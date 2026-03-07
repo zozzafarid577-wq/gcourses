@@ -1,1 +1,10 @@
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
 
+@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column;
+  }
+}
