@@ -161,6 +161,9 @@
   .tt-actions { display: flex; gap: 10px; margin-top: 5px; padding: 0 3px; }
   .tt-action { display: flex; align-items: center; gap: 3px; font-size: 0.52rem; color: #666; }
 
+  /* FREE PREVIEW EMBED — mask Heyzine badge in bottom-right corner */
+  .fp-logo-mask { position: absolute; right: 0; bottom: 0; width: 130px; height: 34px; background: #fff; z-index: 3; pointer-events: none; }
+
   /* CTA BANNER */
   .cta-banner { background: linear-gradient(135deg, var(--purple), var(--mid)); padding: 5rem 3rem; text-align: center; position: relative; overflow: hidden; }
   .cta-banner::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 55% 70% at 50% 50%, rgba(218,181,213,0.12) 0%, transparent 65%); pointer-events: none; }
@@ -225,6 +228,29 @@
   </div>
 </section>
 
+<!-- FREE BOOK PREVIEW -->
+<section class="section-wrap" style="background:var(--blush);">
+  <div class="inner">
+    <div style="margin-bottom:2rem;">
+      <div class="section-label">Free Preview</div>
+      <h2>Check out the <em>ACT/EST Ebook</em></h2>
+      <p style="margin-top:0.9rem;font-size:0.95rem;font-weight:300;line-height:1.85;color:var(--muted);max-width:580px;">
+        This Ebook covers <strong style="color:var(--purple);">40% of what you need in the curriculum</strong> — completely free to read below.
+        Want the full book with everything you need to ace the exam? Get it now.
+      </p>
+    </div>
+    <!-- Ebook Embed -->
+    <div class="fp-embed" style="position:relative;border-radius:16px;overflow:hidden;box-shadow:0 8px 32px rgba(160,80,159,0.13);margin-bottom:1.8rem;">
+      <iframe allowfullscreen="allowfullscreen" allow="clipboard-write" scrolling="no" class="fp-iframe" src="https://heyzine.com/flip-book/e34af5efc5.html?logo=0" style="border: 1px solid lightgray; width: 100%; height: 400px; display:block;"></iframe>
+      <span class="fp-logo-mask" aria-hidden="true"></span>
+    </div>
+    <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+      <a href="https://marked-kumquat-903.notion.site/300700bc3fa581039378f19410c2c1af?pvs=105" target="_blank" rel="noopener noreferrer" class="btn-primary">Get the Full Book →</a>
+      <span style="font-size:0.82rem;color:var(--muted);font-weight:300;">Unlock the remaining 60% of the curriculum &amp; boost your score.</span>
+    </div>
+  </div>
+</section>
+
 <!-- WHY -->
 <section class="section-wrap" style="background:var(--white);">
   <div class="inner">
@@ -276,27 +302,6 @@
 </section>
 
 
-<!-- FREE BOOK PREVIEW -->
-<section class="section-wrap" style="background:var(--blush);">
-  <div class="inner">
-    <div style="margin-bottom:2rem;">
-      <div class="section-label">Free Preview</div>
-      <h2>Check out the <em>ACT/EST Ebook</em></h2>
-      <p style="margin-top:0.9rem;font-size:0.95rem;font-weight:300;line-height:1.85;color:var(--muted);max-width:580px;">
-        This Ebook covers <strong style="color:var(--purple);">40% of what you need in the curriculum</strong> — completely free to read below. 
-        Want the full book with everything you need to ace the exam? Get it now.
-      </p>
-    </div>
-    <!-- Ebook Embed -->
-    <div style="border-radius:16px;overflow:hidden;box-shadow:0 8px 32px rgba(160,80,159,0.13);margin-bottom:1.8rem;">
-      <iframe allowfullscreen="allowfullscreen" allow="clipboard-write" scrolling="no" class="fp-iframe" src="https://heyzine.com/flip-book/e34af5efc5.html" style="border: 1px solid lightgray; width: 100%; height: 400px;"></iframe>
-    </div>
-    <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
-      <a href="https://marked-kumquat-903.notion.site/300700bc3fa581039378f19410c2c1af?pvs=105" target="_blank" rel="noopener noreferrer" class="btn-primary">Get the Full Book →</a>
-      <span style="font-size:0.82rem;color:var(--muted);font-weight:300;">Unlock the remaining 60% of the curriculum &amp; boost your score.</span>
-    </div>
-  </div>
-</section>
 
 <!-- CTA -->
 <div class="cta-banner">
