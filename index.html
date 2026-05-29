@@ -134,8 +134,16 @@
   .tt-label { font-size: 0.67rem; color: var(--muted); }
   .tiktok-btn { display: inline-flex; align-items: center; gap: 0.7rem; background: #010101; color: #fff; border-radius: 100px; padding: 0.78rem 1.6rem; font-family: 'DM Sans', sans-serif; font-size: 0.84rem; font-weight: 500; cursor: pointer; text-decoration: none; transition: all 0.2s; }
   .tiktok-btn:hover { background: #333; transform: translateY(-2px); }
-  .tiktok-phone { width: 210px; background: #111; border-radius: 34px; padding: 12px 10px; box-shadow: 0 20px 60px rgba(0,0,0,0.22); border: 2px solid #222; }
-  .phone-notch { width: 60px; height: 10px; background: #111; border-radius: 0 0 8px 8px; margin: 0 auto 10px; }
+.tiktok-phone { 
+  width: 230px; 
+  height: 480px; /* Added height */
+  background: #111; 
+  border-radius: 34px; 
+  padding: 12px 10px; 
+  box-shadow: 0 20px 60px rgba(0,0,0,0.22); 
+  border: 2px solid #222; 
+  flex-shrink: 0; /* Prevents the phone from squishing */
+}  .phone-notch { width: 60px; height: 10px; background: #111; border-radius: 0 0 8px 8px; margin: 0 auto 10px; }
   .phone-screen { background: #fff; border-radius: 22px; overflow: hidden; display: flex; flex-direction: column; gap: 6px; padding: 8px; }
   .tt-card { background: #fafafa; border-radius: 10px; padding: 8px; border: 1px solid #f0f0f0; }
   .tt-top-bar { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
