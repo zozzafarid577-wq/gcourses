@@ -134,16 +134,22 @@
   .tt-label { font-size: 0.67rem; color: var(--muted); }
   .tiktok-btn { display: inline-flex; align-items: center; gap: 0.7rem; background: #010101; color: #fff; border-radius: 100px; padding: 0.78rem 1.6rem; font-family: 'DM Sans', sans-serif; font-size: 0.84rem; font-weight: 500; cursor: pointer; text-decoration: none; transition: all 0.2s; }
   .tiktok-btn:hover { background: #333; transform: translateY(-2px); }
-.tiktok-phone { 
-  width: 230px; 
-  height: 480px; /* Added height */
-  background: #111; 
-  border-radius: 34px; 
-  padding: 12px 10px; 
-  box-shadow: 0 20px 60px rgba(0,0,0,0.22); 
-  border: 2px solid #222; 
-  flex-shrink: 0; /* Prevents the phone from squishing */
-}  .phone-notch { width: 60px; height: 10px; background: #111; border-radius: 0 0 8px 8px; margin: 0 auto 10px; }
+.tiktok-phone {
+  width: 250px;
+  height: 520px;
+  background: #111;
+  border-radius: 40px;
+  padding: 10px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.22);
+  border: 2px solid #222;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+  .phone-notch { position: absolute; top: 16px; left: 50%; transform: translateX(-50%); width: 70px; height: 18px; background: #000; border-radius: 12px; z-index: 2; }
+  .phone-screen { background: #000; border-radius: 30px; overflow: hidden; flex: 1; display: flex; }
+  .phone-screen img { width: 100%; height: 100%; object-fit: cover; display: block; }  .phone-notch { width: 60px; height: 10px; background: #111; border-radius: 0 0 8px 8px; margin: 0 auto 10px; }
   .phone-screen { background: #fff; border-radius: 22px; overflow: hidden; display: flex; flex-direction: column; gap: 6px; padding: 8px; }
   .tt-card { background: #fafafa; border-radius: 10px; padding: 8px; border: 1px solid #f0f0f0; }
   .tt-top-bar { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
@@ -254,8 +260,12 @@
           <div class="tt-stat"><div class="tt-num">✦</div><div class="tt-label">Short & focused</div></div>
         </div>
         <a href="https://www.tiktok.com/@gcourses" target="_blank" class="tiktok-btn">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg>
-          Follow @gcourses on TikTok
+<div class="tiktok-phone fade-up-2">
+  <div class="phone-notch"></div>
+  <div class="phone-screen">
+    <img src="https://raw.githubusercontent.com/zozzafarid577-wq/gcourses/main/%3Apublic%3Atiktok-preview.png" alt="Gcourses TikTok preview">
+  </div>
+</div>          Follow @gcourses on TikTok
         </a>
       </div>
 
