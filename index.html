@@ -49,9 +49,9 @@
   .page { padding-top: 70px; min-height: 100vh; }
 
   /* SHARED TYPOGRAPHY */
-  h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.6rem, 4.5vw, 4.4rem); font-weight: 300; line-height: 1.08; color: var(--deep); }
+  h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 6vw, 6rem); font-weight: 300; line-height: 1.02; letter-spacing: -0.01em; color: var(--deep); }
   h1 em, h2 em { font-style: italic; color: var(--purple); }
-  h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 300; line-height: 1.2; color: var(--deep); }
+  h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 300; line-height: 1.12; letter-spacing: -0.01em; color: var(--deep); }
   h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: var(--deep); }
 
   /* SHARED COMPONENTS */
@@ -178,6 +178,18 @@
     .tiktok-phone { display: none; }
   }
   @media (max-width: 600px) { .why-grid { grid-template-columns: 1fr; } .hero-stats { gap: 1.5rem; } }
+
+  /* ── SCROLL REVEALS ── */
+  .reveal { opacity: 0; transform: translateY(46px); transition: opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1); will-change: opacity, transform; }
+  .reveal.in-view { opacity: 1; transform: none; }
+  /* Heading word-rise reveal */
+  .word-line { display: inline-block; overflow: hidden; vertical-align: top; }
+  .word-line > span { display: inline-block; transform: translateY(110%); transition: transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+  .in-view .word-line > span, .word-line.in-view > span { transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1 !important; transform: none !important; }
+    .word-line > span { transform: none !important; }
+  }
 </style>
 </head>
 <body>
@@ -319,5 +331,75 @@
   </div>
 </footer>
 </div>
+
+<!-- ── MOTION: smooth scroll + scroll reveals + animated headings ── -->
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script>
+(function () {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ── Smooth (inertia) scrolling ──
+  if (!reduce && typeof Lenis !== 'undefined') {
+    const lenis = new Lenis({ lerp: 0.085, smoothWheel: true, wheelMultiplier: 1 });
+    function raf(t) { lenis.raf(t); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+    // keep native CSS smooth-scroll from fighting Lenis
+    document.documentElement.style.scrollBehavior = 'auto';
+  }
+
+  // ── Animated headings: split into rising words (preserves <em>/<br>) ──
+  function splitHeading(h) {
+    const out = document.createDocumentFragment();
+    h.childNodes.forEach(node => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        node.textContent.split(/(\s+)/).forEach(tok => {
+          if (tok.trim() === '') { out.appendChild(document.createTextNode(tok)); return; }
+          const outer = document.createElement('span'); outer.className = 'word-line';
+          const inner = document.createElement('span'); inner.textContent = tok;
+          outer.appendChild(inner); out.appendChild(outer);
+        });
+      } else if (node.nodeName === 'BR') {
+        out.appendChild(node.cloneNode());
+      } else { // element like <em>
+        const outer = document.createElement('span'); outer.className = 'word-line';
+        const inner = document.createElement('span'); inner.appendChild(node.cloneNode(true));
+        outer.appendChild(inner); out.appendChild(outer);
+      }
+    });
+    h.innerHTML = '';
+    h.appendChild(out);
+    // stagger
+    h.querySelectorAll('.word-line > span').forEach((s, i) => {
+      s.style.transitionDelay = (i * 0.055) + 's';
+    });
+  }
+  if (!reduce) {
+    document.querySelectorAll('.hero h1, .section-wrap h2, .cta-banner h2').forEach(splitHeading);
+  }
+
+  // ── Scroll reveals ──
+  const revealSelectors = [
+    '.section-wrap .inner > div', '.why-card', '.why-bottom',
+    '.tiktok-split', '.fp-embed', '.cta-banner p', '.cta-banner a'
+  ];
+  if (!reduce) {
+    document.querySelectorAll(revealSelectors.join(',')).forEach(el => {
+      if (!el.closest('.hero')) el.classList.add('reveal');
+    });
+    // stagger cards within their grid
+    document.querySelectorAll('.why-grid').forEach(grid => {
+      grid.querySelectorAll('.why-card').forEach((c, i) => { c.style.transitionDelay = (i * 0.08) + 's'; });
+    });
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+  document.querySelectorAll('.reveal, .hero h1, .section-wrap h2, .cta-banner h2').forEach(el => io.observe(el));
+})();
+</script>
 </body>
 </html>
