@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gcourses — ACT/EST Ebook</title>
+  <style>
+    :root { --purple:#a0509f; --mid:#6b3569; --blush:#f3e7f3; --deep:#3b1a3a; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; background: var(--blush); font-family: 'DM Sans', system-ui, sans-serif; }
+    #wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 14px; padding: 12px; }
+    #book { touch-action: pan-y; }
+    #book .page { background: #fff; box-shadow: 0 0 4px rgba(0,0,0,0.1); }
+    #book .page img { width: 100%; height: 100%; display: block; object-fit: contain; }
+    #controls { display: flex; align-items: center; gap: 14px; }
+    #controls button {
+      background: var(--purple); color: #fff; border: none; border-radius: 100px;
+      padding: 0.5rem 1.2rem; font: inherit; font-size: 0.85rem; font-weight: 500;
+      cursor: pointer; transition: background 0.2s; box-shadow: 0 4px 14px rgba(160,80,159,0.28);
+    }
+    #controls button:hover:not(:disabled) { background: var(--mid); }
+    #controls button:disabled { opacity: 0.4; cursor: default; box-shadow: none; }
+    #pageinfo { font-size: 0.82rem; color: var(--mid); min-width: 70px; text-align: center; }
+    #status { color: var(--mid); font-size: 0.95rem; text-align: center; padding: 1rem; }
+    #status a { color: var(--purple); }
+  </style>
+</head>
+<body>
+  <div id="wrap">
+    <div id="status">Loading book…</div>
+    <div id="book" hidden></div>
+    <div id="controls" hidden>
+      <button id="prev" aria-label="Previous page">‹ Prev</button>
+      <span id="pageinfo"></span>
+      <button id="next" aria-label="Next page">Next ›</button>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://unpkg.com/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
+  <script>
+    (function () {
+      const params = new URLSearchParams(location.search);
+      const PDF_URL = params.get('file') || 'ebook.pdf';
+      const statusEl = document.getElementById('status');
+      const bookEl = document.getElementById('book');
+      const controlsEl = document.getElementById('controls');
+      const prevBtn = document.getElementById('prev');
+      const nextBtn = document.getElementById('next');
+      const pageInfo = document.getElementById('pageinfo');
+
+      pdfjsLib.GlobalWorkerOptions.workerSrc =
+        'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+      async function render() {
+        try {
+          const pdf = await pdfjsLib.getDocument(PDF_URL).promise;
+          const images = [];
+          let aspect = 0.7727; // fallback (A4-ish portrait w/h)
+
+          for (let i = 1; i <= pdf.numPages; i++) {
+            const page = await pdf.getPage(i);
+            const viewport = page.getViewport({ scale: 2 });
+            if (i === 1) aspect = viewport.width / viewport.height;
+            const canvas = document.createElement('canvas');
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
+            await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+            images.push(canvas.toDataURL('image/jpeg', 0.85));
+            statusEl.textContent = `Loading book… ${i}/${pdf.numPages}`;
+          }
+
+          // Size a single page to fit the viewport while keeping aspect ratio.
+          const maxH = Math.min(window.innerHeight - 90, 1200);
+          let h = maxH;
+          let w = Math.round(h * aspect);
+          const maxW = (window.innerWidth - 40) / 2; // two pages side by side on desktop
+          if (w > maxW) { w = Math.floor(maxW); h = Math.round(w / aspect); }
+
+          const pageFlip = new St.PageFlip(bookEl, {
+            width: w,
+            height: h,
+            size: 'stretch',
+            minWidth: 180,
+            maxWidth: 1000,
+            minHeight: 250,
+            maxHeight: 1400,
+            maxShadowOpacity: 0.5,
+            showCover: true,
+            mobileScrollSupport: false,
+            usePortrait: true,
+          });
+
+          pageFlip.loadFromImages(images);
+
+          statusEl.hidden = true;
+          bookEl.hidden = false;
+          controlsEl.hidden = false;
+
+          function update() {
+            const cur = pageFlip.getCurrentPageIndex();
+            const total = pageFlip.getPageCount();
+            pageInfo.textContent = `${cur + 1} / ${total}`;
+            prevBtn.disabled = cur <= 0;
+            nextBtn.disabled = cur >= total - 1;
+          }
+
+          pageFlip.on('flip', update);
+          prevBtn.addEventListener('click', () => pageFlip.flipPrev());
+          nextBtn.addEventListener('click', () => pageFlip.flipNext());
+          update();
+        } catch (err) {
+          statusEl.innerHTML =
+            'Could not load the book. Make sure <strong>' + PDF_URL +
+            '</strong> exists in the repo.<br><small>' + (err && err.message ? err.message : err) + '</small>';
+        }
+      }
+
+      render();
+    })();
+  </script>
+</body>
+</html>
