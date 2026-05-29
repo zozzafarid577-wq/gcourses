@@ -114,16 +114,6 @@
   .hero-stats { display: flex; gap: 2.5rem; margin-top: 2.8rem; }
   .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 600; color: var(--purple); line-height: 1; }
   .stat-label { font-size: 0.7rem; color: var(--muted); margin-top: 0.2rem; }
-  /* Hero notes accent — a peek of real study notes at the bottom-right edge */
-  .hero > div { position: relative; z-index: 2; }
-  .hero-notes-accent {
-    position: absolute; right: -55px; bottom: -45px; width: 400px; max-width: 42vw;
-    transform: rotate(-6deg); border-radius: 14px; opacity: 0.9; z-index: 0;
-    box-shadow: 0 18px 50px rgba(59,26,58,0.22); border: 6px solid #fff;
-    pointer-events: none;
-    -webkit-mask-image: radial-gradient(ellipse 130% 130% at 30% 30%, #000 55%, transparent 100%);
-            mask-image: radial-gradient(ellipse 130% 130% at 30% 30%, #000 55%, transparent 100%);
-  }
 
   /* WHY */
   .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 2rem 0; }
@@ -183,7 +173,6 @@
   @media (max-width: 900px) {
     .hero { grid-template-columns: 1fr; }
     .hero-visual { display: none; }
-    .hero-notes-accent { display: none; }
     .why-grid { grid-template-columns: 1fr 1fr; }
     .tiktok-split { grid-template-columns: 1fr; }
     .tiktok-phone { display: none; }
@@ -206,7 +195,6 @@
 
 <!-- HERO -->
 <section class="hero">
-  <img class="hero-notes-accent fade-up-3" src="Grey%20White%20Modern%20Book%20Typography%20Mindset%20Youtube%20Thumbnail%20(1).png" alt="" aria-hidden="true" />
   <div>
     <div class="hero-eyebrow fade-up">Featured · ACT & EST Biology</div>
     <h1 class="fade-up-2">Study biology<br>the <em>smart</em> way.</h1>
@@ -222,8 +210,8 @@
     </div>
   </div>
   <div class="hero-visual fade-up-2" style="display:flex;justify-content:center;">
-    <div style="position:relative;max-width:900px; width:100%;>
-      <div style="background:#fff;border-radius:22px;padding:2.5rem 2.5rem 2rem 2.5rem;box-shadow:0 8px 44px rgba(160,80,159,0.12);border:1px solid rgba(218,181,213,0.4);position:relative;overflow:hidden;">
+    <div style="position:relative;max-width:480px; width:100%;">
+      <div style="background:linear-gradient(rgba(253,250,253,0.86),rgba(253,250,253,0.9)),url('Grey%20White%20Modern%20Book%20Typography%20Mindset%20Youtube%20Thumbnail%20(1).png');background-size:cover;background-position:center;border-radius:22px;padding:2.5rem 2.5rem 2rem 2.5rem;box-shadow:0 8px 44px rgba(160,80,159,0.12);border:1px solid rgba(218,181,213,0.4);position:relative;overflow:hidden;">
         <div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--deep);margin-bottom:2rem;">Chapter 1 · <span style="color:var(--purple);">Evolution & Adaptation</span></div>
         <ul style="list-style:none;margin-top:0.9rem;display:flex;flex-direction:column;gap:0.5rem;">
           <a href="https://gcourses.vercel.app/pricing.html?module=evolution" style="text-decoration:none;color:inherit;"> <li style="display:flex;align-items:center;gap:0.7rem;padding:0.6rem 0.8rem;border-radius:9px;background:rgba(160,80,159,0.09);font-size:0.95rem;"> <span style="width:7px;height:7px;border-radius:50%;background:var(--purple);flex-shrink:0;display:inline-block;"></span> Evolution <span style="margin-left:auto;font-size:0.7rem;color:var(--purple);background:rgba(160,80,159,0.11);border-radius:100px;padding:0.2rem 0.6rem;"></span> </li> </a>
