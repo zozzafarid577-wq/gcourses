@@ -575,41 +575,38 @@ function sendReport(overall, correct, rows){
   const el = $('email-status');
   el.style.display = 'flex';
   el.className = 'email-status sending';
-  el.textContent = '⏳ Sending your report to ' + student.email + ' and Gigi…';
+  el.textContent = '⏳ Sending your report to ' + student.email + '…';
 
-  const report = buildReportText(overall, correct, rows);
+  const weak = rows.filter(r=>r.p<50).sort((a,b)=>a.p-b.p);
+  const okay = rows.filter(r=>r.p>=50 && r.p<70).sort((a,b)=>a.p-b.p);
   const payload = {
-    _subject: 'Your Gcourses ACT Biology Mock Test results — ' + overall + '%',
-    _template: 'table',
-    _cc: student.email,            // student gets a copy too
-    _captcha: 'false',
-    email: student.email,          // reply-to = student
-    Results: report                // single field = the plain report text
+    name: student.name,
+    email: student.email,
+    overall: overall,
+    correct: correct,
+    total: QUESTIONS.length,
+    weak: weak.map(r=>({name:r.name, p:r.p})),
+    okay: okay.map(r=>({name:r.name, p:r.p}))
   };
 
-  fetch(FORMSUBMIT_URL, {
+  fetch('/api/send-report', {
     method:'POST',
-    headers:{ 'Content-Type':'application/json', 'Accept':'application/json' },
+    headers:{ 'Content-Type':'application/json' },
     body: JSON.stringify(payload)
   })
-  .then(r=>r.json())
-  .then(data=>{
-    const ok = data && (data.success===true || data.success==='true');
-    const pending = data && /activat|confirm/i.test(data.message||'');
-    if(ok){
+  .then(r=>r.json().then(d=>({ok:r.ok, d})))
+  .then(({ok, d})=>{
+    if(ok && d && d.success){
       el.className = 'email-status ok';
-      el.textContent = '✓ Report emailed to ' + student.email + ' and Gigi.';
-    } else if(pending){
-      el.className = 'email-status sending';
-      el.textContent = '📩 One-time setup: an activation email was just sent to Gigi. Once she clicks the link, every report sends automatically. Your full report is shown below.';
+      el.textContent = '✓ Report emailed to ' + student.email + ' (Gigi gets a copy too).';
     } else {
       el.className = 'email-status err';
-      el.textContent = '⚠ Couldn’t send the email automatically — your full report is shown below.';
+      el.textContent = '⚠ Couldn’t send the email right now — your full report is shown below.';
     }
   })
   .catch(()=>{
     el.className = 'email-status err';
-    el.textContent = '⚠ Couldn’t send the email automatically — your full report is shown below.';
+    el.textContent = '⚠ Couldn’t send the email right now — your full report is shown below.';
   });
 }
 
