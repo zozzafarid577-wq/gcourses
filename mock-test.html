@@ -38,6 +38,44 @@
   .intro-meta { display:flex; gap:2.5rem; margin:2.2rem 0; flex-wrap:wrap; }
   .intro-meta .num { font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:600; color:var(--purple); line-height:1; }
   .intro-meta .lbl { font-size:0.72rem; color:var(--muted); margin-top:0.25rem; }
+  .intro-form { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1.6rem; max-width:560px; }
+  .field { display:flex; flex-direction:column; gap:0.4rem; }
+  .field label { font-size:0.72rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted); }
+  .field input { font-family:'DM Sans',sans-serif; font-size:0.95rem; padding:0.8rem 1rem; border:1.5px solid rgba(218,181,213,0.6); border-radius:12px; background:#fff; color:var(--text); transition:border-color 0.15s; }
+  .field input:focus { outline:none; border-color:var(--purple); }
+  .form-note { font-size:0.8rem !important; color:var(--muted); margin-top:0.8rem !important; }
+  .form-error { color:var(--bad); font-size:0.85rem; margin-top:0.7rem; min-height:1rem; font-weight:500; }
+  @media (max-width:560px){ .intro-form { grid-template-columns:1fr; } }
+
+  /* NAVIGATOR */
+  .nav-grid-btn { font-family:'DM Sans',sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.04em; color:var(--purple); background:#fff; border:1.5px solid var(--lavender); border-radius:100px; padding:0.45rem 1rem; cursor:pointer; transition:all 0.15s; }
+  .nav-grid-btn:hover { background:var(--blush); border-color:var(--purple); }
+  .nav-overlay { display:none; position:fixed; inset:0; z-index:200; background:rgba(59,26,58,0.45); backdrop-filter:blur(3px); align-items:flex-start; justify-content:center; padding:6vh 1.2rem; overflow-y:auto; }
+  .nav-overlay.open { display:flex; }
+  .nav-sheet { background:#fff; border-radius:20px; padding:1.8rem; max-width:520px; width:100%; box-shadow:0 24px 70px rgba(59,26,58,0.3); }
+  .nav-sheet-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.1rem; }
+  .nav-sheet-head h3 { font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:600; color:var(--deep); }
+  .nav-close { background:none; border:none; font-size:1.1rem; color:var(--muted); cursor:pointer; padding:0.3rem; line-height:1; }
+  .nav-close:hover { color:var(--purple); }
+  .nav-legend { display:flex; gap:1.2rem; flex-wrap:wrap; font-size:0.74rem; color:var(--muted); margin-bottom:1.2rem; }
+  .nav-legend span { display:flex; align-items:center; gap:0.4rem; }
+  .nav-legend .dot { width:12px; height:12px; border-radius:4px; display:inline-block; }
+  .dot.done { background:var(--purple); }
+  .dot.todo { background:#fff; border:1.5px solid var(--lavender); }
+  .dot.cur { background:var(--good); }
+  .nav-grid { display:grid; grid-template-columns:repeat(8,1fr); gap:0.55rem; }
+  .nav-cell { aspect-ratio:1; border-radius:9px; border:1.5px solid var(--lavender); background:#fff; color:var(--muted); font-size:0.82rem; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.12s; }
+  .nav-cell:hover { border-color:var(--purple); }
+  .nav-cell.done { background:var(--purple); border-color:var(--purple); color:#fff; }
+  .nav-cell.cur { background:var(--good); border-color:var(--good); color:#fff; box-shadow:0 0 0 3px rgba(63,157,107,0.25); }
+  .nav-count { font-size:0.82rem; color:var(--muted); margin-top:1.2rem; text-align:center; }
+  @media (max-width:480px){ .nav-grid { grid-template-columns:repeat(6,1fr); } }
+
+  /* EMAIL STATUS */
+  .email-status { border-radius:14px; padding:1rem 1.3rem; margin-bottom:1.8rem; font-size:0.88rem; font-weight:500; display:flex; align-items:center; gap:0.6rem; }
+  .email-status.sending { background:var(--blush); color:var(--mid); }
+  .email-status.ok { background:rgba(63,157,107,0.12); color:#1f5e3f; }
+  .email-status.err { background:rgba(192,80,106,0.1); color:#7d2c40; }
 
   /* QUIZ */
   #quiz { display:none; }
@@ -160,7 +198,19 @@
       <div><div class="num">ACT</div><div class="lbl">Exam version</div></div>
     </div>
     <p style="font-size:0.9rem;">Two timed sections of 34 questions each, 45 minutes per section (90 minutes total). When the timer runs out, the section is submitted automatically. You can move back and forth between questions within a section.</p>
-    <button class="btn" id="start-btn" style="margin-top:1.6rem;">Start Section 1 →</button>
+    <div class="intro-form">
+      <div class="field">
+        <label for="student-name">Your name</label>
+        <input type="text" id="student-name" placeholder="Jane Doe" autocomplete="name" />
+      </div>
+      <div class="field">
+        <label for="student-email">Your email</label>
+        <input type="email" id="student-email" placeholder="jane@email.com" autocomplete="email" />
+      </div>
+    </div>
+    <p class="form-note">We’ll email your full score report to you and to Gigi when you finish.</p>
+    <div class="form-error" id="intro-error"></div>
+    <button class="btn" id="start-btn" style="margin-top:1.4rem;">Start Section 1 →</button>
   </section>
 
   <!-- SECTION BREAK -->
@@ -180,7 +230,10 @@
   <section id="quiz">
     <div class="quiz-head">
       <span class="section-badge" id="section-badge">Section 1 of 2</span>
-      <span class="timer" id="timer">45:00</span>
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <button class="nav-grid-btn" id="navigator-btn" type="button">⊞ All questions</button>
+        <span class="timer" id="timer">45:00</span>
+      </div>
     </div>
     <div class="progress-track"><div class="progress-fill" id="prog-fill"></div></div>
     <div class="progress-text"><span id="prog-label">Question 1</span><span id="prog-count"></span></div>
@@ -193,10 +246,28 @@
     </div>
   </section>
 
+  <!-- QUESTION NAVIGATOR -->
+  <div class="nav-overlay" id="nav-overlay">
+    <div class="nav-sheet">
+      <div class="nav-sheet-head">
+        <h3 id="nav-sheet-title">Section 1 — jump to a question</h3>
+        <button class="nav-close" id="nav-close" type="button" aria-label="Close">✕</button>
+      </div>
+      <div class="nav-legend">
+        <span><i class="dot done"></i> Answered</span>
+        <span><i class="dot todo"></i> Unanswered</span>
+        <span><i class="dot cur"></i> Current</span>
+      </div>
+      <div class="nav-grid" id="nav-grid"></div>
+      <p class="nav-count" id="nav-count"></p>
+    </div>
+  </div>
+
   <!-- RESULTS -->
   <section id="results">
     <div class="label">Your Results</div>
     <h1>Here’s your <em>overview.</em></h1>
+    <div class="email-status sending" id="email-status" style="display:none;"></div>
     <div class="score-ring">
       <div class="score-big" id="score-big">0%</div>
       <div class="score-sub" id="score-sub"></div>
@@ -235,12 +306,20 @@ const QUESTIONS = [{"section": 1, "chapter": "Ch 1: Evolution & Adaptation", "mo
 const SECTION_TIME = 45 * 60; // seconds per section
 const PER_SECTION = 34;
 
+// === Email delivery (Web3Forms) ===
+// Get a free access key at https://web3forms.com (enter gigiimofarid@gmail.com, no signup).
+// Paste it below. Reports go to your Gmail; enable "Send copy to submitter" in your
+// Web3Forms settings so the student also receives their results.
+const WEB3FORMS_KEY = 'REPLACE_WITH_YOUR_WEB3FORMS_ACCESS_KEY';
+const OWNER_EMAIL = 'gigiimofarid@gmail.com';
+
 const $ = id => document.getElementById(id);
 let section = 1;          // 1 or 2
 let current = 0;          // index within current section
 const answers = new Array(QUESTIONS.length).fill(null);
 let timeLeft = SECTION_TIME;
 let timerId = null;
+let student = { name:'', email:'' };
 
 $('meta-q').textContent = QUESTIONS.length;
 
@@ -280,8 +359,43 @@ function updateTimerDisplay(){
   $('timer').classList.toggle('warn', timeLeft<=300);
 }
 
-$('start-btn').addEventListener('click', ()=> startSection(1));
+$('start-btn').addEventListener('click', ()=>{
+  const name = $('student-name').value.trim();
+  const email = $('student-email').value.trim();
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  if(!name){ $('intro-error').textContent = 'Please enter your name first.'; return; }
+  if(!emailOk){ $('intro-error').textContent = 'Please enter a valid email so we can send your report.'; return; }
+  $('intro-error').textContent = '';
+  student = { name, email };
+  startSection(1);
+});
 $('startsec2-btn').addEventListener('click', ()=> startSection(2));
+
+// === Question navigator ===
+function openNavigator(){
+  const list = sectionQuestions(section);
+  $('nav-sheet-title').textContent = 'Section ' + section + ' — jump to a question';
+  $('nav-grid').innerHTML = list.map((o,i)=>{
+    const answered = answers[o.gi] !== null;
+    const cls = i===current ? 'cur' : (answered ? 'done' : '');
+    return `<button class="nav-cell ${cls}" data-i="${i}">${i+1}</button>`;
+  }).join('');
+  $('nav-grid').querySelectorAll('.nav-cell').forEach(el=>{
+    el.addEventListener('click', ()=>{
+      current = parseInt(el.dataset.i);
+      closeNavigator();
+      render();
+      window.scrollTo(0,0);
+    });
+  });
+  const done = list.filter(o=>answers[o.gi]!==null).length;
+  $('nav-count').textContent = done + ' of ' + list.length + ' answered in this section';
+  $('nav-overlay').classList.add('open');
+}
+function closeNavigator(){ $('nav-overlay').classList.remove('open'); }
+$('navigator-btn').addEventListener('click', openNavigator);
+$('nav-close').addEventListener('click', closeNavigator);
+$('nav-overlay').addEventListener('click', (e)=>{ if(e.target===$('nav-overlay')) closeNavigator(); });
 
 function render() {
   const list = sectionQuestions(section);
@@ -395,12 +509,86 @@ function showResults() {
       <div class="review-exp"><strong>${ok?'Correct.':'Your answer: '+yourAns+'.'} </strong>${q.explanation}</div>
     </div>`;
   }).join('');
+
+  sendReport(overall, correct, rows);
+}
+
+function buildReportText(overall, correct, rows){
+  const letters = ['A','B','C','D','E'];
+  let txt = 'GCOURSES — ACT BIOLOGY MOCK TEST REPORT\n';
+  txt += '========================================\n\n';
+  txt += 'Student: ' + student.name + '\n';
+  txt += 'Email:   ' + student.email + '\n';
+  txt += 'Date:    ' + new Date().toLocaleString() + '\n\n';
+  txt += 'OVERALL SCORE: ' + overall + '%  (' + correct + ' of ' + QUESTIONS.length + ' correct)\n\n';
+  txt += 'PERFORMANCE BY CHAPTER\n----------------------\n';
+  rows.forEach(r=>{ txt += '  ' + r.name + ': ' + r.p + '%  (' + r.c + '/' + r.t + ')\n'; });
+  const strong = rows.filter(r=>r.p>=70).map(r=>r.name);
+  const weak = rows.filter(r=>r.p<50).map(r=>r.name);
+  txt += '\nStrong in: ' + (strong.length?strong.join(', '):'—') + '\n';
+  txt += 'Needs improvement: ' + (weak.length?weak.join(', '):'—') + '\n\n';
+  txt += 'ANSWER REVIEW\n-------------\n';
+  QUESTIONS.forEach((q,i)=>{
+    const ua = answers[i];
+    const ok = ua===q.answer;
+    txt += (i+1) + '. [' + (ok?'✓':'✗') + '] ' + q.q + '\n';
+    txt += '   Your answer: ' + (ua===null?'(none)':letters[ua]+'. '+q.options[ua]) + '\n';
+    txt += '   Correct: ' + letters[q.answer] + '. ' + q.options[q.answer] + '\n';
+    txt += '   Why: ' + q.explanation + '\n\n';
+  });
+  return txt;
+}
+
+function sendReport(overall, correct, rows){
+  const el = $('email-status');
+  el.style.display = 'flex';
+  if(!WEB3FORMS_KEY || WEB3FORMS_KEY.indexOf('REPLACE_WITH')===0){
+    el.className = 'email-status err';
+    el.textContent = '⚠ Email sending is not configured yet. Your report is shown below.';
+    return;
+  }
+  el.className = 'email-status sending';
+  el.textContent = '⏳ Sending your report to ' + student.email + ' and Gigi…';
+
+  const report = buildReportText(overall, correct, rows);
+  const payload = {
+    access_key: WEB3FORMS_KEY,
+    subject: 'ACT Biology Mock Test — ' + student.name + ' scored ' + overall + '%',
+    from_name: 'Gcourses Mock Test',
+    name: student.name,
+    email: student.email,          // student's address (reply-to + submitter copy)
+    replyto: student.email,
+    ccemail: OWNER_EMAIL,
+    score: overall + '% (' + correct + '/' + QUESTIONS.length + ')',
+    message: report
+  };
+
+  fetch('https://api.web3forms.com/submit', {
+    method:'POST',
+    headers:{ 'Content-Type':'application/json', 'Accept':'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(r=>r.json())
+  .then(data=>{
+    if(data.success){
+      el.className = 'email-status ok';
+      el.textContent = '✓ Report emailed to ' + student.email + ' and Gigi.';
+    } else {
+      el.className = 'email-status err';
+      el.textContent = '⚠ Couldn’t send the email automatically — your full report is shown below.';
+    }
+  })
+  .catch(()=>{
+    el.className = 'email-status err';
+    el.textContent = '⚠ Couldn’t send the email automatically — your full report is shown below.';
+  });
 }
 
 $('retake-btn').addEventListener('click', () => {
   for (let i=0;i<answers.length;i++) answers[i]=null;
   $('results').style.display='none';
   $('intro').style.display='block';
+  $('email-status').style.display='none';
   clearInterval(timerId);
   $('timer').textContent='45:00';
   window.scrollTo(0,0);
