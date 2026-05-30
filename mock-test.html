@@ -543,61 +543,31 @@ function showResults() {
 }
 
 function buildReportText(overall, correct, rows){
-  const letters = ['A','B','C','D','E'];
-  const bar = (p)=>{ const n=Math.round(p/10); return '█'.repeat(n) + '░'.repeat(10-n); };
-  const pad = (s,n)=>{ s=String(s); return s.length>=n ? s : s + ' '.repeat(n-s.length); };
+  const weak = rows.filter(r=>r.p<50).sort((a,b)=>a.p-b.p);
+  const okay = rows.filter(r=>r.p>=50 && r.p<70).sort((a,b)=>a.p-b.p);
   const L = [];
 
-  L.push('✦ G C O U R S E S');
-  L.push('Biology Exam Prep · with Gigi');
-  L.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-  L.push('ACT BIOLOGY · MOCK TEST REPORT');
+  L.push('Hi ' + student.name + ',');
   L.push('');
-  L.push('Student   ' + student.name);
-  L.push('Email     ' + student.email);
-  L.push('Date      ' + new Date().toLocaleString());
+  L.push('Here are your results from the Gcourses ACT Biology mock test.');
   L.push('');
-  L.push('┌──────────────────────────────────────┐');
-  L.push('│  OVERALL SCORE                       │');
-  L.push('│  ' + pad(overall + '%   (' + correct + ' of ' + QUESTIONS.length + ' correct)', 36) + '│');
-  L.push('└──────────────────────────────────────┘');
+  L.push('Your score: ' + overall + '%  (' + correct + ' out of ' + QUESTIONS.length + ' correct)');
   L.push('');
-  L.push('PERFORMANCE BY CHAPTER');
-  L.push('────────────────────────────────────────');
-  rows.forEach(r=>{
-    const tag = r.p>=70?'Strong':r.p>=50?'Okay':'Review';
-    L.push('  ' + r.name);
-    L.push('  ' + bar(r.p) + '  ' + r.p + '%  (' + r.c + '/' + r.t + ') · ' + tag);
-    L.push('');
-  });
 
-  const strong = rows.filter(r=>r.p>=70).map(r=>r.name);
-  const weak = rows.filter(r=>r.p<50).map(r=>r.name);
-  L.push('✨ STRONG IN');
-  L.push('────────────────────────────────────────');
-  L.push(strong.length ? strong.map(s=>'  • '+s).join('\n') : '  • Keep practicing — no chapter hit 70% yet.');
+  if(weak.length){
+    L.push('What you need to work on most:');
+    weak.forEach(r=> L.push('  - ' + r.name + ' (' + r.p + '%)'));
+  } else if(okay.length){
+    L.push('You did well overall. A couple of areas could still use another pass:');
+    okay.forEach(r=> L.push('  - ' + r.name + ' (' + r.p + '%)'));
+  } else {
+    L.push('Great work — no weak areas stood out. Every chapter scored solidly.');
+  }
   L.push('');
-  L.push('📚 NEEDS IMPROVEMENT');
-  L.push('────────────────────────────────────────');
-  L.push(weak.length ? weak.map(s=>'  • '+s).join('\n') : '  • Nothing critical — nicely balanced!');
+  L.push('Keep going, and retake the test any time to track your progress.');
   L.push('');
-  L.push('ANSWER REVIEW & EXPLANATIONS');
-  L.push('────────────────────────────────────────');
-  L.push('');
-  QUESTIONS.forEach((q,i)=>{
-    const ua = answers[i];
-    const ok = ua===q.answer;
-    L.push((ok?'✓':'✗') + '  Q' + (i+1) + ' · ' + q.chapter);
-    L.push('   ' + q.q);
-    L.push('   Your answer:  ' + (ua===null?'— (no answer)':letters[ua]+'. '+q.options[ua]));
-    L.push('   Correct:      ' + letters[q.answer] + '. ' + q.options[q.answer]);
-    L.push('   Why:          ' + q.explanation);
-    L.push('');
-  });
-
-  L.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-  L.push('Ready for the full course? gcourses.vercel.app');
-  L.push('Study with Gigi · ACT/EST Biology');
+  L.push('— Gigi · Gcourses');
+  L.push('gcourses.vercel.app');
   return L.join('\n');
 }
 
@@ -609,12 +579,12 @@ function sendReport(overall, correct, rows){
 
   const report = buildReportText(overall, correct, rows);
   const payload = {
-    _subject: 'ACT Biology Mock Test — ' + student.name + ' scored ' + overall + '%',
-    _template: 'box',
+    _subject: 'Your Gcourses ACT Biology Mock Test results — ' + overall + '%',
+    _template: 'table',
     _cc: student.email,            // student gets a copy too
     _captcha: 'false',
     email: student.email,          // reply-to = student
-    Report: report                 // single field = the full branded report
+    Results: report                // single field = the plain report text
   };
 
   fetch(FORMSUBMIT_URL, {
