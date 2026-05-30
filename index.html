@@ -209,13 +209,13 @@
   .hero-scroll { display:flex; flex-direction:row; gap:0.7rem; overflow-x:auto; overflow-y:hidden; padding:0.5rem 0.2rem 0.4rem; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
   .hero-scroll::-webkit-scrollbar { display:none; }
   .hero-scroll::-webkit-scrollbar-thumb { background:var(--lavender); border-radius:100px; }
-  .hero-chap { background:linear-gradient(135deg,rgba(160,80,159,0.32),rgba(107,53,105,0.22)); border:1px solid rgba(160,80,159,0.4); border-radius:14px; padding:0.9rem 1rem; min-width:170px; flex-shrink:0; scroll-snap-align:start; }
+  .hero-chap { background:linear-gradient(135deg,rgba(160,80,159,0.75),rgba(107,53,105,0.85)); border:1px solid rgba(160,80,159,0.7); border-radius:14px; padding:0.9rem 1rem; min-width:170px; flex-shrink:0; scroll-snap-align:start; }
   .hero-chap:last-child { border-bottom: none; }
   .hero-chap-head { display: flex; align-items: baseline; gap: 0.6rem; margin-bottom: 0.35rem; }
-  .hero-chap-num { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--purple); min-width: 1.6rem; }
+  .hero-chap-num { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: rgba(255,255,255,0.75); min-width: 1.6rem; }
   .hero-chap-name { font-size: 0.92rem; font-weight: 600; color: var(--deep); }
   .hero-chap-mods { display: flex; flex-wrap: wrap; gap: 0.4rem; padding-left: 2.2rem; }
-  .hero-chap-mods span { font-size: 0.68rem; color: var(--purple); background: rgba(160,80,159,0.1); border-radius: 100px; padding: 0.18rem 0.6rem; }
+  .hero-chap-mods span { display:inline-block; font-size:0.68rem; background:rgba(255,255,255,0.18); color:#fff; border:1px solid rgba(255,255,255,0.3); border-radius:100px; padding:0.15rem 0.55rem; margin:0.18rem 0.18rem 0 0; }
 
   @media (max-width: 900px) {
     .hero { grid-template-columns: 1fr; }
