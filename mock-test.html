@@ -109,6 +109,26 @@
   .footer-links a:hover { color:var(--lavender); }
   @media (max-width:760px){ nav{padding:0.8rem 1.5rem;} .nav-links{display:none;} .lists{grid-template-columns:1fr;} footer{flex-direction:column;gap:1rem;text-align:center;} }
   </style>
+<style id="mobile-nav-fix">
+  .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.4rem; flex-direction:column; gap:5px; z-index:120; }
+  .nav-toggle span { display:block; width:24px; height:2px; background:var(--purple,#a0509f); border-radius:2px; transition:transform 0.25s, opacity 0.25s; }
+  .nav-toggle.open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2){ opacity:0; }
+  .nav-toggle.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+  @media (max-width:900px){
+    nav { flex-wrap:wrap; }
+    .nav-toggle { display:flex; order:3; margin-left:auto; }
+    .nav-cta { order:2; }
+    .nav-links {
+      display:flex !important; flex-direction:column; gap:0; order:4;
+      flex-basis:100%; max-height:0; overflow:hidden;
+      transition:max-height 0.3s ease; align-items:flex-start;
+    }
+    .nav-links.open { max-height:60vh; margin-top:0.6rem; }
+    .nav-links li { width:100%; }
+    .nav-links a { display:block; padding:0.85rem 0.2rem; width:100%; border-bottom:1px solid rgba(218,181,213,0.25) !important; }
+  }
+</style>
 </head>
 <body>
 <nav>
@@ -122,6 +142,7 @@
     <li><a href="mock-test.html" class="active">Mock Test</a></li>
   </ul>
   <a href="pricing.html" class="nav-cta">Enroll Now</a>
+  <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
 <div class="page">
@@ -384,6 +405,15 @@ $('retake-btn').addEventListener('click', () => {
   $('timer').textContent='45:00';
   window.scrollTo(0,0);
 });
+</script>
+<script id="mobile-nav-js">
+(function(){
+  var btn=document.querySelector('.nav-toggle'), links=document.querySelector('.nav-links');
+  if(btn&&links){
+    btn.addEventListener('click',function(){ btn.classList.toggle('open'); links.classList.toggle('open'); });
+    links.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ btn.classList.remove('open'); links.classList.remove('open'); }); });
+  }
+})();
 </script>
 </body>
 </html>
