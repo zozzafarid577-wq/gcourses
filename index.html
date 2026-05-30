@@ -234,8 +234,9 @@
     .section-wrap { padding: 3rem 1.2rem; }
     footer { flex-direction: column; gap: 1rem; text-align: center; }
     .hero { grid-template-columns: 1fr; padding: 2rem 1.2rem; min-height: unset; gap: 1.5rem; }
-    .hero-visual { display: flex !important; }
-    .hero-card-inner { padding: 1.3rem !important; }
+    .hero-visual { display: flex !important; width: 100%; max-width: 100%; overflow: hidden; }
+    .hero-visual > div { max-width: 100% !important; width: 100% !important; }
+    .hero-card-inner { padding: 1.3rem !important; overflow: hidden; }
     #hero-scroll { margin-left: -1.3rem !important; margin-right: -1.3rem !important; padding-left: 1.3rem !important; padding-right: 1.3rem !important; }
     .hero-chap { min-width: 150px !important; }
     .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
