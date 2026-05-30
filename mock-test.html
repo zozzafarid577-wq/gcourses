@@ -601,12 +601,13 @@ function sendReport(overall, correct, rows){
       el.textContent = '✓ Report emailed to ' + student.email + ' (Gigi gets a copy too).';
     } else {
       el.className = 'email-status err';
-      el.textContent = '⚠ Couldn’t send the email right now — your results are shown below.';
+      var msg = (d && d.error) ? (typeof d.error==='string'? d.error : JSON.stringify(d.error)) : 'unknown error';
+      el.textContent = '⚠ Email failed: ' + msg;
     }
   })
-  .catch(()=>{
+  .catch(function(e){
     el.className = 'email-status err';
-    el.textContent = '⚠ Couldn’t send the email right now — your results are shown below.';
+    el.textContent = '⚠ Email request failed: ' + (e && e.message || e);
   });
 }
 
