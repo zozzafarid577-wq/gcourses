@@ -18,6 +18,7 @@
     --muted: #8a6a88; --white: #fdfafd;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow-x: hidden; max-width: 100%; }
   html { scroll-behavior: smooth; }
   body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text); overflow-x: hidden; }
 
@@ -100,10 +101,11 @@
   /* RESPONSIVE */
 
 
-  .hero { display: grid; grid-template-columns: 1fr 1fr; align-items: center; min-height: 78vh; max-width: 1400px; margin: 0 auto; padding: 2rem 2.5rem; gap: 2rem; position: relative; overflow: visible; }
+  .hero { display: grid; grid-template-columns: 1fr 1fr; align-items: center; min-height: 78vh; max-width: 1400px; margin: 0 auto; padding: 2rem 2.5rem; gap: 2rem; position: relative; overflow: hidden; }
   .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 55% 65% at 72% 40%, rgba(218,181,213,0.3) 0%, transparent 65%); pointer-events: none; }
   .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(160,80,159,0.08); border: 1px solid rgba(160,80,159,0.18); border-radius: 100px; padding: 0.3rem 1rem; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.09em; text-transform: uppercase; color: var(--purple); margin-bottom: 1.4rem; }
   .hero-eyebrow::before { content: '✦'; font-size: 0.55rem; }
+  .hero-visual { display: flex; }
   .hero-sub { margin-top: 1.2rem; font-size: 0.96rem; font-weight: 300; line-height: 1.8; color: var(--muted); max-width: 440px; }
   .hero-actions { display: flex; align-items: center; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
   .hero-stats { display: flex; gap: 2.5rem; margin-top: 2.8rem; }
@@ -235,7 +237,7 @@
 
     /* Hero */
     .hero { grid-template-columns: 1fr; padding: 2rem 1.2rem; min-height: unset; gap: 1.5rem; }
-    .hero-visual { display: none; }
+    .hero-visual { display: none !important; }
     .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
     h1 { font-size: clamp(2.2rem, 8vw, 3.5rem); }
 
@@ -349,7 +351,7 @@
       <span class="arrow">→</span>
     </a>
   </div>
-  <div class="hero-visual fade-up-2" style="display:flex;justify-content:center;">
+  <div class="hero-visual fade-up-2" style="justify-content:center;">
     <div style="position:relative;max-width:660px; width:100%;">
       <div style="background:linear-gradient(rgba(253,250,253,0.38),rgba(253,250,253,0.46)),url('Grey%20White%20Modern%20Book%20Typography%20Mindset%20Youtube%20Thumbnail%20(1).png');background-size:cover;background-position:center;border-radius:22px;padding:2.8rem 2.8rem 2.3rem 2.8rem;box-shadow:0 8px 44px rgba(160,80,159,0.18);border:1px solid rgba(218,181,213,0.4);position:relative;overflow:hidden;">
         <div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--deep);margin-bottom:0.4rem;">Chapter 1 · <span style="color:var(--purple);">Evolution & Adaptation</span></div>
