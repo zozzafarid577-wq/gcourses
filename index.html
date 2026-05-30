@@ -227,42 +227,29 @@
     .reveal { opacity: 1 !important; transform: none !important; }
     .word-line > span { transform: none !important; }
   }
-</style>
 
   /* ── MOBILE ── */
   @media (max-width: 900px) {
     nav { padding: 0.8rem 1.5rem; }
     .section-wrap { padding: 3rem 1.2rem; }
     footer { flex-direction: column; gap: 1rem; text-align: center; }
-
-    /* Hero */
     .hero { grid-template-columns: 1fr; padding: 2rem 1.2rem; min-height: unset; gap: 1.5rem; }
     .hero-visual { display: none !important; }
     .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
     h1 { font-size: clamp(2.2rem, 8vw, 3.5rem); }
-
-    /* Why grid */
     .why-grid { grid-template-columns: 1fr 1fr; }
     .why-bottom { flex-direction: column; gap: 1rem; padding: 1.2rem; }
-
-    /* TikTok */
     .tiktok-split { grid-template-columns: 1fr; gap: 2rem; }
     .tiktok-phone { display: flex; margin: 1rem auto 0; width: 200px; height: 420px; }
-
-    /* CTA */
     .cta-banner { padding: 3.5rem 1.5rem; }
-
-    /* Values grid in about */
-    .values-grid { grid-template-columns: 1fr 1fr; }
   }
-
   @media (max-width: 480px) {
     .why-grid { grid-template-columns: 1fr; }
     .hero-actions { flex-direction: column; align-items: flex-start; }
     .hero-stats { gap: 1rem; }
-    .values-grid { grid-template-columns: 1fr; }
     .hero-chap { min-width: 160px; }
   }
+</style>
 
 <style id="mobile-nav-fix">
   .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.4rem; flex-direction:column; gap:5px; z-index:120; }
