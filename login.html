@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login — Gcourses</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --purple:#a0509f; --lavender:#dab5d5; --blush:#f3e7f3;
+      --deep:#3b1a3a; --mid:#6b3569; --text:#2e1a2e;
+      --muted:#8a6a88; --white:#fdfafd;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--blush); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 1rem; }
+
+    .logo-wrap { text-align: center; margin-bottom: 2.5rem; }
+    .logo-wrap img { height: 48px; }
+    .logo-sub { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 0.5rem; }
+
+    .card { background: var(--white); border-radius: 22px; box-shadow: 0 12px 48px rgba(160,80,159,0.13); width: 100%; max-width: 420px; overflow: hidden; }
+
+    .tabs { display: flex; border-bottom: 1px solid var(--blush); }
+    .tab { flex: 1; padding: 1.1rem; font-size: 0.83rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; background: none; border: none; cursor: pointer; color: var(--muted); transition: all 0.2s; }
+    .tab.active { color: var(--purple); border-bottom: 2px solid var(--purple); margin-bottom: -1px; background: var(--white); }
+    .tab:hover:not(.active) { color: var(--mid); background: var(--blush); }
+
+    .panel { padding: 2rem; display: none; }
+    .panel.active { display: block; }
+
+    .panel-title { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 400; color: var(--deep); margin-bottom: 0.4rem; }
+    .panel-sub { font-size: 0.88rem; color: var(--muted); margin-bottom: 1.8rem; line-height: 1.5; }
+
+    .field { margin-bottom: 1.1rem; }
+    .field label { display: block; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.45rem; }
+    .field input, .field textarea { width: 100%; padding: 0.75rem 1rem; border: 1.5px solid var(--lavender); border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--text); background: var(--white); transition: border-color 0.2s; outline: none; resize: none; }
+    .field input:focus, .field textarea:focus { border-color: var(--purple); }
+    .field textarea { min-height: 90px; }
+
+    .btn { width: 100%; padding: 0.85rem; background: var(--purple); color: #fff; border: none; border-radius: 100px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500; cursor: pointer; transition: all 0.2s; margin-top: 0.5rem; }
+    .btn:hover { background: var(--mid); transform: translateY(-1px); }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    .status { margin-top: 1.2rem; padding: 0.9rem 1rem; border-radius: 10px; font-size: 0.88rem; font-weight: 500; display: none; }
+    .status.ok { background: rgba(63,157,107,0.12); color: #1f5e3f; }
+    .status.err { background: rgba(192,80,106,0.1); color: #7d2c40; }
+    .status.info { background: var(--blush); color: var(--mid); }
+
+    .home-link { margin-top: 2rem; font-size: 0.83rem; color: var(--muted); text-align: center; }
+    .home-link a { color: var(--purple); text-decoration: none; }
+    .home-link a:hover { text-decoration: underline; }
+
+    /* verify screen */
+    #verify-screen { text-align: center; max-width: 420px; width: 100%; }
+    #verify-screen .verify-icon { font-size: 3rem; margin-bottom: 1rem; }
+    #verify-screen h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; font-weight: 400; color: var(--deep); margin-bottom: 0.6rem; }
+    #verify-screen p { font-size: 0.93rem; color: var(--muted); line-height: 1.6; }
+  </style>
+</head>
+<body>
+
+<div class="logo-wrap">
+  <img src="gcourses-logo.png" alt="Gcourses" />
+  <div class="logo-sub">ACT Biology · Study Portal</div>
+</div>
+
+<!-- token verification screen (shown while processing magic link) -->
+<div id="verify-screen" style="display:none;">
+  <div class="verify-icon">⏳</div>
+  <h2>Verifying your link…</h2>
+  <p>Just a moment.</p>
+</div>
+
+<div class="card" id="main-card">
+  <div class="tabs">
+    <button class="tab active" id="tab-login" onclick="switchTab('login')">Log In</button>
+    <button class="tab" id="tab-enroll" onclick="switchTab('enroll')">Request Access</button>
+  </div>
+
+  <!-- LOGIN PANEL -->
+  <div class="panel active" id="panel-login">
+    <div class="panel-title">Welcome back</div>
+    <p class="panel-sub">Enter your enrolled email and we'll send you a login link — no password needed.</p>
+    <form id="login-form" onsubmit="submitLogin(event)">
+      <div class="field">
+        <label>Email address</label>
+        <input type="email" id="login-email" placeholder="you@example.com" required />
+      </div>
+      <button class="btn" type="submit" id="login-btn">Send login link →</button>
+    </form>
+    <div class="status" id="login-status"></div>
+    <p style="margin-top:1.4rem;font-size:0.83rem;color:var(--muted);">Not enrolled yet? <a href="#" style="color:var(--purple);text-decoration:none;" onclick="switchTab('enroll');return false;">Request access →</a></p>
+  </div>
+
+  <!-- ENROLL PANEL -->
+  <div class="panel" id="panel-enroll">
+    <div class="panel-title">Request access</div>
+    <p class="panel-sub">Fill in your details and Gigi will review your request. You'll hear back once approved.</p>
+    <form id="enroll-form" onsubmit="submitEnroll(event)">
+      <div class="field">
+        <label>Full name</label>
+        <input type="text" id="enroll-name" placeholder="Your name" required />
+      </div>
+      <div class="field">
+        <label>Email address</label>
+        <input type="email" id="enroll-email" placeholder="you@example.com" required />
+      </div>
+      <div class="field">
+        <label>Why do you want access? <span style="font-weight:300;text-transform:none;">(optional)</span></label>
+        <textarea id="enroll-msg" placeholder="e.g. I'm preparing for the ACT in June…"></textarea>
+      </div>
+      <button class="btn" type="submit" id="enroll-btn">Send request →</button>
+    </form>
+    <div class="status" id="enroll-status"></div>
+  </div>
+</div>
+
+<div class="home-link"><a href="index.html">← Back to Gcourses</a></div>
+
+<script>
+function switchTab(t) {
+  document.getElementById('panel-login').classList.toggle('active', t==='login');
+  document.getElementById('panel-enroll').classList.toggle('active', t==='enroll');
+  document.getElementById('tab-login').classList.toggle('active', t==='login');
+  document.getElementById('tab-enroll').classList.toggle('active', t==='enroll');
+}
+
+function showStatus(id, type, msg) {
+  const el = document.getElementById(id);
+  el.className = 'status ' + type;
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+
+async function submitLogin(e) {
+  e.preventDefault();
+  const email = document.getElementById('login-email').value.trim();
+  const btn = document.getElementById('login-btn');
+  btn.disabled = true; btn.textContent = 'Sending…';
+  try {
+    const r = await fetch('/api/request-login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email })
+    });
+    const d = await r.json();
+    if (r.ok && d.success) {
+      showStatus('login-status', 'ok', '✓ Login link sent! Check your inbox (and spam folder).');
+      btn.textContent = 'Link sent ✓';
+    } else {
+      showStatus('login-status', 'err', d.error || 'Something went wrong. Try again.');
+      btn.disabled = false; btn.textContent = 'Send login link →';
+    }
+  } catch {
+    showStatus('login-status', 'err', 'Network error. Please try again.');
+    btn.disabled = false; btn.textContent = 'Send login link →';
+  }
+}
+
+async function submitEnroll(e) {
+  e.preventDefault();
+  const name = document.getElementById('enroll-name').value.trim();
+  const email = document.getElementById('enroll-email').value.trim();
+  const message = document.getElementById('enroll-msg').value.trim();
+  const btn = document.getElementById('enroll-btn');
+  btn.disabled = true; btn.textContent = 'Sending…';
+  try {
+    const r = await fetch('/api/enroll-request', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, message })
+    });
+    const d = await r.json();
+    if (r.ok && d.success) {
+      showStatus('enroll-status', 'ok', '✓ Request sent! Gigi will review it and get back to you.');
+      document.getElementById('enroll-form').reset();
+      btn.textContent = 'Sent ✓';
+    } else {
+      showStatus('enroll-status', 'err', d.error || 'Something went wrong. Try again.');
+      btn.disabled = false; btn.textContent = 'Send request →';
+    }
+  } catch {
+    showStatus('enroll-status', 'err', 'Network error. Please try again.');
+    btn.disabled = false; btn.textContent = 'Send request →';
+  }
+}
+
+// Handle magic link token in URL
+(async function() {
+  const params = new URLSearchParams(location.search);
+  const token = params.get('token');
+  if (!token) return;
+
+  document.getElementById('main-card').style.display = 'none';
+  document.querySelector('.logo-wrap').style.marginBottom = '1.5rem';
+  document.getElementById('verify-screen').style.display = 'block';
+
+  try {
+    const r = await fetch('/api/verify-token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token })
+    });
+    const d = await r.json();
+    if (r.ok && d.valid) {
+      localStorage.setItem('gc_token', token);
+      localStorage.setItem('gc_email', d.email);
+      const vs = document.getElementById('verify-screen');
+      vs.querySelector('.verify-icon').textContent = '✓';
+      vs.querySelector('h2').textContent = 'You\'re in!';
+      vs.querySelector('p').textContent = 'Redirecting you now…';
+      setTimeout(() => { location.href = params.get('next') || 'courses.html'; }, 1000);
+    } else {
+      const vs = document.getElementById('verify-screen');
+      vs.querySelector('.verify-icon').textContent = '⚠️';
+      vs.querySelector('h2').textContent = 'Link expired or invalid';
+      vs.querySelector('p').innerHTML = 'This login link has expired or already been used. <a href="login.html" style="color:var(--purple)">Request a new one →</a>';
+    }
+  } catch {
+    document.getElementById('verify-screen').querySelector('p').innerHTML = 'Network error. <a href="login.html" style="color:var(--purple)">Try again →</a>';
+  }
+})();
+</script>
+</body>
+</html>
