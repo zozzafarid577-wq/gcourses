@@ -515,28 +515,61 @@ function showResults() {
 
 function buildReportText(overall, correct, rows){
   const letters = ['A','B','C','D','E'];
-  let txt = 'GCOURSES — ACT BIOLOGY MOCK TEST REPORT\n';
-  txt += '========================================\n\n';
-  txt += 'Student: ' + student.name + '\n';
-  txt += 'Email:   ' + student.email + '\n';
-  txt += 'Date:    ' + new Date().toLocaleString() + '\n\n';
-  txt += 'OVERALL SCORE: ' + overall + '%  (' + correct + ' of ' + QUESTIONS.length + ' correct)\n\n';
-  txt += 'PERFORMANCE BY CHAPTER\n----------------------\n';
-  rows.forEach(r=>{ txt += '  ' + r.name + ': ' + r.p + '%  (' + r.c + '/' + r.t + ')\n'; });
+  const bar = (p)=>{ const n=Math.round(p/10); return '█'.repeat(n) + '░'.repeat(10-n); };
+  const pad = (s,n)=>{ s=String(s); return s.length>=n ? s : s + ' '.repeat(n-s.length); };
+  const L = [];
+
+  L.push('✦ G C O U R S E S');
+  L.push('Biology Exam Prep · with Gigi');
+  L.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  L.push('ACT BIOLOGY · MOCK TEST REPORT');
+  L.push('');
+  L.push('Student   ' + student.name);
+  L.push('Email     ' + student.email);
+  L.push('Date      ' + new Date().toLocaleString());
+  L.push('');
+  L.push('┌──────────────────────────────────────┐');
+  L.push('│  OVERALL SCORE                       │');
+  L.push('│  ' + pad(overall + '%   (' + correct + ' of ' + QUESTIONS.length + ' correct)', 36) + '│');
+  L.push('└──────────────────────────────────────┘');
+  L.push('');
+  L.push('PERFORMANCE BY CHAPTER');
+  L.push('────────────────────────────────────────');
+  rows.forEach(r=>{
+    const tag = r.p>=70?'Strong':r.p>=50?'Okay':'Review';
+    L.push('  ' + r.name);
+    L.push('  ' + bar(r.p) + '  ' + r.p + '%  (' + r.c + '/' + r.t + ') · ' + tag);
+    L.push('');
+  });
+
   const strong = rows.filter(r=>r.p>=70).map(r=>r.name);
   const weak = rows.filter(r=>r.p<50).map(r=>r.name);
-  txt += '\nStrong in: ' + (strong.length?strong.join(', '):'—') + '\n';
-  txt += 'Needs improvement: ' + (weak.length?weak.join(', '):'—') + '\n\n';
-  txt += 'ANSWER REVIEW\n-------------\n';
+  L.push('✨ STRONG IN');
+  L.push('────────────────────────────────────────');
+  L.push(strong.length ? strong.map(s=>'  • '+s).join('\n') : '  • Keep practicing — no chapter hit 70% yet.');
+  L.push('');
+  L.push('📚 NEEDS IMPROVEMENT');
+  L.push('────────────────────────────────────────');
+  L.push(weak.length ? weak.map(s=>'  • '+s).join('\n') : '  • Nothing critical — nicely balanced!');
+  L.push('');
+  L.push('ANSWER REVIEW & EXPLANATIONS');
+  L.push('────────────────────────────────────────');
+  L.push('');
   QUESTIONS.forEach((q,i)=>{
     const ua = answers[i];
     const ok = ua===q.answer;
-    txt += (i+1) + '. [' + (ok?'✓':'✗') + '] ' + q.q + '\n';
-    txt += '   Your answer: ' + (ua===null?'(none)':letters[ua]+'. '+q.options[ua]) + '\n';
-    txt += '   Correct: ' + letters[q.answer] + '. ' + q.options[q.answer] + '\n';
-    txt += '   Why: ' + q.explanation + '\n\n';
+    L.push((ok?'✓':'✗') + '  Q' + (i+1) + ' · ' + q.chapter);
+    L.push('   ' + q.q);
+    L.push('   Your answer:  ' + (ua===null?'— (no answer)':letters[ua]+'. '+q.options[ua]));
+    L.push('   Correct:      ' + letters[q.answer] + '. ' + q.options[q.answer]);
+    L.push('   Why:          ' + q.explanation);
+    L.push('');
   });
-  return txt;
+
+  L.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  L.push('Ready for the full course? gcourses.vercel.app');
+  L.push('Study with Gigi · ACT/EST Biology');
+  return L.join('\n');
 }
 
 function sendReport(overall, correct, rows){
@@ -551,10 +584,8 @@ function sendReport(overall, correct, rows){
     _template: 'box',
     _cc: student.email,            // student gets a copy too
     _captcha: 'false',
-    name: student.name,
     email: student.email,          // reply-to = student
-    score: overall + '% (' + correct + ' / ' + QUESTIONS.length + ' correct)',
-    message: report
+    Report: report                 // single field = the full branded report
   };
 
   fetch(FORMSUBMIT_URL, {
