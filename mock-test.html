@@ -579,37 +579,26 @@ function sendReport(overall, correct, rows){
 
   const weak = rows.filter(r=>r.p<50).sort((a,b)=>a.p-b.p);
   const okay = rows.filter(r=>r.p>=50 && r.p<70).sort((a,b)=>a.p-b.p);
-  let focus;
-  if(weak.length) focus = weak.map(r=>r.name+' ('+r.p+'%)').join(', ');
-  else if(okay.length) focus = 'Mostly solid. Could revisit: ' + okay.map(r=>r.name+' ('+r.p+'%)').join(', ');
-  else focus = 'No weak areas — every chapter scored solidly. Great work!';
-
   const payload = {
-    _subject: 'Your Gcourses ACT Biology results — ' + overall + '%',
-    _template: 'table',            // table template removes FormSubmit's boilerplate + box
-    _cc: student.email,            // student gets a copy too
-    _captcha: 'false',
-    email: student.email,          // reply-to = student
-    Student: student.name,
-    Score: overall + '%  (' + correct + ' of ' + QUESTIONS.length + ' correct)',
-    'Needs work on': focus
+    name: student.name,
+    email: student.email,
+    overall: overall,
+    correct: correct,
+    total: QUESTIONS.length,
+    weak: weak.map(r=>({name:r.name, p:r.p})),
+    okay: okay.map(r=>({name:r.name, p:r.p}))
   };
 
-  fetch(FORMSUBMIT_URL, {
+  fetch('/api/send-report', {
     method:'POST',
-    headers:{ 'Content-Type':'application/json', 'Accept':'application/json' },
+    headers:{ 'Content-Type':'application/json' },
     body: JSON.stringify(payload)
   })
-  .then(r=>r.json())
-  .then(data=>{
-    const ok = data && (data.success===true || data.success==='true');
-    const pending = data && /activat|confirm/i.test(data.message||'');
-    if(ok){
+  .then(r=>r.json().then(d=>({ok:r.ok, d})))
+  .then(({ok, d})=>{
+    if(ok && d && d.success){
       el.className = 'email-status ok';
-      el.textContent = '✓ Report emailed to ' + student.email + ' and Gigi.';
-    } else if(pending){
-      el.className = 'email-status sending';
-      el.textContent = '📩 One-time setup: an activation email was sent to Gigi. Once she clicks the link, every report sends automatically. Your results are shown below.';
+      el.textContent = '✓ Report emailed to ' + student.email + ' (Gigi gets a copy too).';
     } else {
       el.className = 'email-status err';
       el.textContent = '⚠ Couldn’t send the email right now — your results are shown below.';
