@@ -41,6 +41,19 @@
 
   /* QUIZ */
   #quiz { display:none; }
+  .quiz-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; gap:1rem; flex-wrap:wrap; }
+  .section-badge { font-size:0.7rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--purple); background:var(--blush); padding:0.4rem 0.9rem; border-radius:100px; }
+  .timer { font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:600; color:var(--deep); display:flex; align-items:center; gap:0.45rem; }
+  .timer::before { content:'⏱'; font-size:1.1rem; }
+  .timer.warn { color:var(--bad); animation:pulse 1s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.45;} }
+  /* SECTION BREAK */
+  #sectionbreak { display:none; text-align:center; }
+  #sectionbreak .checkwrap { font-size:3rem; margin-bottom:1rem; }
+  #sectionbreak p { margin-top:1.2rem; font-size:1rem; font-weight:300; line-height:1.8; color:var(--muted); }
+  .break-meta { display:flex; gap:2.5rem; margin:2.2rem 0; flex-wrap:wrap; justify-content:center; }
+  .break-meta .num { font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:600; color:var(--purple); line-height:1; }
+  .break-meta .lbl { font-size:0.72rem; color:var(--muted); margin-top:0.25rem; }
   .progress-track { background:var(--blush); border-radius:100px; height:6px; overflow:hidden; margin-bottom:0.5rem; }
   .progress-fill { height:100%; background:linear-gradient(90deg,var(--purple),var(--lavender)); border-radius:100px; transition:width 0.3s; }
   .progress-text { display:flex; justify-content:space-between; font-size:0.72rem; color:var(--muted); margin-bottom:2rem; }
@@ -75,6 +88,20 @@
   .list-card ul { list-style:none; display:flex; flex-direction:column; gap:0.5rem; }
   .list-card li { font-size:0.88rem; color:var(--muted); font-weight:300; display:flex; gap:0.5rem; }
   .list-card li::before { content:'→'; color:var(--purple); }
+  /* REVIEW */
+  .review-q { border:1px solid rgba(218,181,213,0.5); border-radius:14px; padding:1.3rem 1.4rem; margin-bottom:1.1rem; }
+  .review-head { display:flex; align-items:flex-start; gap:0.7rem; margin-bottom:0.9rem; }
+  .review-icon { flex-shrink:0; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.85rem; font-weight:700; color:#fff; }
+  .review-icon.ok { background:var(--good); }
+  .review-icon.no { background:var(--bad); }
+  .review-chapter { font-size:0.66rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--purple); margin-bottom:0.2rem; }
+  .review-qtext { font-size:0.98rem; font-weight:500; color:var(--deep); line-height:1.4; }
+  .review-opt { display:flex; align-items:center; gap:0.6rem; padding:0.55rem 0.8rem; border-radius:9px; font-size:0.88rem; margin-bottom:0.35rem; border:1.5px solid transparent; }
+  .review-opt.correct { background:rgba(63,157,107,0.12); border-color:var(--good); color:#1f5e3f; }
+  .review-opt.wrong { background:rgba(192,80,106,0.1); border-color:var(--bad); color:#7d2c40; }
+  .review-opt .rmark { font-size:0.8rem; font-weight:700; width:18px; flex-shrink:0; }
+  .review-exp { margin-top:0.7rem; font-size:0.86rem; line-height:1.6; font-weight:300; color:var(--text); background:var(--blush); border-radius:10px; padding:0.75rem 0.95rem; }
+  .review-exp strong { color:var(--purple); font-weight:600; }
   footer { background:var(--deep); color:rgba(218,181,213,0.4); padding:2rem 3rem; display:flex; justify-content:space-between; align-items:center; font-size:0.77rem; }
   .footer-logo img { height:30px; width:auto; display:block; }
   .footer-links { display:flex; gap:1.4rem; }
@@ -107,14 +134,33 @@
     <p>A full ACT-style Biology mock test drawn from the entire Gcourses curriculum — all 8 chapters, from Evolution to Human Physiology. Answer each question, then get a personalized breakdown of exactly what you’ve mastered and what still needs work.</p>
     <div class="intro-meta">
       <div><div class="num" id="meta-q">0</div><div class="lbl">Questions</div></div>
+      <div><div class="num">2 × 45</div><div class="lbl">Minutes per section</div></div>
       <div><div class="num">8</div><div class="lbl">Chapters covered</div></div>
       <div><div class="num">ACT</div><div class="lbl">Exam version</div></div>
     </div>
-    <button class="btn" id="start-btn">Start the Mock Test →</button>
+    <p style="font-size:0.9rem;">Two timed sections of 34 questions each, 45 minutes per section (90 minutes total). When the timer runs out, the section is submitted automatically. You can move back and forth between questions within a section.</p>
+    <button class="btn" id="start-btn" style="margin-top:1.6rem;">Start Section 1 →</button>
+  </section>
+
+  <!-- SECTION BREAK -->
+  <section id="sectionbreak">
+    <div class="checkwrap">✓</div>
+    <div class="label" style="justify-content:center;">Section 1 complete</div>
+    <h1>Take a <em>breath.</em></h1>
+    <p id="break-msg">You've finished Section 1. Section 2 covers the same 8 chapters with 34 fresh questions and its own 45-minute timer.</p>
+    <div class="break-meta">
+      <div><div class="num">34</div><div class="lbl">Questions ahead</div></div>
+      <div><div class="num">45:00</div><div class="lbl">Fresh timer</div></div>
+    </div>
+    <button class="btn" id="startsec2-btn">Start Section 2 →</button>
   </section>
 
   <!-- QUIZ -->
   <section id="quiz">
+    <div class="quiz-head">
+      <span class="section-badge" id="section-badge">Section 1 of 2</span>
+      <span class="timer" id="timer">45:00</span>
+    </div>
     <div class="progress-track"><div class="progress-fill" id="prog-fill"></div></div>
     <div class="progress-text"><span id="prog-label">Question 1</span><span id="prog-count"></span></div>
     <div class="q-chapter" id="q-chapter"></div>
@@ -141,6 +187,9 @@
       <div class="list-card"><h3 class="col-good">✨ You’re strong in</h3><ul id="strong-list"></ul></div>
       <div class="list-card"><h3 class="col-bad">📚 Needs improvement</h3><ul id="weak-list"></ul></div>
     </div>
+    <h2 style="font-size:1.6rem;margin:2.5rem 0 1.3rem;">Answer review &amp; explanations</h2>
+    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:1.5rem;">Every question with your answer, the correct answer, and why.</p>
+    <div id="review"></div>
     <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem;">
       <button class="btn" id="retake-btn">Retake Test</button>
       <a href="pricing.html" class="btn btn-ghost">Get the Full Course →</a>
@@ -161,58 +210,108 @@
 </footer>
 
 <script>
-const QUESTIONS = [{"chapter": "Ch 1: Evolution & Adaptation", "module": "Evolution", "q": "Which statement best describes natural selection?", "options": ["Organisms change their bodies during life to adapt and pass those changes on", "Individuals with favorable heritable traits tend to survive and reproduce more", "All mutations in a population are beneficial", "Evolution always makes organisms more complex over time"], "answer": 1}, {"chapter": "Ch 1: Evolution & Adaptation", "module": "Animal Behavior", "q": "A courtship dance that is identical in all members of a species and present from birth is an example of:", "options": ["Learned behavior", "Innate (instinctive) behavior", "Operant conditioning", "Trial-and-error learning"], "answer": 1}, {"chapter": "Ch 1: Evolution & Adaptation", "module": "Ecology", "q": "Roughly what percentage of energy is transferred between trophic levels in a food chain?", "options": ["1%", "10%", "50%", "90%"], "answer": 1}, {"chapter": "Ch 2: Foundations of Life", "module": "Cell Structure", "q": "Which organelle is the primary site of ATP production in eukaryotic cells?", "options": ["Ribosome", "Mitochondrion", "Golgi apparatus", "Lysosome"], "answer": 1}, {"chapter": "Ch 2: Foundations of Life", "module": "Cell Transport", "q": "The movement of water across a selectively permeable membrane is called:", "options": ["Active transport", "Osmosis", "Endocytosis", "Exocytosis"], "answer": 1}, {"chapter": "Ch 2: Foundations of Life", "module": "Cell Division", "q": "During which phase of mitosis do sister chromatids separate toward opposite poles?", "options": ["Prophase", "Metaphase", "Anaphase", "Telophase"], "answer": 2}, {"chapter": "Ch 2: Foundations of Life", "module": "DNA & Protein Synthesis", "q": "During translation, each mRNA codon is read by the anticodon of a:", "options": ["DNA polymerase", "tRNA molecule", "Ribosomal RNA only", "DNA ligase"], "answer": 1}, {"chapter": "Ch 3: Growth, Division & Biochemistry", "module": "Biochemistry", "q": "Which type of molecule forms the basic bilayer structure of the cell membrane?", "options": ["Carbohydrates", "Phospholipids", "Nucleic acids", "Starch"], "answer": 1}, {"chapter": "Ch 3: Growth, Division & Biochemistry", "module": "Enzymes", "q": "Enzymes increase the rate of a reaction by:", "options": ["Raising the activation energy", "Lowering the activation energy", "Shifting the reaction's equilibrium", "Being permanently used up"], "answer": 1}, {"chapter": "Ch 3: Growth, Division & Biochemistry", "module": "Photosynthesis / Respiration", "q": "The light-dependent reactions of photosynthesis take place in the:", "options": ["Stroma", "Thylakoid membranes", "Mitochondrial matrix", "Cytoplasm"], "answer": 1}, {"chapter": "Ch 4: Patterns of Inheritance", "module": "Classical Genetics", "q": "A cross between two heterozygous tall pea plants (Tt \u00d7 Tt) gives what phenotypic ratio?", "options": ["1 tall : 1 short", "3 tall : 1 short", "9 : 3 : 3 : 1", "All tall"], "answer": 1}, {"chapter": "Ch 4: Patterns of Inheritance", "module": "Molecular Genetics", "q": "A point mutation that changes a codon into a premature STOP codon is called a:", "options": ["Silent mutation", "Nonsense mutation", "Frameshift mutation", "Missense mutation"], "answer": 1}, {"chapter": "Ch 4: Patterns of Inheritance", "module": "Pedigrees", "q": "A trait that appears in every generation and affects males and females about equally is most likely:", "options": ["Autosomal recessive", "Autosomal dominant", "X-linked recessive", "Y-linked"], "answer": 1}, {"chapter": "Ch 5: Plants", "module": "Plant Structure", "q": "Which tissue transports water and minerals from the roots up to the leaves?", "options": ["Phloem", "Xylem", "Stomata", "Cambium"], "answer": 1}, {"chapter": "Ch 5: Plants", "module": "Reproduction", "q": "In flowering plants, pollination is best defined as:", "options": ["The fusion of sperm and egg", "The transfer of pollen from anther to stigma", "The dispersal of seeds", "The germination of a seed"], "answer": 1}, {"chapter": "Ch 6: Classification & Taxonomy", "module": "Taxonomy", "q": "Which lists taxonomic ranks from broadest to most specific?", "options": ["Kingdom, Phylum, Class, Order, Family, Genus, Species", "Species, Genus, Family, Order, Class, Phylum, Kingdom", "Kingdom, Class, Phylum, Order, Family, Genus, Species", "Phylum, Kingdom, Class, Order, Family, Genus, Species"], "answer": 0}, {"chapter": "Ch 6: Classification & Taxonomy", "module": "Taxonomy", "q": "In binomial nomenclature, an organism's two-part scientific name consists of its:", "options": ["Family and genus", "Genus and species", "Order and family", "Domain and kingdom"], "answer": 1}, {"chapter": "Ch 7: Human Anatomy & Physiology", "module": "Circulatory / Respiratory", "q": "Which vessels generally carry oxygenated blood away from the heart to the body?", "options": ["Veins", "Arteries", "Capillaries", "Venules"], "answer": 1}, {"chapter": "Ch 7: Human Anatomy & Physiology", "module": "Digestive / Excretory", "q": "Most nutrient absorption in the human digestive system occurs in the:", "options": ["Stomach", "Small intestine", "Large intestine", "Esophagus"], "answer": 1}, {"chapter": "Ch 7: Human Anatomy & Physiology", "module": "Nervous System", "q": "Which part of a neuron receives incoming signals from other neurons?", "options": ["Axon", "Dendrites", "Myelin sheath", "Axon terminal"], "answer": 1}, {"chapter": "Ch 8: Mastery & Full Review", "module": "Cellular Respiration", "q": "Which correctly pairs a process with where it occurs?", "options": ["Glycolysis \u2013 mitochondrial matrix", "Krebs cycle \u2013 cytoplasm", "Glycolysis \u2013 cytoplasm", "Calvin cycle \u2013 thylakoid membrane"], "answer": 2}, {"chapter": "Ch 8: Mastery & Full Review", "module": "Hardy-Weinberg", "q": "In a population at Hardy-Weinberg equilibrium, if the recessive allele frequency q = 0.3, what is the frequency of homozygous dominant individuals (p\u00b2)?", "options": ["0.09", "0.21", "0.49", "0.70"], "answer": 2}, {"chapter": "Ch 8: Mastery & Full Review", "module": "Genetic Variation", "q": "Which best explains the genetic variation seen in offspring of sexual reproduction?", "options": ["Mitosis produces identical daughter cells", "Crossing over and independent assortment during meiosis", "Binary fission of cells", "Error-free DNA replication"], "answer": 1}, {"chapter": "Ch 8: Mastery & Full Review", "module": "Evidence for Evolution", "q": "Homologous structures, such as a human arm and a whale flipper, are evidence of:", "options": ["Convergent evolution", "Common ancestry (divergent evolution)", "Spontaneous generation", "Inheritance of acquired traits"], "answer": 1}];
-
-let current = 0;
-const answers = new Array(QUESTIONS.length).fill(null);
+const QUESTIONS = [{"section": 1, "chapter": "Ch 1: Evolution & Adaptation", "module": "Evolution", "q": "Which statement best describes natural selection?", "options": ["Organisms change their bodies during life and pass those changes on", "Individuals with favorable heritable traits tend to survive and reproduce more", "All mutations in a population are beneficial", "Evolution always makes organisms more complex over time"], "answer": 1, "explanation": "Natural selection acts on heritable variation: individuals whose inherited traits improve survival and reproduction leave more offspring, so those traits become more common."}, {"section": 1, "chapter": "Ch 1: Evolution & Adaptation", "module": "Evolution", "q": "Two species of birds evolve similar wing shapes despite unrelated ancestry. This is:", "options": ["Divergent evolution", "Convergent evolution", "Coevolution", "Genetic drift"], "answer": 1, "explanation": "Convergent evolution is when unrelated species independently evolve similar traits because they face similar environmental pressures."}, {"section": 1, "chapter": "Ch 1: Evolution & Adaptation", "module": "Animal Behavior", "q": "A courtship dance identical in all members of a species and present from birth is:", "options": ["Learned behavior", "Innate (instinctive) behavior", "Operant conditioning", "Trial-and-error learning"], "answer": 1, "explanation": "Innate behaviors are genetically programmed, appear without prior experience, and are performed the same way by all members of the species."}, {"section": 1, "chapter": "Ch 1: Evolution & Adaptation", "module": "Animal Behavior", "q": "A dog learning to sit for a treat is an example of:", "options": ["Imprinting", "Operant conditioning", "Habituation", "Fixed action pattern"], "answer": 1, "explanation": "Operant conditioning is learning in which behavior is shaped by rewards (reinforcement) or punishments — the treat reinforces sitting."}, {"section": 1, "chapter": "Ch 1: Evolution & Adaptation", "module": "Ecology", "q": "Roughly what percentage of energy is transferred between trophic levels?", "options": ["1%", "10%", "50%", "90%"], "answer": 1, "explanation": "The 10% rule: only about 10% of the energy stored at one trophic level is passed to the next; the rest is lost mainly as heat from metabolism."}, {"section": 1, "chapter": "Ch 2: Foundations of Life", "module": "Cell Structure", "q": "Which organelle is the primary site of ATP production in eukaryotic cells?", "options": ["Ribosome", "Mitochondrion", "Golgi apparatus", "Lysosome"], "answer": 1, "explanation": "The mitochondrion carries out aerobic respiration, producing most of the cell's ATP — it's the 'powerhouse' of the cell."}, {"section": 1, "chapter": "Ch 2: Foundations of Life", "module": "Cell Structure", "q": "Which structure is found in plant cells but NOT animal cells?", "options": ["Nucleus", "Cell wall", "Mitochondrion", "Cell membrane"], "answer": 1, "explanation": "Plant cells have a rigid cellulose cell wall outside the membrane for support; animal cells lack a cell wall."}, {"section": 1, "chapter": "Ch 2: Foundations of Life", "module": "Cell Transport", "q": "The movement of water across a selectively permeable membrane is called:", "options": ["Active transport", "Osmosis", "Endocytosis", "Exocytosis"], "answer": 1, "explanation": "Osmosis is the diffusion of water across a selectively permeable membrane from high to low water concentration; it requires no energy."}, {"section": 1, "chapter": "Ch 2: Foundations of Life", "module": "Cell Transport", "q": "Moving molecules against their concentration gradient requires:", "options": ["Simple diffusion", "Osmosis", "Active transport (energy)", "Facilitated diffusion"], "answer": 2, "explanation": "Active transport moves substances from low to high concentration, which requires energy (ATP), often via membrane pump proteins."}, {"section": 1, "chapter": "Ch 2: Foundations of Life", "module": "Cell Division", "q": "During which phase of mitosis do sister chromatids separate toward opposite poles?", "options": ["Prophase", "Metaphase", "Anaphase", "Telophase"], "answer": 2, "explanation": "In anaphase, the centromeres split and sister chromatids are pulled to opposite poles of the cell."}, {"section": 1, "chapter": "Ch 2: Foundations of Life", "module": "DNA & Protein Synthesis", "q": "During translation, each mRNA codon is read by the anticodon of a:", "options": ["DNA polymerase", "tRNA molecule", "Ribosomal RNA only", "DNA ligase"], "answer": 1, "explanation": "tRNA molecules carry amino acids and pair their anticodon with the complementary mRNA codon during translation."}, {"section": 1, "chapter": "Ch 2: Foundations of Life", "module": "DNA & Protein Synthesis", "q": "The process of copying DNA into messenger RNA is called:", "options": ["Replication", "Transcription", "Translation", "Mutation"], "answer": 1, "explanation": "Transcription is making an mRNA copy of a gene in the nucleus; translation then converts that mRNA into protein."}, {"section": 1, "chapter": "Ch 3: Growth, Division & Biochemistry", "module": "Biochemistry", "q": "Which molecule forms the basic bilayer of the cell membrane?", "options": ["Carbohydrates", "Phospholipids", "Nucleic acids", "Starch"], "answer": 1, "explanation": "Phospholipids form a bilayer because their hydrophilic heads face water and hydrophobic tails face inward."}, {"section": 1, "chapter": "Ch 3: Growth, Division & Biochemistry", "module": "Biochemistry", "q": "The monomers (building blocks) of proteins are:", "options": ["Monosaccharides", "Amino acids", "Nucleotides", "Fatty acids"], "answer": 1, "explanation": "Proteins are polymers of amino acids joined by peptide bonds."}, {"section": 1, "chapter": "Ch 3: Growth, Division & Biochemistry", "module": "Enzymes", "q": "Enzymes increase reaction rate by:", "options": ["Raising the activation energy", "Lowering the activation energy", "Shifting the equilibrium", "Being permanently used up"], "answer": 1, "explanation": "Enzymes are biological catalysts that lower activation energy, speeding the reaction without being consumed or changing equilibrium."}, {"section": 1, "chapter": "Ch 3: Growth, Division & Biochemistry", "module": "Enzymes", "q": "An enzyme's activity is usually highest at its:", "options": ["Lowest possible temperature", "Optimal temperature and pH", "Any pH equally", "Denatured state"], "answer": 1, "explanation": "Each enzyme works best at a specific optimal temperature and pH; outside that range its shape (and function) is lost."}, {"section": 1, "chapter": "Ch 3: Growth, Division & Biochemistry", "module": "Photosynthesis / Respiration", "q": "The light-dependent reactions of photosynthesis take place in the:", "options": ["Stroma", "Thylakoid membranes", "Mitochondrial matrix", "Cytoplasm"], "answer": 1, "explanation": "Light-dependent reactions occur in the thylakoid membranes, where chlorophyll captures light; the Calvin cycle occurs in the stroma."}, {"section": 1, "chapter": "Ch 4: Patterns of Inheritance", "module": "Classical Genetics", "q": "A cross between two heterozygous tall pea plants (Tt × Tt) gives what phenotypic ratio?", "options": ["1 tall : 1 short", "3 tall : 1 short", "9 : 3 : 3 : 1", "All tall"], "answer": 1, "explanation": "A monohybrid cross of two heterozygotes yields a 3:1 phenotypic ratio (3 dominant : 1 recessive)."}, {"section": 1, "chapter": "Ch 4: Patterns of Inheritance", "module": "Classical Genetics", "q": "An organism's genetic makeup is its ____, while its physical traits are its ____.", "options": ["Phenotype; genotype", "Genotype; phenotype", "Allele; gene", "Locus; trait"], "answer": 1, "explanation": "Genotype is the set of alleles an organism carries; phenotype is the observable expression of those alleles."}, {"section": 1, "chapter": "Ch 4: Patterns of Inheritance", "module": "Molecular Genetics", "q": "A point mutation that changes a codon into a premature STOP codon is a:", "options": ["Silent mutation", "Nonsense mutation", "Frameshift mutation", "Missense mutation"], "answer": 1, "explanation": "A nonsense mutation converts an amino-acid codon into a stop codon, truncating the protein early."}, {"section": 1, "chapter": "Ch 4: Patterns of Inheritance", "module": "Pedigrees", "q": "A trait appearing in every generation, affecting males and females equally, is most likely:", "options": ["Autosomal recessive", "Autosomal dominant", "X-linked recessive", "Y-linked"], "answer": 1, "explanation": "Autosomal dominant traits typically appear in every generation and affect both sexes equally."}, {"section": 1, "chapter": "Ch 5: Plants", "module": "Plant Structure", "q": "Which tissue transports water and minerals from roots up to leaves?", "options": ["Phloem", "Xylem", "Stomata", "Cambium"], "answer": 1, "explanation": "Xylem carries water and dissolved minerals upward; phloem carries sugars made in the leaves throughout the plant."}, {"section": 1, "chapter": "Ch 5: Plants", "module": "Plant Structure", "q": "Tiny pores on a leaf that control gas exchange and water loss are:", "options": ["Stomata", "Chloroplasts", "Root hairs", "Cuticles"], "answer": 0, "explanation": "Stomata are adjustable pores (flanked by guard cells) that allow CO2 in and O2/water vapor out."}, {"section": 1, "chapter": "Ch 5: Plants", "module": "Reproduction", "q": "In flowering plants, pollination is best defined as:", "options": ["Fusion of sperm and egg", "Transfer of pollen from anther to stigma", "Dispersal of seeds", "Germination of a seed"], "answer": 1, "explanation": "Pollination is the transfer of pollen from the anther (male) to the stigma (female); fertilization happens afterward."}, {"section": 1, "chapter": "Ch 6: Classification & Taxonomy", "module": "Taxonomy", "q": "Which lists taxonomic ranks from broadest to most specific?", "options": ["Kingdom, Phylum, Class, Order, Family, Genus, Species", "Species, Genus, Family, Order, Class, Phylum, Kingdom", "Kingdom, Class, Phylum, Order, Family, Genus, Species", "Phylum, Kingdom, Class, Order, Family, Genus, Species"], "answer": 0, "explanation": "The standard hierarchy, broadest to narrowest, is Kingdom → Phylum → Class → Order → Family → Genus → Species."}, {"section": 1, "chapter": "Ch 6: Classification & Taxonomy", "module": "Taxonomy", "q": "In binomial nomenclature, an organism's scientific name consists of its:", "options": ["Family and genus", "Genus and species", "Order and family", "Domain and kingdom"], "answer": 1, "explanation": "Binomial nomenclature names a species by its genus (capitalized) and species (lowercase), e.g., Homo sapiens."}, {"section": 1, "chapter": "Ch 7: Human Anatomy & Physiology", "module": "Circulatory / Respiratory", "q": "Which vessels generally carry oxygenated blood away from the heart?", "options": ["Veins", "Arteries", "Capillaries", "Venules"], "answer": 1, "explanation": "Arteries carry blood away from the heart (usually oxygenated); the pulmonary artery is the main exception."}, {"section": 1, "chapter": "Ch 7: Human Anatomy & Physiology", "module": "Circulatory / Respiratory", "q": "Gas exchange between air and blood occurs in the:", "options": ["Bronchi", "Alveoli", "Trachea", "Larynx"], "answer": 1, "explanation": "Alveoli are tiny air sacs with thin walls and rich capillary networks where O2 and CO2 diffuse between air and blood."}, {"section": 1, "chapter": "Ch 7: Human Anatomy & Physiology", "module": "Digestive / Excretory", "q": "Most nutrient absorption in the human digestive system occurs in the:", "options": ["Stomach", "Small intestine", "Large intestine", "Esophagus"], "answer": 1, "explanation": "The small intestine, with its villi providing huge surface area, absorbs most nutrients."}, {"section": 1, "chapter": "Ch 7: Human Anatomy & Physiology", "module": "Nervous System", "q": "Which part of a neuron receives incoming signals?", "options": ["Axon", "Dendrites", "Myelin sheath", "Axon terminal"], "answer": 1, "explanation": "Dendrites receive signals from other neurons; the axon carries the impulse away to the next cell."}, {"section": 1, "chapter": "Ch 8: Mastery & Full Review", "module": "Cellular Respiration", "q": "Which correctly pairs a process with where it occurs?", "options": ["Glycolysis – mitochondrial matrix", "Krebs cycle – cytoplasm", "Glycolysis – cytoplasm", "Calvin cycle – thylakoid membrane"], "answer": 2, "explanation": "Glycolysis occurs in the cytoplasm; the Krebs cycle is in the mitochondrial matrix and the Calvin cycle in the chloroplast stroma."}, {"section": 1, "chapter": "Ch 8: Mastery & Full Review", "module": "Genetic Variation", "q": "Which best explains genetic variation in offspring of sexual reproduction?", "options": ["Mitosis produces identical daughter cells", "Crossing over and independent assortment in meiosis", "Binary fission", "Error-free DNA replication"], "answer": 1, "explanation": "Crossing over and independent assortment during meiosis, plus random fertilization, shuffle alleles to create variation."}, {"section": 1, "chapter": "Ch 8: Mastery & Full Review", "module": "Evidence for Evolution", "q": "Homologous structures (human arm, whale flipper) are evidence of:", "options": ["Convergent evolution", "Common ancestry (divergent evolution)", "Spontaneous generation", "Inheritance of acquired traits"], "answer": 1, "explanation": "Homologous structures share the same underlying anatomy from a common ancestor, even if used differently — evidence of divergent evolution."}, {"section": 1, "chapter": "Ch 8: Mastery & Full Review", "module": "Hardy-Weinberg", "q": "At Hardy-Weinberg equilibrium, if recessive allele frequency q = 0.3, frequency of homozygous dominant (p²) is:", "options": ["0.09", "0.21", "0.49", "0.70"], "answer": 2, "explanation": "p = 1 − q = 0.7, so p² = 0.49. (q² = 0.09 would be homozygous recessive.)"}, {"section": 2, "chapter": "Ch 1: Evolution & Adaptation", "module": "Evolution", "q": "A sudden change in allele frequencies due to a random event in a small population is:", "options": ["Natural selection", "Genetic drift", "Gene flow", "Adaptation"], "answer": 1, "explanation": "Genetic drift is random change in allele frequencies, most pronounced in small populations (e.g., founder or bottleneck effects)."}, {"section": 2, "chapter": "Ch 1: Evolution & Adaptation", "module": "Evolution", "q": "Which is a requirement for natural selection to occur?", "options": ["All individuals are identical", "Heritable variation in fitness", "No competition for resources", "Unlimited environmental resources"], "answer": 1, "explanation": "Natural selection requires heritable variation that affects survival/reproduction; without variation, selection has nothing to act on."}, {"section": 2, "chapter": "Ch 1: Evolution & Adaptation", "module": "Animal Behavior", "q": "A young goose following the first moving object it sees after hatching shows:", "options": ["Imprinting", "Conditioning", "Migration", "Hibernation"], "answer": 0, "explanation": "Imprinting is rapid learning during a critical early period, such as a gosling bonding to the first moving object it sees."}, {"section": 2, "chapter": "Ch 1: Evolution & Adaptation", "module": "Ecology", "q": "An organism's role and position in its ecosystem is its:", "options": ["Habitat", "Niche", "Biome", "Population"], "answer": 1, "explanation": "A niche is the full role of a species (how it gets energy, interactions, etc.); habitat is just where it lives."}, {"section": 2, "chapter": "Ch 1: Evolution & Adaptation", "module": "Ecology", "q": "In a food chain, organisms that break down dead matter are:", "options": ["Producers", "Primary consumers", "Decomposers", "Apex predators"], "answer": 2, "explanation": "Decomposers (bacteria, fungi) break down dead organisms, recycling nutrients back into the ecosystem."}, {"section": 2, "chapter": "Ch 2: Foundations of Life", "module": "Cell Structure", "q": "Ribosomes are responsible for:", "options": ["Photosynthesis", "Protein synthesis", "Lipid storage", "DNA replication"], "answer": 1, "explanation": "Ribosomes assemble amino acids into proteins by reading mRNA — the site of translation."}, {"section": 2, "chapter": "Ch 2: Foundations of Life", "module": "Cell Structure", "q": "Which best distinguishes a prokaryotic from a eukaryotic cell?", "options": ["Prokaryotes have no DNA", "Prokaryotes lack a membrane-bound nucleus", "Prokaryotes are always multicellular", "Prokaryotes have no ribosomes"], "answer": 1, "explanation": "Prokaryotes (bacteria) lack a membrane-bound nucleus and other membrane-bound organelles; their DNA floats in the cytoplasm."}, {"section": 2, "chapter": "Ch 2: Foundations of Life", "module": "Cell Transport", "q": "A red blood cell placed in pure water will:", "options": ["Shrink", "Swell and possibly burst", "Stay the same", "Become more salty"], "answer": 1, "explanation": "Pure water is hypotonic to the cell, so water moves in by osmosis, causing the cell to swell and possibly lyse."}, {"section": 2, "chapter": "Ch 2: Foundations of Life", "module": "Cell Division", "q": "Meiosis produces:", "options": ["Two identical diploid cells", "Four genetically varied haploid cells", "One large egg only", "Identical clones"], "answer": 1, "explanation": "Meiosis produces four haploid gametes that are genetically distinct due to crossing over and independent assortment."}, {"section": 2, "chapter": "Ch 2: Foundations of Life", "module": "DNA & Protein Synthesis", "q": "In DNA, adenine always pairs with:", "options": ["Guanine", "Cytosine", "Thymine", "Uracil"], "answer": 2, "explanation": "By complementary base pairing, adenine pairs with thymine (A–T) and guanine with cytosine (G–C). Uracil replaces thymine in RNA."}, {"section": 2, "chapter": "Ch 2: Foundations of Life", "module": "DNA & Protein Synthesis", "q": "If a DNA strand reads 3'-TAC-5', the mRNA codon is:", "options": ["AUG", "ATG", "UAC", "TAC"], "answer": 0, "explanation": "mRNA is complementary and antiparallel: DNA TAC transcribes to mRNA AUG (with U replacing T) — the start codon."}, {"section": 2, "chapter": "Ch 3: Growth, Division & Biochemistry", "module": "Biochemistry", "q": "Which is the primary energy-storage molecule used directly by cells?", "options": ["DNA", "ATP", "Cellulose", "Collagen"], "answer": 1, "explanation": "ATP (adenosine triphosphate) is the cell's immediate energy currency; energy is released when its phosphate bond is broken."}, {"section": 2, "chapter": "Ch 3: Growth, Division & Biochemistry", "module": "Biochemistry", "q": "The monomers of nucleic acids (DNA/RNA) are:", "options": ["Amino acids", "Nucleotides", "Monosaccharides", "Fatty acids"], "answer": 1, "explanation": "Nucleic acids are polymers of nucleotides, each made of a sugar, a phosphate, and a nitrogenous base."}, {"section": 2, "chapter": "Ch 3: Growth, Division & Biochemistry", "module": "Enzymes", "q": "A molecule that binds an enzyme's active site and blocks the substrate is a:", "options": ["Coenzyme", "Competitive inhibitor", "Substrate", "Product"], "answer": 1, "explanation": "A competitive inhibitor competes with the substrate for the active site, reducing enzyme activity."}, {"section": 2, "chapter": "Ch 3: Growth, Division & Biochemistry", "module": "Photosynthesis / Respiration", "q": "The overall reactants of photosynthesis are:", "options": ["Glucose and oxygen", "Carbon dioxide and water", "Oxygen and water", "Glucose and CO2"], "answer": 1, "explanation": "Photosynthesis uses CO2 + H2O (and light) to make glucose and O2 — essentially the reverse of respiration."}, {"section": 2, "chapter": "Ch 3: Growth, Division & Biochemistry", "module": "Photosynthesis / Respiration", "q": "The Calvin cycle uses ATP and NADPH to:", "options": ["Split water", "Fix carbon dioxide into sugar", "Produce oxygen", "Absorb light"], "answer": 1, "explanation": "The light-independent Calvin cycle uses ATP and NADPH from the light reactions to fix CO2 into glucose."}, {"section": 2, "chapter": "Ch 4: Patterns of Inheritance", "module": "Classical Genetics", "q": "In a dihybrid cross (AaBb × AaBb), the phenotypic ratio is:", "options": ["3:1", "1:1:1:1", "9:3:3:1", "1:2:1"], "answer": 2, "explanation": "A dihybrid cross of two double heterozygotes gives the classic 9:3:3:1 phenotypic ratio."}, {"section": 2, "chapter": "Ch 4: Patterns of Inheritance", "module": "Classical Genetics", "q": "When both alleles are fully expressed (e.g., AB blood type), this is:", "options": ["Incomplete dominance", "Codominance", "Complete dominance", "Epistasis"], "answer": 1, "explanation": "Codominance is when both alleles are fully and separately expressed in the phenotype, as in AB blood type."}, {"section": 2, "chapter": "Ch 4: Patterns of Inheritance", "module": "Molecular Genetics", "q": "Inserting or deleting one nucleotide, shifting the reading of all later codons, is a:", "options": ["Silent mutation", "Frameshift mutation", "Missense mutation", "Inversion"], "answer": 1, "explanation": "A frameshift mutation from an insertion/deletion shifts the reading frame, usually garbling the entire downstream protein."}, {"section": 2, "chapter": "Ch 4: Patterns of Inheritance", "module": "Pedigrees", "q": "An X-linked recessive trait is generally more common in:", "options": ["Females", "Males", "Both equally", "Neither sex"], "answer": 1, "explanation": "Males have only one X, so a single recessive allele is expressed; females need two copies, making them affected less often."}, {"section": 2, "chapter": "Ch 5: Plants", "module": "Plant Structure", "q": "Sugars made during photosynthesis are transported through the:", "options": ["Xylem", "Phloem", "Epidermis", "Root cap"], "answer": 1, "explanation": "Phloem transports sugars (and other organic nutrients) from sources like leaves to the rest of the plant."}, {"section": 2, "chapter": "Ch 5: Plants", "module": "Plant Structure", "q": "Guard cells function to:", "options": ["Anchor the plant", "Open and close stomata", "Transport water", "Store starch"], "answer": 1, "explanation": "Guard cells change shape to open or close the stomata, regulating gas exchange and water loss."}, {"section": 2, "chapter": "Ch 5: Plants", "module": "Reproduction", "q": "The part of the flower that produces pollen is the:", "options": ["Stigma", "Anther", "Ovary", "Sepal"], "answer": 1, "explanation": "The anther, at the top of the stamen, produces and releases pollen grains."}, {"section": 2, "chapter": "Ch 5: Plants", "module": "Reproduction", "q": "A plant hormone responsible for stem elongation and phototropism is:", "options": ["Auxin", "Insulin", "Estrogen", "Adrenaline"], "answer": 0, "explanation": "Auxin promotes cell elongation and accumulates on the shaded side of a stem, causing it to bend toward light (phototropism)."}, {"section": 2, "chapter": "Ch 6: Classification & Taxonomy", "module": "Taxonomy", "q": "Which domain consists only of prokaryotes?", "options": ["Eukarya", "Bacteria", "Plantae", "Animalia"], "answer": 1, "explanation": "Domains Bacteria and Archaea are prokaryotic; Eukarya contains all eukaryotes (protists, fungi, plants, animals)."}, {"section": 2, "chapter": "Ch 6: Classification & Taxonomy", "module": "Taxonomy", "q": "Two organisms in the same genus also necessarily share the same:", "options": ["Species", "Family", "Individual traits", "Habitat"], "answer": 1, "explanation": "Because the hierarchy is nested, organisms sharing a genus also share every broader rank, including family."}, {"section": 2, "chapter": "Ch 7: Human Anatomy & Physiology", "module": "Circulatory / Respiratory", "q": "Which chamber of the heart pumps oxygenated blood to the body?", "options": ["Right atrium", "Left ventricle", "Right ventricle", "Left atrium"], "answer": 1, "explanation": "The left ventricle has the thickest wall and pumps oxygenated blood out through the aorta to the whole body."}, {"section": 2, "chapter": "Ch 7: Human Anatomy & Physiology", "module": "Digestive / Excretory", "q": "The functional filtering unit of the kidney is the:", "options": ["Alveolus", "Nephron", "Villus", "Neuron"], "answer": 1, "explanation": "The nephron is the kidney's microscopic unit that filters blood and forms urine."}, {"section": 2, "chapter": "Ch 7: Human Anatomy & Physiology", "module": "Digestive / Excretory", "q": "Bile, which helps digest fats, is produced by the:", "options": ["Stomach", "Liver", "Pancreas", "Kidney"], "answer": 1, "explanation": "The liver produces bile (stored in the gallbladder), which emulsifies fats for easier digestion."}, {"section": 2, "chapter": "Ch 7: Human Anatomy & Physiology", "module": "Nervous System", "q": "The gap between two neurons across which signals pass is the:", "options": ["Axon", "Synapse", "Dendrite", "Node"], "answer": 1, "explanation": "The synapse is the junction where a neuron communicates with the next cell, usually via neurotransmitters."}, {"section": 2, "chapter": "Ch 8: Mastery & Full Review", "module": "Cellular Respiration", "q": "The final electron acceptor in aerobic respiration is:", "options": ["Carbon dioxide", "Oxygen", "Water", "Glucose"], "answer": 1, "explanation": "In aerobic respiration, oxygen is the final electron acceptor in the electron transport chain, forming water."}, {"section": 2, "chapter": "Ch 8: Mastery & Full Review", "module": "Cellular Respiration", "q": "Approximately how many ATP does aerobic respiration of one glucose yield?", "options": ["2", "4", "18", "36 (about 30–38)"], "answer": 3, "explanation": "Complete aerobic respiration of one glucose yields roughly 36 ATP (commonly cited 30–38), far more than the 2 from glycolysis alone."}, {"section": 2, "chapter": "Ch 8: Mastery & Full Review", "module": "Evidence for Evolution", "q": "Vestigial structures, like the human appendix, suggest:", "options": ["Recent creation of species", "Descent with modification from ancestors", "That evolution has stopped", "Acquired characteristics"], "answer": 1, "explanation": "Vestigial structures are reduced remnants of features that were functional in ancestors — evidence of descent with modification."}, {"section": 2, "chapter": "Ch 8: Mastery & Full Review", "module": "Genetic Variation", "q": "Which event introduces brand-new alleles into a population?", "options": ["Mitosis", "Mutation", "Independent assortment", "Migration only"], "answer": 1, "explanation": "Mutation is the ultimate source of new alleles; other mechanisms only reshuffle or spread existing variation."}];
+const SECTION_TIME = 45 * 60; // seconds per section
+const PER_SECTION = 34;
 
 const $ = id => document.getElementById(id);
+let section = 1;          // 1 or 2
+let current = 0;          // index within current section
+const answers = new Array(QUESTIONS.length).fill(null);
+let timeLeft = SECTION_TIME;
+let timerId = null;
+
 $('meta-q').textContent = QUESTIONS.length;
 
-$('start-btn').addEventListener('click', () => {
-  $('intro').style.display = 'none';
-  $('quiz').style.display = 'block';
+function sectionQuestions(sec){
+  return QUESTIONS.map((q,gi)=>({q,gi})).filter(o=>o.q.section===sec);
+}
+
+function startSection(sec){
+  section = sec;
+  current = 0;
+  timeLeft = SECTION_TIME;
+  $('intro').style.display='none';
+  $('sectionbreak').style.display='none';
+  $('results').style.display='none';
+  $('quiz').style.display='block';
+  $('section-badge').textContent = 'Section ' + sec + ' of 2';
   window.scrollTo(0,0);
   render();
-});
+  startTimer();
+}
+
+function startTimer(){
+  clearInterval(timerId);
+  updateTimerDisplay();
+  timerId = setInterval(()=>{
+    timeLeft--;
+    updateTimerDisplay();
+    if(timeLeft<=0){
+      clearInterval(timerId);
+      endSection();
+    }
+  },1000);
+}
+function updateTimerDisplay(){
+  const m = Math.floor(timeLeft/60), s = timeLeft%60;
+  $('timer').textContent = m + ':' + (s<10?'0':'') + s;
+  $('timer').classList.toggle('warn', timeLeft<=300);
+}
+
+$('start-btn').addEventListener('click', ()=> startSection(1));
+$('startsec2-btn').addEventListener('click', ()=> startSection(2));
 
 function render() {
-  const q = QUESTIONS[current];
-  $('q-chapter').textContent = q.chapter + (q.module ? ' · ' + q.module : '');
+  const list = sectionQuestions(section);
+  const {q,gi} = list[current];
+  $('q-chapter').textContent = q.chapter + (q.module ? ' \u00b7 ' + q.module : '');
   $('q-text').textContent = (current+1) + '. ' + q.q;
   const letters = ['A','B','C','D','E'];
   $('options').innerHTML = q.options.map((opt,i) =>
-    `<div class="opt${answers[current]===i?' selected':''}" data-i="${i}">
-       <span class="mark">${answers[current]===i?'✓':letters[i]}</span><span>${opt}</span>
+    `<div class="opt${answers[gi]===i?' selected':''}" data-i="${i}">
+       <span class="mark">${answers[gi]===i?'\u2713':letters[i]}</span><span>${opt}</span>
      </div>`).join('');
   $('options').querySelectorAll('.opt').forEach(el => {
-    el.addEventListener('click', () => {
-      answers[current] = parseInt(el.dataset.i);
-      render();
-    });
+    el.addEventListener('click', () => { answers[gi] = parseInt(el.dataset.i); render(); });
   });
-  const pct = ((current) / QUESTIONS.length) * 100;
+  const pct = (current / list.length) * 100;
   $('prog-fill').style.width = pct + '%';
   $('prog-label').textContent = 'Question ' + (current+1);
-  $('prog-count').textContent = (current+1) + ' / ' + QUESTIONS.length;
+  $('prog-count').textContent = (current+1) + ' / ' + list.length;
   $('prev-btn').disabled = current === 0;
-  $('next-btn').disabled = answers[current] === null;
-  $('next-btn').textContent = current === QUESTIONS.length-1 ? 'See Results →' : 'Next →';
+  $('next-btn').disabled = answers[gi] === null;
+  const last = current === list.length-1;
+  $('next-btn').textContent = last ? (section===1 ? 'Finish Section 1 \u2192' : 'See Results \u2192') : 'Next \u2192';
 }
 
 $('next-btn').addEventListener('click', () => {
-  if (answers[current] === null) return;
-  if (current < QUESTIONS.length-1) { current++; render(); window.scrollTo(0,0); }
-  else showResults();
+  const list = sectionQuestions(section);
+  const {gi} = list[current];
+  if (answers[gi] === null) return;
+  if (current < list.length-1) { current++; render(); window.scrollTo(0,0); }
+  else endSection();
 });
 $('prev-btn').addEventListener('click', () => { if (current>0){current--; render(); window.scrollTo(0,0);} });
 
+function endSection(){
+  clearInterval(timerId);
+  if(section===1){
+    $('quiz').style.display='none';
+    $('sectionbreak').style.display='block';
+    window.scrollTo(0,0);
+  } else {
+    showResults();
+  }
+}
+
 function showResults() {
+  clearInterval(timerId);
   $('quiz').style.display = 'none';
+  $('sectionbreak').style.display = 'none';
   $('results').style.display = 'block';
   window.scrollTo(0,0);
 
-  // tally per chapter
   const byChap = {};
   let correct = 0;
   QUESTIONS.forEach((q,i) => {
@@ -225,10 +324,10 @@ function showResults() {
   $('score-sub').textContent = correct + ' of ' + QUESTIONS.length + ' correct';
 
   let verdict;
-  if (overall >= 80) verdict = 'Excellent work — you have a strong command of ACT Biology. Polish the few weak spots below and you’re in great shape for exam day.';
-  else if (overall >= 60) verdict = 'Solid foundation. You know the core material, but a few chapters need another pass. Focus on the “Needs improvement” list below.';
-  else if (overall >= 40) verdict = 'You’ve got the basics, but there are real gaps to close. Use the breakdown below to target your weakest chapters first.';
-  else verdict = 'This is a starting point — most chapters need review. Work through the full Gcourses curriculum chapter by chapter, then retake this test.';
+  if (overall >= 80) verdict = 'Excellent work \u2014 you have a strong command of ACT Biology. Polish the few weak spots below and you\u2019re in great shape for exam day.';
+  else if (overall >= 60) verdict = 'Solid foundation. You know the core material, but a few chapters need another pass. Focus on the \u201cNeeds improvement\u201d list below.';
+  else if (overall >= 40) verdict = 'You\u2019ve got the basics, but there are real gaps to close. Use the breakdown below to target your weakest chapters first.';
+  else verdict = 'This is a starting point \u2014 most chapters need review. Work through the full Gcourses curriculum chapter by chapter, then retake this test.';
   $('verdict').textContent = verdict;
 
   const cls = p => p>=70?'good':p>=50?'warn':'bad';
@@ -241,24 +340,49 @@ function showResults() {
     <div class="breakdown-row">
       <div class="breakdown-top">
         <span class="breakdown-name">${r.name}<span class="tag col-${cls(r.p)}">${tag(r.p)}</span></span>
-        <span class="breakdown-pct col-${cls(r.p)}">${r.p}% · ${r.c}/${r.t}</span>
+        <span class="breakdown-pct col-${cls(r.p)}">${r.p}% \u00b7 ${r.c}/${r.t}</span>
       </div>
       <div class="bar-track"><div class="bar-fill bg-${cls(r.p)}" style="width:${r.p}%"></div></div>
     </div>`).join('');
 
   const strong = rows.filter(r=>r.p>=70).map(r=>r.name);
   const weak = rows.filter(r=>r.p<50).map(r=>r.name);
-  $('strong-list').innerHTML = strong.length ? strong.map(s=>`<li>${s}</li>`).join('') : '<li>Keep practicing — no chapter hit 70% yet.</li>';
-  $('weak-list').innerHTML = weak.length ? weak.map(s=>`<li>${s}</li>`).join('') : '<li>Nothing critical — nice and balanced!</li>';
+  $('strong-list').innerHTML = strong.length ? strong.map(s=>`<li>${s}</li>`).join('') : '<li>Keep practicing \u2014 no chapter hit 70% yet.</li>';
+  $('weak-list').innerHTML = weak.length ? weak.map(s=>`<li>${s}</li>`).join('') : '<li>Nothing critical \u2014 nice and balanced!</li>';
+
+  // Answer review
+  const letters = ['A','B','C','D','E'];
+  $('review').innerHTML = QUESTIONS.map((q,i)=>{
+    const userA = answers[i];
+    const ok = userA === q.answer;
+    const opts = q.options.map((opt,oi)=>{
+      let c='', mark='';
+      if(oi===q.answer){ c='correct'; mark='\u2713'; }
+      else if(oi===userA){ c='wrong'; mark='\u2717'; }
+      return `<div class="review-opt ${c}"><span class="rmark">${mark||letters[oi]}</span><span>${opt}</span></div>`;
+    }).join('');
+    const yourAns = userA===null ? '<em>No answer</em>' : letters[userA];
+    return `<div class="review-q">
+      <div class="review-head">
+        <span class="review-icon ${ok?'ok':'no'}">${ok?'\u2713':'\u2717'}</span>
+        <div>
+          <div class="review-chapter">Section ${q.section} \u00b7 ${q.chapter}${q.module?' \u00b7 '+q.module:''}</div>
+          <div class="review-qtext">${i+1}. ${q.q}</div>
+        </div>
+      </div>
+      ${opts}
+      <div class="review-exp"><strong>${ok?'Correct.':'Your answer: '+yourAns+'.'} </strong>${q.explanation}</div>
+    </div>`;
+  }).join('');
 }
 
 $('retake-btn').addEventListener('click', () => {
-  current = 0;
   for (let i=0;i<answers.length;i++) answers[i]=null;
   $('results').style.display='none';
-  $('quiz').style.display='block';
+  $('intro').style.display='block';
+  clearInterval(timerId);
+  $('timer').textContent='45:00';
   window.scrollTo(0,0);
-  render();
 });
 </script>
 </body>
