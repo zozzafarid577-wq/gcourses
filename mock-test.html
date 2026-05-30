@@ -306,12 +306,12 @@ const QUESTIONS = [{"section": 1, "chapter": "Ch 1: Evolution & Adaptation", "mo
 const SECTION_TIME = 45 * 60; // seconds per section
 const PER_SECTION = 34;
 
-// === Email delivery (Web3Forms) ===
-// Get a free access key at https://web3forms.com (enter gigiimofarid@gmail.com, no signup).
-// Paste it below. Reports go to your Gmail; enable "Send copy to submitter" in your
-// Web3Forms settings so the student also receives their results.
-const WEB3FORMS_KEY = 'REPLACE_WITH_YOUR_WEB3FORMS_ACCESS_KEY';
+// === Email delivery (FormSubmit.co — no key/signup needed) ===
+// Reports POST straight to the owner's email. The student is CC'd so both get a copy.
+// One-time setup: the FIRST time a test is submitted, FormSubmit emails Gigi a
+// confirmation link — click it once and every report after that is sent automatically.
 const OWNER_EMAIL = 'gigiimofarid@gmail.com';
+const FORMSUBMIT_URL = 'https://formsubmit.co/ajax/' + OWNER_EMAIL;
 
 const $ = id => document.getElementById(id);
 let section = 1;          // 1 or 2
@@ -542,35 +542,29 @@ function buildReportText(overall, correct, rows){
 function sendReport(overall, correct, rows){
   const el = $('email-status');
   el.style.display = 'flex';
-  if(!WEB3FORMS_KEY || WEB3FORMS_KEY.indexOf('REPLACE_WITH')===0){
-    el.className = 'email-status err';
-    el.textContent = '⚠ Email sending is not configured yet. Your report is shown below.';
-    return;
-  }
   el.className = 'email-status sending';
   el.textContent = '⏳ Sending your report to ' + student.email + ' and Gigi…';
 
   const report = buildReportText(overall, correct, rows);
   const payload = {
-    access_key: WEB3FORMS_KEY,
-    subject: 'ACT Biology Mock Test — ' + student.name + ' scored ' + overall + '%',
-    from_name: 'Gcourses Mock Test',
+    _subject: 'ACT Biology Mock Test — ' + student.name + ' scored ' + overall + '%',
+    _template: 'box',
+    _cc: student.email,            // student gets a copy too
+    _captcha: 'false',
     name: student.name,
-    email: student.email,          // student's address (reply-to + submitter copy)
-    replyto: student.email,
-    ccemail: OWNER_EMAIL,
-    score: overall + '% (' + correct + '/' + QUESTIONS.length + ')',
+    email: student.email,          // reply-to = student
+    score: overall + '% (' + correct + ' / ' + QUESTIONS.length + ' correct)',
     message: report
   };
 
-  fetch('https://api.web3forms.com/submit', {
+  fetch(FORMSUBMIT_URL, {
     method:'POST',
     headers:{ 'Content-Type':'application/json', 'Accept':'application/json' },
     body: JSON.stringify(payload)
   })
   .then(r=>r.json())
   .then(data=>{
-    if(data.success){
+    if(data && (data.success===true || data.success==='true')){
       el.className = 'email-status ok';
       el.textContent = '✓ Report emailed to ' + student.email + ' and Gigi.';
     } else {
