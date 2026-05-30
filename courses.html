@@ -163,6 +163,10 @@
     .nav-links li { width:100%; }
     .nav-links a { display:block; padding:0.85rem 0.2rem; width:100%; border-bottom:1px solid rgba(218,181,213,0.25) !important; }
   }
+
+  .nav-links a.mock-link { color:#fff !important; background:linear-gradient(135deg,var(--purple),var(--mid)); border-radius:100px; padding:0.4rem 0.95rem; border-bottom:none !important; box-shadow:0 3px 12px rgba(160,80,159,0.3); position:relative; }
+  .nav-links a.mock-link:hover { color:#fff !important; transform:translateY(-1px); }
+  .nav-links a.mock-link::after { content:'NEW'; position:absolute; top:-7px; right:-9px; font-size:0.46rem; font-weight:700; letter-spacing:0.05em; background:var(--lavender); color:var(--deep); border-radius:100px; padding:1px 5px; }
 </style>
 </head>
 <body>
@@ -173,7 +177,7 @@
 <li><a href="courses.html" class="active">Courses</a></li>
 <li><a href="curriculum.html" class="">Curriculum</a></li>
 <li><a href="pricing.html" class="">Pricing</a></li>
-<li><a href="about.html" class="">About</a></li><li><a href="mock-test.html" class="">Mock Test</a></li></ul>
+<li><a href="about.html" class="">About</a></li><li><a href="mock-test.html" class="mock-link">Mock Test</a></li></ul>
   <a href="pricing.html" class="nav-cta">Enroll Now</a>
   <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
