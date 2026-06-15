@@ -19,7 +19,19 @@ function signApproval(obj, secret) {
   return `${header}.${payload}.${sig}`;
 }
 
-function ownerEmailHtml({ name, email, productName, amount, approveUrl, hasShot }) {
+function ownerEmailHtml({ name, email, productName, amount, approveUrl, hasShot, delivery, physical }) {
+  const d = delivery || {};
+  const deliveryBlock = physical ? `
+          <div style="margin-top:16px;padding:14px 16px;background:#f3e7f3;border-radius:10px;">
+            <div style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#a0509f;font-weight:600;margin-bottom:8px;">📦 Deliver printed copy to</div>
+            <table style="width:100%;border-collapse:collapse;">
+              <tr><td style="padding:4px 0;font-size:13px;color:#8a6a88;width:100px;">Phone</td><td style="padding:4px 0;font-size:13px;color:#2e1a2e;">${esc(d.phone)}</td></tr>
+              <tr><td style="padding:4px 0;font-size:13px;color:#8a6a88;">Governorate</td><td style="padding:4px 0;font-size:13px;color:#2e1a2e;">${esc(d.governorate)}</td></tr>
+              <tr><td style="padding:4px 0;font-size:13px;color:#8a6a88;">City / area</td><td style="padding:4px 0;font-size:13px;color:#2e1a2e;">${esc(d.city)}</td></tr>
+              <tr><td style="padding:4px 0;font-size:13px;color:#8a6a88;vertical-align:top;">Address</td><td style="padding:4px 0;font-size:13px;color:#2e1a2e;">${esc(d.address)}</td></tr>
+              ${d.notes ? `<tr><td style="padding:4px 0;font-size:13px;color:#8a6a88;vertical-align:top;">Notes</td><td style="padding:4px 0;font-size:13px;color:#2e1a2e;">${esc(d.notes)}</td></tr>` : ''}
+            </table>
+          </div>` : '';
   return `<!DOCTYPE html><html><body style="margin:0;padding:0;background:#f3e7f3;font-family:Helvetica,Arial,sans-serif;">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f3e7f3;padding:28px 12px;">
     <tr><td align="center">
@@ -36,6 +48,7 @@ function ownerEmailHtml({ name, email, productName, amount, approveUrl, hasShot 
             <tr><td style="padding:7px 0;font-size:14px;color:#8a6a88;">Product</td><td style="padding:7px 0;font-size:14px;color:#2e1a2e;">${esc(productName)}</td></tr>
             <tr><td style="padding:7px 0;font-size:14px;color:#8a6a88;">Amount</td><td style="padding:7px 0;font-size:14px;color:#2e1a2e;font-weight:600;">${esc(amount)}</td></tr>
           </table>
+          ${deliveryBlock}
         </td></tr>
         <tr><td style="padding:18px 32px 30px;">
           <a href="${approveUrl}" style="display:inline-block;background:#3f9d6b;color:#fff;text-decoration:none;font-size:15px;font-weight:600;padding:14px 32px;border-radius:100px;">✓ Approve &amp; enroll ${esc(name)}</a>
@@ -67,6 +80,18 @@ module.exports = async (req, res) => {
   const p = PRODUCTS[product];
   if (!p) { res.status(400).json({ error: 'Unknown product' }); return; }
 
+  // Physical products need a delivery address (inside Egypt).
+  const delivery = {
+    phone: String((body && body.phone) || '').trim().slice(0, 30),
+    governorate: String((body && body.governorate) || '').trim().slice(0, 60),
+    city: String((body && body.city) || '').trim().slice(0, 80),
+    address: String((body && body.address) || '').trim().slice(0, 300),
+    notes: String((body && body.notes) || '').trim().slice(0, 300)
+  };
+  if (p.physical && (!delivery.phone || !delivery.governorate || !delivery.city || !delivery.address)) {
+    res.status(400).json({ error: 'Delivery details are required for the printed copy' }); return;
+  }
+
   const emailLower = email.trim().toLowerCase();
   const token = signApproval({
     e: emailLower,
@@ -87,7 +112,8 @@ module.exports = async (req, res) => {
     subject: `Instapay payment from ${name.trim()} — approve to enroll`,
     htmlContent: ownerEmailHtml({
       name: name.trim(), email: emailLower, productName: p.name,
-      amount: p.egp || (p.price + ' ' + p.currency), approveUrl, hasShot: Boolean(screenshot && screenshot.content)
+      amount: p.egp || (p.price + ' ' + p.currency), approveUrl, hasShot: Boolean(screenshot && screenshot.content),
+      delivery, physical: Boolean(p.physical)
     })
   };
 

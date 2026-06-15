@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
   const products = {};
   for (const key of Object.keys(PRODUCTS)) {
     const p = PRODUCTS[key];
-    products[key] = { name: p.name, price: p.price, currency: p.currency, desc: p.desc, egp: p.egp };
+    products[key] = { name: p.name, price: p.price, currency: p.currency, desc: p.desc, egp: p.egp, physical: Boolean(p.physical) };
   }
 
   res.status(200).json({
