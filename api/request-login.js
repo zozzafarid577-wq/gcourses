@@ -42,6 +42,21 @@ function buildMagicLinkEmail(name, link) {
   </body></html>`;
 }
 
+// Checks the Vercel KV "enrolled" set (paid buyers). Returns false if KV is not configured.
+async function kvIsEnrolled(email) {
+  const url = process.env.KV_REST_API_URL;
+  const tok = process.env.KV_REST_API_TOKEN;
+  if (!url || !tok) return false;
+  try {
+    const r = await fetch(`${url}/sismember/enrolled/${encodeURIComponent(email)}`, {
+      headers: { Authorization: `Bearer ${tok}` }
+    });
+    if (!r.ok) return false;
+    const d = await r.json();
+    return d && (d.result === 1 || d.result === '1');
+  } catch (_) { return false; }
+}
+
 module.exports = async (req, res) => {
   if (req.method !== 'POST') { res.status(405).json({ error: 'Method not allowed' }); return; }
 
@@ -62,8 +77,12 @@ module.exports = async (req, res) => {
 
   const emailLower = email.trim().toLowerCase();
 
+  // Approved if manually whitelisted OR auto-enrolled via a paid purchase (KV).
+  let allowed = approved.includes(emailLower);
+  if (!allowed) allowed = await kvIsEnrolled(emailLower);
+
   // Always return success to prevent email enumeration
-  if (!approved.includes(emailLower)) {
+  if (!allowed) {
     // Silently do nothing but return success
     res.status(200).json({ success: true });
     return;
