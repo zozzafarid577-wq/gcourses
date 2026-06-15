@@ -1,4 +1,10 @@
+# robots.txt — https://gcourses.site
 User-agent: *
 Allow: /
+
+# Keep utility / private pages out of search
+Disallow: /checkout.html
+Disallow: /admin/
+Disallow: /secret/
 
 Sitemap: https://gcourses.site/sitemap.xml
