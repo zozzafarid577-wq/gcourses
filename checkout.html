@@ -121,6 +121,31 @@
             <label for="buyer-email">Email for course access</label>
             <input type="email" id="buyer-email" placeholder="you@example.com" autocomplete="email" required />
           </div>
+
+          <div id="delivery-section" style="display:none;">
+            <div class="field">
+              <label for="buyer-phone">Phone number</label>
+              <input type="text" id="buyer-phone" placeholder="01x xxxx xxxx" autocomplete="tel" />
+            </div>
+            <div class="field">
+              <label for="buyer-gov">Governorate</label>
+              <select id="buyer-gov" style="width:100%;padding:0.75rem 1rem;border:1.5px solid var(--lavender);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.95rem;color:var(--text);background:#fff;outline:none;">
+                <option value="">Select…</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="buyer-city">City / area</label>
+              <input type="text" id="buyer-city" placeholder="e.g. Nasr City" />
+            </div>
+            <div class="field">
+              <label for="buyer-address">Full address</label>
+              <textarea id="buyer-address" rows="2" placeholder="Street, building number, apartment, floor" style="width:100%;padding:0.75rem 1rem;border:1.5px solid var(--lavender);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.95rem;color:var(--text);outline:none;resize:vertical;"></textarea>
+            </div>
+            <div class="field">
+              <label for="buyer-notes">Landmark / notes <span style="text-transform:none;font-weight:300;">(optional)</span></label>
+              <input type="text" id="buyer-notes" placeholder="e.g. near the metro station" />
+            </div>
+          </div>
           <div class="field">
             <label for="buyer-shot">Payment screenshot</label>
             <input type="file" id="buyer-shot" accept="image/*" />
@@ -205,11 +230,33 @@
       });
       $('instapay').style.display='block';
 
+      // Printed (physical) products need a delivery address.
+      if(cfg.products[product] && cfg.products[product].physical){
+        var govs=["Cairo","Giza","Alexandria","Dakahlia","Beheira","Qalyubia","Sharqia","Gharbia","Menofia","Kafr El Sheikh","Damietta","Port Said","Ismailia","Suez","South Sinai","North Sinai","Fayoum","Beni Suef","Minya","Assiut","Sohag","Qena","Luxor","Aswan","Red Sea","New Valley","Matrouh"];
+        var sel=$('buyer-gov');
+        govs.forEach(function(g){ var o=document.createElement('option'); o.value=g; o.textContent=g; sel.appendChild(o); });
+        $('delivery-section').style.display='block';
+      }
+
       $('ip-form').addEventListener('submit', function(e){
         e.preventDefault();
         var name=$('buyer-name').value.trim(), email=$('buyer-email').value.trim();
         if(!name){ showStatus('status','err','Please enter your name.'); return; }
         if(!validEmail(email)){ showStatus('status','err','Please enter a valid email.'); return; }
+        var physical = !!(cfg.products[product] && cfg.products[product].physical);
+        var delivery = null;
+        if(physical){
+          delivery = {
+            phone: $('buyer-phone').value.trim(),
+            governorate: $('buyer-gov').value,
+            city: $('buyer-city').value.trim(),
+            address: $('buyer-address').value.trim(),
+            notes: $('buyer-notes').value.trim()
+          };
+          if(!delivery.phone || !delivery.governorate || !delivery.city || !delivery.address){
+            showStatus('status','err','Please fill in your delivery phone, governorate, city and address.'); return;
+          }
+        }
         var fileEl=$('buyer-shot'), file=fileEl.files && fileEl.files[0];
         if(file && file.size > 3.6*1024*1024){ showStatus('status','err','That image is too large — please upload one under 3.5 MB.'); return; }
 
@@ -218,14 +265,15 @@
         ready.then(function(shot){
           return fetch('/api/instapay-request', {
             method:'POST', headers:{'Content-Type':'application/json'},
-            body: JSON.stringify({ name:name, email:email, product:product, screenshot:shot })
+            body: JSON.stringify(Object.assign({ name:name, email:email, product:product, screenshot:shot }, delivery || {}))
           });
         }).then(function(r){ return r.json().then(function(d){ return { ok:r.ok, d:d }; }); })
           .then(function(res){
             if(res.ok && res.d.success){
               if(window.dataLayer){ dataLayer.push({ event:'begin_checkout', method:'instapay', product:product }); }
-              showSuccess('Request received! 🎉',
-                "Thanks! We've sent your payment details to Gigi. Once your InstaPay transfer is confirmed (usually within a few hours), you'll get an email at <strong>"+email+"</strong> with your one-click login link.");
+              showSuccess('Request received! 🎉', physical
+                ? "Thanks! We've sent your order to Gigi. Once your InstaPay transfer is confirmed, your <strong>printed copy will be shipped to your address</strong> and we'll email your digital access to <strong>"+email+"</strong>."
+                : "Thanks! We've sent your payment details to Gigi. Once your InstaPay transfer is confirmed (usually within a few hours), you'll get an email at <strong>"+email+"</strong> with your one-click login link.");
             } else {
               btn.disabled=false; btn.textContent="I've paid — send for confirmation";
               showStatus('status','err',(res.d && res.d.error) || 'Something went wrong. Please try again.');
