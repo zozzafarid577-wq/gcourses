@@ -30,34 +30,42 @@
     .topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 2rem;background:var(--white);border-bottom:1px solid rgba(218,181,213,0.4);}
     .topbar img{height:30px;display:block;}
     .topbar a.back{font-size:0.85rem;color:var(--mid);text-decoration:none;font-weight:500;}
-    .wrap{max-width:480px;margin:0 auto;padding:2.5rem 1.2rem 4rem;}
+    .wrap{max-width:500px;margin:0 auto;padding:2.4rem 1.2rem 4rem;}
     .eyebrow{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--purple);font-weight:600;margin-bottom:0.5rem;text-align:center;}
-    h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:2.2rem;color:var(--deep);line-height:1.1;margin-bottom:1.6rem;text-align:center;}
+    h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:2.1rem;color:var(--deep);line-height:1.1;margin-bottom:1.5rem;text-align:center;}
     .card{background:var(--white);border-radius:20px;padding:1.8rem 1.7rem;box-shadow:0 10px 40px rgba(160,80,159,0.08);}
     .summary{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;padding-bottom:1.2rem;border-bottom:1px solid var(--blush);margin-bottom:1.4rem;}
     .summary .pname{font-size:1.05rem;font-weight:500;color:var(--deep);}
     .summary .pdesc{font-size:0.82rem;color:var(--muted);margin-top:0.2rem;}
     .summary .pprice{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:600;color:var(--purple);white-space:nowrap;}
-    .summary .pegp{font-size:0.72rem;color:var(--muted);text-align:right;}
+    .step{display:flex;gap:0.8rem;margin-bottom:1.3rem;}
+    .step .n{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--purple);color:#fff;font-size:0.85rem;font-weight:600;display:flex;align-items:center;justify-content:center;}
+    .step .t{font-size:0.92rem;color:var(--text);}
+    .step .t b{color:var(--deep);}
+    .pay-to{background:var(--blush);border-radius:12px;padding:0.9rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:0.8rem;margin-top:0.6rem;}
+    .pay-to .h{font-size:1.05rem;font-weight:600;color:var(--deep);word-break:break-all;}
+    .pay-to .nm{font-size:0.76rem;color:var(--muted);margin-top:0.1rem;}
+    .copy{flex-shrink:0;border:1.5px solid var(--lavender);background:#fff;color:var(--purple);border-radius:8px;padding:0.45rem 0.8rem;font-size:0.8rem;font-weight:500;cursor:pointer;font-family:inherit;}
+    .copy:hover{border-color:var(--purple);}
     .field{margin-bottom:1rem;}
     .field label{display:block;font-size:0.76rem;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem;}
-    .field input{width:100%;padding:0.75rem 1rem;border:1.5px solid var(--lavender);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.95rem;color:var(--text);outline:none;}
+    .field input[type=text],.field input[type=email]{width:100%;padding:0.75rem 1rem;border:1.5px solid var(--lavender);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.95rem;color:var(--text);outline:none;}
     .field input:focus{border-color:var(--purple);}
-    .hint{font-size:0.78rem;color:var(--muted);margin:0.2rem 0 1.2rem;}
-    #paypal-buttons{margin-top:0.4rem;min-height:48px;}
+    .field input[type=file]{width:100%;font-size:0.85rem;color:var(--muted);}
+    .hint{font-size:0.78rem;color:var(--muted);margin:-0.4rem 0 1.1rem;}
+    .btn{display:block;width:100%;text-align:center;background:var(--purple);color:#fff;border:none;text-decoration:none;font-family:inherit;font-size:0.95rem;font-weight:500;padding:0.9rem 1.8rem;border-radius:100px;cursor:pointer;}
+    .btn:hover{background:var(--mid);}
+    .btn:disabled{opacity:0.6;cursor:not-allowed;}
+    .btn-wa{background:#25D366;}
+    #paypal-buttons{margin-top:0.4rem;min-height:46px;}
     .status{margin-top:1rem;padding:0.85rem 1rem;border-radius:10px;font-size:0.88rem;font-weight:500;display:none;}
     .status.err{background:rgba(192,80,106,0.1);color:#7d2c40;}
     .status.info{background:var(--blush);color:var(--mid);}
-    .secure{display:flex;align-items:center;gap:0.4rem;justify-content:center;margin-top:1.2rem;font-size:0.76rem;color:var(--muted);}
-    /* success */
+    .secure{display:flex;align-items:center;gap:0.4rem;justify-content:center;margin-top:1.2rem;font-size:0.76rem;color:var(--muted);text-align:center;}
     #success{display:none;text-align:center;}
     #success .tick{width:64px;height:64px;border-radius:50%;background:rgba(63,157,107,0.14);color:#3f9d6b;font-size:2rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;}
     #success h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.7rem;color:var(--deep);margin-bottom:0.5rem;}
-    #success p{font-size:0.95rem;color:var(--muted);margin-bottom:1.4rem;}
-    .btn{display:inline-block;background:var(--purple);color:#fff;text-decoration:none;font-size:0.95rem;font-weight:500;padding:0.85rem 1.8rem;border-radius:100px;}
-    .fallback{text-align:center;}
-    .fallback .btn-wa{background:#25D366;}
-    .processing{display:none;text-align:center;color:var(--mid);font-size:0.9rem;padding:1rem;}
+    #success p{font-size:0.95rem;color:var(--muted);margin-bottom:1.2rem;}
     .legal{text-align:center;font-size:0.74rem;color:var(--muted);margin-top:1.4rem;line-height:1.7;}
     .legal a{color:var(--purple);text-decoration:none;}
   </style>
@@ -77,48 +85,81 @@
     <h1>Complete your enrollment</h1>
 
     <div class="card">
-      <!-- PAYMENT STATE -->
-      <div id="pay-state">
-        <div class="summary">
-          <div>
-            <div class="pname" id="p-name">Loading…</div>
-            <div class="pdesc" id="p-desc"></div>
-          </div>
-          <div style="text-align:right;">
-            <div class="pprice" id="p-price"></div>
-            <div class="pegp" id="p-egp"></div>
-          </div>
+      <div class="summary">
+        <div>
+          <div class="pname" id="p-name">Loading…</div>
+          <div class="pdesc" id="p-desc"></div>
         </div>
-
-        <div class="field">
-          <label for="buyer-name">Your name</label>
-          <input type="text" id="buyer-name" placeholder="e.g. Sara Ahmed" autocomplete="name" />
-        </div>
-        <div class="field">
-          <label for="buyer-email">Email for course access</label>
-          <input type="email" id="buyer-email" placeholder="you@example.com" autocomplete="email" required />
-        </div>
-        <p class="hint">We'll send your login link to this email right after payment.</p>
-
-        <div id="paypal-buttons"></div>
-        <div class="processing" id="processing">Confirming your payment…</div>
-        <div class="status" id="status"></div>
-
-        <div class="secure">🔒 Payments are processed securely by PayPal — pay with card or your PayPal balance.</div>
-
-        <!-- shown if PayPal isn't configured yet -->
-        <div class="fallback" id="fallback" style="display:none;margin-top:1rem;">
-          <div class="status info" style="display:block;">Online card payment is being set up. To enroll right now, message us and we'll get you in.</div>
-          <a class="btn btn-wa" id="fallback-wa" href="https://wa.me/201130052584" target="_blank" rel="noopener" style="margin-top:1rem;">Message us on WhatsApp →</a>
-        </div>
+        <div class="pprice" id="p-price"></div>
       </div>
 
-      <!-- SUCCESS STATE -->
+      <!-- INSTAPAY FLOW -->
+      <div id="instapay" style="display:none;">
+        <div class="step">
+          <div class="n">1</div>
+          <div class="t">Open your bank / wallet app and send <b id="ip-amount"></b> via <b>InstaPay</b> to:
+            <div class="pay-to">
+              <div>
+                <div class="h" id="ip-handle"></div>
+                <div class="nm" id="ip-name"></div>
+              </div>
+              <button class="copy" id="ip-copy" type="button">Copy</button>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="n">2</div>
+          <div class="t">Fill in your details and attach a <b>screenshot of the transfer</b>, then submit.</div>
+        </div>
+
+        <form id="ip-form">
+          <div class="field">
+            <label for="buyer-name">Your name</label>
+            <input type="text" id="buyer-name" placeholder="e.g. Sara Ahmed" autocomplete="name" required />
+          </div>
+          <div class="field">
+            <label for="buyer-email">Email for course access</label>
+            <input type="email" id="buyer-email" placeholder="you@example.com" autocomplete="email" required />
+          </div>
+          <div class="field">
+            <label for="buyer-shot">Payment screenshot</label>
+            <input type="file" id="buyer-shot" accept="image/*" />
+          </div>
+          <p class="hint">We'll confirm your payment and email your login link — usually within a few hours.</p>
+          <button class="btn" type="submit" id="ip-submit">I've paid — send for confirmation</button>
+        </form>
+        <div class="status" id="status"></div>
+        <div class="secure">🔒 Your details go straight to Gigi to confirm your InstaPay transfer.</div>
+      </div>
+
+      <!-- PAYPAL FLOW (only if configured) -->
+      <div id="paypal-flow" style="display:none;">
+        <div class="field">
+          <label for="pp-name">Your name</label>
+          <input type="text" id="pp-name" placeholder="e.g. Sara Ahmed" autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="pp-email">Email for course access</label>
+          <input type="email" id="pp-email" placeholder="you@example.com" autocomplete="email" />
+        </div>
+        <p class="hint">We'll send your login link to this email right after payment.</p>
+        <div id="paypal-buttons"></div>
+        <div class="status" id="pp-status"></div>
+        <div class="secure">🔒 Payments processed securely by PayPal.</div>
+      </div>
+
+      <!-- FALLBACK -->
+      <div id="fallback" style="display:none;text-align:center;">
+        <div class="status info" style="display:block;">Online payment is being set up. To enroll right now, message us and we'll get you in.</div>
+        <a class="btn btn-wa" id="fallback-wa" href="https://wa.me/201130052584" target="_blank" rel="noopener" style="margin-top:1rem;">Message us on WhatsApp →</a>
+      </div>
+
+      <!-- SUCCESS -->
       <div id="success">
         <div class="tick">✓</div>
-        <h2>You're enrolled! 🎉</h2>
-        <p>Payment received. We've emailed your one-click login link to <strong id="success-email"></strong>. You can open your course right now:</p>
-        <a class="btn" id="success-link" href="#">Open my course →</a>
+        <h2 id="success-title">Request received! 🎉</h2>
+        <p id="success-msg"></p>
+        <a class="btn" id="success-link" href="#" style="display:none;">Open my course →</a>
       </div>
     </div>
 
@@ -133,93 +174,123 @@
     var params = new URLSearchParams(location.search);
     var product = params.get('product') || 'ebook';
     var cfg = null;
-
     var $ = function(id){ return document.getElementById(id); };
-    function showStatus(type, msg){ var el=$('status'); el.className='status '+type; el.textContent=msg; el.style.display='block'; }
-    function hideStatus(){ $('status').style.display='none'; }
-    function emailVal(){ return ($('buyer-email').value||'').trim(); }
-    function nameVal(){ return ($('buyer-name').value||'').trim(); }
-    function validEmail(){ return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(emailVal()); }
+    function showStatus(id, type, msg){ var el=$(id); el.className='status '+type; el.textContent=msg; el.style.display='block'; }
+    function validEmail(v){ return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test((v||'').trim()); }
 
+    function showSuccess(title, msg, link){
+      $('instapay').style.display='none'; $('paypal-flow').style.display='none'; $('fallback').style.display='none';
+      $('success-title').textContent = title;
+      $('success-msg').innerHTML = msg;
+      if(link){ $('success-link').href = link; $('success-link').style.display='block'; }
+      $('success').style.display='block';
+      window.scrollTo(0,0);
+    }
+
+    // ---------- Instapay ----------
+    function fileToBase64(file){
+      return new Promise(function(resolve, reject){
+        var r=new FileReader();
+        r.onload=function(){ resolve(String(r.result).split(',')[1]); };
+        r.onerror=reject; r.readAsDataURL(file);
+      });
+    }
+
+    function setupInstapay(){
+      var ip = cfg.instapay;
+      $('ip-handle').textContent = ip.handle;
+      $('ip-name').textContent = ip.name || '';
+      $('ip-copy').addEventListener('click', function(){
+        try { navigator.clipboard.writeText(ip.handle); $('ip-copy').textContent='Copied ✓'; setTimeout(function(){ $('ip-copy').textContent='Copy'; },1500); } catch(_){}
+      });
+      $('instapay').style.display='block';
+
+      $('ip-form').addEventListener('submit', function(e){
+        e.preventDefault();
+        var name=$('buyer-name').value.trim(), email=$('buyer-email').value.trim();
+        if(!name){ showStatus('status','err','Please enter your name.'); return; }
+        if(!validEmail(email)){ showStatus('status','err','Please enter a valid email.'); return; }
+        var fileEl=$('buyer-shot'), file=fileEl.files && fileEl.files[0];
+        if(file && file.size > 3.6*1024*1024){ showStatus('status','err','That image is too large — please upload one under 3.5 MB.'); return; }
+
+        var btn=$('ip-submit'); btn.disabled=true; btn.textContent='Sending…';
+        var ready = file ? fileToBase64(file).then(function(b64){ return { name:file.name, content:b64 }; }) : Promise.resolve(null);
+        ready.then(function(shot){
+          return fetch('/api/instapay-request', {
+            method:'POST', headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({ name:name, email:email, product:product, screenshot:shot })
+          });
+        }).then(function(r){ return r.json().then(function(d){ return { ok:r.ok, d:d }; }); })
+          .then(function(res){
+            if(res.ok && res.d.success){
+              if(window.dataLayer){ dataLayer.push({ event:'begin_checkout', method:'instapay', product:product }); }
+              showSuccess('Request received! 🎉',
+                "Thanks! We've sent your payment details to Gigi. Once your InstaPay transfer is confirmed (usually within a few hours), you'll get an email at <strong>"+email+"</strong> with your one-click login link.");
+            } else {
+              btn.disabled=false; btn.textContent="I've paid — send for confirmation";
+              showStatus('status','err',(res.d && res.d.error) || 'Something went wrong. Please try again.');
+            }
+          }).catch(function(){
+            btn.disabled=false; btn.textContent="I've paid — send for confirmation";
+            showStatus('status','err','Network error. Please try again.');
+          });
+      });
+    }
+
+    // ---------- PayPal (only if configured & Instapay off) ----------
     function loadSdk(clientId, currency){
       return new Promise(function(resolve, reject){
         var s=document.createElement('script');
         s.src='https://www.paypal.com/sdk/js?client-id='+encodeURIComponent(clientId)+'&currency='+encodeURIComponent(currency)+'&intent=capture';
-        s.onload=resolve; s.onerror=function(){ reject(new Error('PayPal SDK failed to load')); };
+        s.onload=resolve; s.onerror=function(){ reject(); };
         document.head.appendChild(s);
       });
     }
-
-    function renderButtons(){
-      paypal.Buttons({
-        style:{ shape:'pill', color:'gold', layout:'vertical', label:'pay' },
-        onClick: function(data, actions){
-          if(!nameVal()){ showStatus('err','Please enter your name first.'); return actions.reject(); }
-          if(!validEmail()){ showStatus('err','Please enter a valid email for your course access.'); return actions.reject(); }
-          hideStatus();
-          return actions.resolve();
-        },
-        createOrder: function(){
-          return fetch('/api/paypal-order', {
-            method:'POST', headers:{'Content-Type':'application/json'},
-            body: JSON.stringify({ product: product, name: nameVal(), email: emailVal() })
-          }).then(function(r){ return r.json().then(function(d){ if(!r.ok) throw new Error(d.error||'Could not start checkout'); return d.id; }); });
-        },
-        onApprove: function(data){
-          $('paypal-buttons').style.display='none';
-          $('processing').style.display='block';
-          hideStatus();
-          return fetch('/api/paypal-capture', {
-            method:'POST', headers:{'Content-Type':'application/json'},
-            body: JSON.stringify({ orderID: data.orderID })
-          }).then(function(r){ return r.json().then(function(d){ return { ok:r.ok, d:d }; }); })
-            .then(function(res){
-              $('processing').style.display='none';
-              if(res.ok && res.d.success){
-                if(window.dataLayer){ dataLayer.push({ event:'purchase', product: product }); }
-                $('success-email').textContent = res.d.email || emailVal();
-                if(res.d.loginUrl){ $('success-link').href = res.d.loginUrl; }
-                else { $('success-link').style.display='none'; }
-                $('pay-state').style.display='none';
-                $('success').style.display='block';
-                window.scrollTo(0,0);
-              } else {
-                $('paypal-buttons').style.display='block';
-                showStatus('err', (res.d && res.d.error) || 'We could not confirm your payment. If you were charged, please contact us — we will sort it out.');
-              }
-            });
-        },
-        onError: function(){
-          $('processing').style.display='none';
-          $('paypal-buttons').style.display='block';
-          showStatus('err','Something went wrong with PayPal. Please try again.');
-        }
-      }).render('#paypal-buttons');
+    function setupPaypal(){
+      $('paypal-flow').style.display='block';
+      var cur = (cfg.products[product] && cfg.products[product].currency) || cfg.paypal.currency || 'USD';
+      loadSdk(cfg.paypal.clientId, cur).then(function(){
+        paypal.Buttons({
+          style:{ shape:'pill', color:'gold', layout:'vertical', label:'pay' },
+          onClick:function(data,actions){
+            if(!$('pp-name').value.trim()){ showStatus('pp-status','err','Please enter your name first.'); return actions.reject(); }
+            if(!validEmail($('pp-email').value)){ showStatus('pp-status','err','Please enter a valid email.'); return actions.reject(); }
+            $('pp-status').style.display='none'; return actions.resolve();
+          },
+          createOrder:function(){
+            return fetch('/api/paypal-order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({product:product,name:$('pp-name').value.trim(),email:$('pp-email').value.trim()})})
+              .then(function(r){ return r.json().then(function(d){ if(!r.ok) throw new Error(d.error||'order failed'); return d.id; }); });
+          },
+          onApprove:function(data){
+            return fetch('/api/paypal-capture',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({orderID:data.orderID})})
+              .then(function(r){ return r.json().then(function(d){ return {ok:r.ok,d:d}; }); })
+              .then(function(res){
+                if(res.ok && res.d.success){ showSuccess("You're enrolled! 🎉","Payment received. We've emailed your login link to <strong>"+(res.d.email||'')+"</strong>.", res.d.loginUrl); }
+                else { showStatus('pp-status','err',(res.d&&res.d.error)||'Could not confirm payment. If charged, contact us.'); }
+              });
+          },
+          onError:function(){ showStatus('pp-status','err','Something went wrong with PayPal. Please try again.'); }
+        }).render('#paypal-buttons');
+      }).catch(function(){ showStatus('pp-status','err','Could not load PayPal. Please refresh or contact us.'); });
     }
 
+    // ---------- init ----------
     fetch('/api/paypal-config').then(function(r){ return r.json(); }).then(function(c){
-      cfg = c;
-      var p = (c.products && c.products[product]) || (c.products && c.products.ebook);
-      if(!p){ $('p-name').textContent='Product not found'; return; }
-      $('p-name').textContent = p.name;
-      $('p-desc').textContent = p.desc || '';
-      $('p-price').textContent = p.price + ' ' + (p.currency || 'USD');
-      $('p-egp').textContent = p.egp ? '(' + p.egp + ')' : '';
-      $('fallback-wa').href = 'https://wa.me/201130052584?text=' + encodeURIComponent("Hi! I'd like to enroll in: " + p.name);
+      cfg=c;
+      var p=(c.products && c.products[product]) || (c.products && c.products.ebook);
+      if(!p){ $('p-name').textContent='Product not found'; $('fallback').style.display='block'; return; }
+      $('p-name').textContent=p.name;
+      $('p-desc').textContent=p.desc||'';
+      $('p-price').textContent=p.egp || (p.price+' '+(p.currency||''));
+      $('ip-amount').textContent=p.egp || (p.price+' '+(p.currency||''));
+      $('fallback-wa').href='https://wa.me/201130052584?text='+encodeURIComponent("Hi! I'd like to enroll in: "+p.name);
 
-      if(!c.configured || !c.clientId){
-        $('paypal-buttons').style.display='none';
-        document.querySelector('.secure').style.display='none';
-        $('fallback').style.display='block';
-        return;
-      }
-      loadSdk(c.clientId, p.currency || c.currency || 'USD')
-        .then(renderButtons)
-        .catch(function(){ showStatus('err','Could not load the payment buttons. Please refresh, or contact us.'); $('fallback').style.display='block'; });
+      if(c.instapay && c.instapay.enabled){ setupInstapay(); }
+      else if(c.paypal && c.paypal.configured){ setupPaypal(); }
+      else { $('fallback').style.display='block'; }
     }).catch(function(){
       $('p-name').textContent='Checkout temporarily unavailable';
       $('fallback').style.display='block';
-      $('paypal-buttons').style.display='none';
     });
   </script>
 </body>
