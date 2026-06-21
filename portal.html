@@ -146,6 +146,58 @@
       .main{max-height:none}
       .ed-row{grid-template-columns:1fr}
     }
+
+    /* ---------- modern admin editor ---------- */
+    .editor{padding:1.4rem clamp(1rem,4vw,2.4rem);max-width:920px;margin:0 auto}
+    .ed-head{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:1.1rem 1.2rem;margin-bottom:1.2rem;box-shadow:0 6px 24px rgba(160,80,159,.06)}
+    .ed-head-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .ed-stats{display:flex;gap:1.4rem;margin-top:.9rem;font-size:.8rem;color:var(--muted)}
+    .ed-stats strong{color:var(--purple);font-size:.95rem}
+    .ed-mod{background:var(--white);border:1px solid var(--line);border-radius:16px;margin-bottom:.8rem;overflow:hidden;box-shadow:0 4px 18px rgba(160,80,159,.05)}
+    .ed-mod-head{display:flex;align-items:center;gap:.55rem;padding:.65rem .8rem}
+    .ed-mod-toggle{display:flex;align-items:center;gap:.55rem;border:none;background:none;cursor:pointer;padding:.2rem;flex:0 0 auto}
+    .ed-chev{color:var(--muted);transition:transform .2s;font-size:.85rem}
+    .ed-mod.open .ed-chev{transform:rotate(90deg)}
+    .ed-mod-num{width:26px;height:26px;border-radius:8px;background:var(--blush);color:var(--purple);font-size:.78rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+    .ed-mod-title{flex:1;min-width:0;border:1px solid transparent;border-radius:8px;padding:.45rem .6rem;font-size:.95rem;font-weight:600;color:var(--deep);background:transparent;outline:none}
+    .ed-mod-title:hover{background:var(--blush)}
+    .ed-mod-title:focus{background:#fff;border-color:var(--lavender)}
+    .ed-pill{font-size:.68rem;color:var(--mid);background:var(--blush);border-radius:100px;padding:.25rem .6rem;white-space:nowrap;flex:0 0 auto}
+    .ed-mod-body{padding:.2rem .9rem 1rem;border-top:1px solid var(--line)}
+    .ed-les{background:var(--blush);border:1px solid var(--line);border-radius:13px;padding:.9rem;margin-top:.8rem}
+    .ed-les-top{display:flex;align-items:center;gap:.5rem;margin-bottom:.7rem}
+    .ed-les-title{flex:1;min-width:0;border:1.5px solid var(--lavender);border-radius:9px;padding:.5rem .7rem;font-size:.92rem;font-weight:600;color:var(--deep);background:#fff;outline:none}
+    .ed-les-title:focus{border-color:var(--purple)}
+    .ed-seg{display:inline-flex;background:#fff;border:1.5px solid var(--lavender);border-radius:10px;padding:3px;gap:3px;margin-bottom:.85rem}
+    .ed-seg-btn{border:none;background:none;border-radius:7px;padding:.42rem .9rem;font-size:.77rem;font-weight:600;color:var(--mid);cursor:pointer;transition:.15s}
+    .ed-seg-btn:hover{color:var(--purple)}
+    .ed-seg-btn.on{background:var(--purple);color:#fff}
+    .dz-wrap{margin-bottom:.9rem}
+    .dz{display:flex;align-items:center;gap:.85rem;border:2px dashed var(--lavender);border-radius:12px;padding:1rem;cursor:pointer;background:#fff;transition:.15s}
+    .dz:hover{border-color:var(--purple);background:#fffdff}
+    .dz.over{border-color:var(--purple);background:var(--blush)}
+    .dz.busy{opacity:.65;pointer-events:none}
+    .dz-ic{width:38px;height:38px;border-radius:50%;background:var(--blush);color:var(--purple);font-size:1.2rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+    .dz-txt{display:flex;flex-direction:column;line-height:1.35}
+    .dz-txt strong{font-size:.88rem;color:var(--deep)}
+    .dz-txt span{font-size:.73rem;color:var(--muted)}
+    .dz-bar{height:4px;background:var(--blush);border-radius:100px;overflow:hidden;margin-top:.5rem;display:none}
+    .dz-bar.on{display:block}
+    .dz-bar span{display:block;height:100%;width:40%;background:linear-gradient(90deg,var(--purple),var(--lavender));border-radius:100px;animation:dzload 1.1s linear infinite}
+    @keyframes dzload{0%{margin-left:-40%}100%{margin-left:100%}}
+    .dz-stat{font-size:.76rem;color:var(--mid);margin-top:.4rem}
+    .dz-stat.err{color:var(--err)}
+    .dz-done{display:flex;align-items:center;gap:.6rem;background:#fff;border:1.5px solid rgba(63,157,107,.4);border-radius:11px;padding:.7rem .85rem}
+    .dz-check{width:24px;height:24px;border-radius:50%;background:var(--ok);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.78rem;flex:0 0 auto}
+    .dz-name{flex:1;min-width:0;font-size:.84rem;color:var(--deep);text-decoration:none;word-break:break-all}
+    .dz-name:hover{text-decoration:underline}
+    .dz-remove{border:1px solid var(--line);background:#fff;color:var(--err);border-radius:8px;padding:.35rem .7rem;font-size:.75rem;cursor:pointer;flex:0 0 auto}
+    .dz-remove:hover{background:rgba(192,80,106,.08)}
+    .ed-add-lesson{margin-top:.8rem;width:100%;border:1.5px dashed var(--lavender);background:#fff;color:var(--purple);border-radius:10px;padding:.6rem;font-size:.82rem;font-weight:600;cursor:pointer}
+    .ed-add-lesson:hover{background:var(--blush)}
+    .ed-add-module{margin-top:.6rem;width:100%;border:none;background:var(--purple);color:#fff;border-radius:12px;padding:.85rem;font-size:.9rem;font-weight:600;cursor:pointer}
+    .ed-add-module:hover{background:var(--mid)}
+    @media(max-width:640px){.ed-head-row{grid-template-columns:1fr}.ed-seg{width:100%}.ed-seg-btn{flex:1}}
   </style>
 </head>
 <body>
@@ -467,67 +519,121 @@
   /* ========================= EDITOR ========================= */
   function renderEditor(){
     var c=state.curriculum, ed=$('#editor');
-    ed.innerHTML='<div class="ed-row">'+
-      '<div class="ed-field"><label>Portal title</label><input id="ed-title" value="'+esc(c.title||'')+'"></div>'+
-      '<div class="ed-field"><label>Intro / welcome</label><input id="ed-intro" value="'+esc(c.intro||'')+'"></div></div>';
+    ed.innerHTML='';
+    var head=el('div','ed-head');
+    head.innerHTML='<div class="ed-head-row">'+
+        '<div class="ed-field"><label>Course title</label><input id="ed-title" value="'+esc(c.title||'')+'"></div>'+
+        '<div class="ed-field"><label>Intro / welcome message</label><input id="ed-intro" value="'+esc(c.intro||'')+'"></div>'+
+      '</div>'+
+      '<div class="ed-stats"><span><strong>'+c.modules.length+'</strong> modules</span>'+
+        '<span><strong>'+allLessons().length+'</strong> lessons</span></div>';
+    ed.appendChild(head);
     $('#ed-title').addEventListener('input',markDirty);
     $('#ed-intro').addEventListener('input',markDirty);
-    c.modules.forEach(function(m,mi){ ed.appendChild(moduleEditor(m,mi)); });
-    if(!c.modules.length) ed.appendChild(el('p','hint','No modules yet — click “+ Add module” above to begin.'));
+    if(!c.modules.length) ed.appendChild(el('p','hint','No modules yet — add your first one below.'));
+    c.modules.forEach(function(m,mi){ ed.appendChild(moduleCard(m,mi)); });
+    var addBig=el('button','ed-add-module','+ Add module'); addBig.type='button';
+    addBig.addEventListener('click',function(){ state.curriculum.modules.push({id:id(),title:'New module',lessons:[],_open:true}); markDirty(); renderEditor(); });
+    ed.appendChild(addBig);
   }
-  function moduleEditor(m,mi){
-    var box=el('div','ed-module'), head=el('div','ed-module-head');
-    var ti=el('input'); ti.value=m.title||''; ti.placeholder='Module title';
+
+  function moduleCard(m,mi){
+    var card=el('div','ed-mod'+(m._open?' open':''));
+    var head=el('div','ed-mod-head');
+    var toggle=el('button','ed-mod-toggle'); toggle.type='button';
+    toggle.innerHTML='<span class="ed-chev">▸</span><span class="ed-mod-num">'+(mi+1)+'</span>';
+    toggle.addEventListener('click',function(){ m._open=!m._open; renderEditor(); });
+    var ti=el('input','ed-mod-title'); ti.value=m.title||''; ti.placeholder='Module title';
     ti.addEventListener('input',function(){m.title=ti.value;markDirty();});
-    head.appendChild(ti);
+    var n=(m.lessons||[]).length;
+    var pill=el('span','ed-pill',n+' lesson'+(n===1?'':'s'));
     var acts=el('div','ed-actions');
     acts.appendChild(iconBtn('↑','Move up',function(){move(state.curriculum.modules,mi,-1);renderEditor();}));
     acts.appendChild(iconBtn('↓','Move down',function(){move(state.curriculum.modules,mi,1);renderEditor();}));
     acts.appendChild(iconBtn('✕','Delete module',function(){if(confirm('Delete this module and all its lessons?')){state.curriculum.modules.splice(mi,1);markDirty();renderEditor();}},'del'));
-    head.appendChild(acts); box.appendChild(head);
-    (m.lessons||[]).forEach(function(l,li){ box.appendChild(lessonEditor(m,l,li)); });
-    var add=el('button','btn ghost sm','+ Add lesson'); add.style.marginTop='.4rem';
-    add.addEventListener('click',function(){ m.lessons=m.lessons||[]; m.lessons.push({id:id(),type:'video',title:'New lesson',url:'',text:'',description:''}); markDirty(); renderEditor(); });
-    box.appendChild(add); return box;
+    head.appendChild(toggle); head.appendChild(ti); head.appendChild(pill); head.appendChild(acts);
+    card.appendChild(head);
+    if(m._open){
+      var body=el('div','ed-mod-body');
+      (m.lessons||[]).forEach(function(l,li){ body.appendChild(lessonCard(m,l,li)); });
+      var add=el('button','ed-add-lesson','+ Add lesson'); add.type='button';
+      add.addEventListener('click',function(){ m.lessons=m.lessons||[]; m.lessons.push({id:id(),type:'video',title:'New lesson',url:'',text:'',description:''}); markDirty(); renderEditor(); });
+      body.appendChild(add);
+      card.appendChild(body);
+    }
+    return card;
   }
-  function lessonEditor(m,l,li){
-    var box=el('div','ed-lesson'), top=el('div','ed-lesson-top'), sel=el('select');
-    ['video','pdf','text','link'].forEach(function(t){var o=el('option',null,({video:'Recording / video',pdf:'PDF document',text:'Notes / text',link:'External link'})[t]);o.value=t;if(l.type===t)o.selected=true;sel.appendChild(o);});
-    sel.style.maxWidth='200px';
-    sel.addEventListener('change',function(){l.type=sel.value;markDirty();renderEditor();});
-    top.appendChild(sel);
+
+  var LTYPES=[['video','Video'],['pdf','PDF'],['text','Notes'],['link','Link']];
+  function lessonCard(m,l,li){
+    var box=el('div','ed-les');
+    var top=el('div','ed-les-top');
+    var ti=el('input','ed-les-title'); ti.value=l.title||''; ti.placeholder='Lesson title';
+    ti.addEventListener('input',function(){l.title=ti.value;markDirty();});
     var acts=el('div','ed-actions');
     acts.appendChild(iconBtn('↑','Move up',function(){move(m.lessons,li,-1);renderEditor();}));
     acts.appendChild(iconBtn('↓','Move down',function(){move(m.lessons,li,1);renderEditor();}));
     acts.appendChild(iconBtn('✕','Delete lesson',function(){if(confirm('Delete this lesson?')){m.lessons.splice(li,1);markDirty();renderEditor();}},'del'));
-    top.appendChild(acts); box.appendChild(top);
-    box.appendChild(field('Title',inputFor(l,'title','e.g. Cell Respiration — recap')));
+    top.appendChild(ti); top.appendChild(acts); box.appendChild(top);
+
+    var seg=el('div','ed-seg');
+    LTYPES.forEach(function(t){
+      var b=el('button','ed-seg-btn'+(l.type===t[0]?' on':''),t[1]); b.type='button';
+      b.addEventListener('click',function(){ if(l.type!==t[0]){ l.type=t[0]; markDirty(); renderEditor(); } });
+      seg.appendChild(b);
+    });
+    box.appendChild(seg);
     box.appendChild(field('Short description (optional)',inputFor(l,'description','One line shown under the title')));
-    if(l.type==='video'){ box.appendChild(field('Recording link (YouTube, Vimeo, Loom, Drive, or .mp4)',inputFor(l,'url','https://youtu.be/…'))); }
-    else if(l.type==='pdf'){ var f1=field('PDF link (Drive, Dropbox, or direct .pdf)',inputFor(l,'url','https://…')); f1.appendChild(uploadWidget(l,'application/pdf,.pdf')); box.appendChild(f1); }
-    else if(l.type==='link'){ box.appendChild(field('Resource URL',inputFor(l,'url','https://…'))); }
-    if(l.type==='text'||l.type==='video'||l.type==='pdf'){
-      box.appendChild(field(l.type==='text'?'Notes (supports **bold**, *italics*, `code`, and links)':'Notes shown below (optional)', textareaFor(l,'text')));
+
+    if(l.type==='video'){
+      box.appendChild(dropzone(l,'video/*','Video','Drop a recording here, or click to browse'));
+      box.appendChild(field('…or paste a link (YouTube, Vimeo, Loom, Drive, .mp4)',inputFor(l,'url','https://youtu.be/…')));
+      box.appendChild(field('Notes shown below (optional)',textareaFor(l,'text')));
+    } else if(l.type==='pdf'){
+      box.appendChild(dropzone(l,'application/pdf,.pdf','PDF','Drop a PDF here, or click to browse'));
+      box.appendChild(field('…or paste a link (Drive, Dropbox, direct .pdf)',inputFor(l,'url','https://…')));
+      box.appendChild(field('Notes shown below (optional)',textareaFor(l,'text')));
+    } else if(l.type==='link'){
+      box.appendChild(field('Resource URL',inputFor(l,'url','https://…')));
+    } else {
+      box.appendChild(field('Notes (supports **bold**, *italics*, `code`, and links)',textareaFor(l,'text')));
     }
     return box;
   }
-  function uploadWidget(l,accept){
-    var wrap=el('div','uploadrow');
+
+  function dropzone(l,accept,kind,prompt){
+    var wrap=el('div','dz-wrap');
+    if(l.url && !/^https?:\/\/(www\.)?(youtu|vimeo|loom|drive\.google)/i.test(l.url)){
+      // a file/link is attached — show a tidy "attached" state
+      var done=el('div','dz-done');
+      var nm=decodeURIComponent(l.url.split('/').pop().split('?')[0])||'Attached file';
+      done.innerHTML='<span class="dz-check">✓</span><a class="dz-name" href="'+esc(l.url)+'" target="_blank" rel="noopener">'+esc(nm)+'</a>';
+      var rm=el('button','dz-remove','Remove'); rm.type='button';
+      rm.addEventListener('click',function(){ l.url=''; markDirty(); renderEditor(); });
+      done.appendChild(rm); wrap.appendChild(done); return wrap;
+    }
+    var dz=el('div','dz');
+    dz.innerHTML='<div class="dz-ic">↑</div><div class="dz-txt"><strong>'+esc(prompt)+'</strong><span>'+esc(kind)+' &middot; saved to your Supabase storage</span></div>';
     var inp=el('input'); inp.type='file'; inp.accept=accept; inp.style.display='none';
-    var btn=el('button','btn ghost sm','⬆ Upload file'); btn.type='button';
-    var stat=el('span','hint'); stat.style.marginTop='0';
-    btn.addEventListener('click',function(){inp.click();});
-    inp.addEventListener('change',function(){
-      var file=inp.files[0]; if(!file)return;
-      stat.textContent='Uploading…';
+    var bar=el('div','dz-bar'); bar.appendChild(el('span'));
+    var stat=el('div','dz-stat');
+    function upload(file){
+      if(!file) return;
+      dz.classList.add('busy'); bar.classList.add('on'); stat.className='dz-stat'; stat.textContent='Uploading “'+file.name+'”…';
       var path=Date.now()+'-'+file.name.replace(/[^a-zA-Z0-9._-]+/g,'-');
-      sb.storage.from('portal-files').upload(path,file,{upsert:false}).then(function(res){
-        if(res.error){ stat.textContent=/bucket/i.test(res.error.message||'')?'Create a public "portal-files" bucket in Supabase Storage first, or paste a link.':(res.error.message||'Upload failed.'); return; }
-        var pub=sb.storage.from('portal-files').getPublicUrl(path);
-        l.url=pub.data.publicUrl; markDirty(); renderEditor();
-      });
-    });
-    wrap.appendChild(btn); wrap.appendChild(inp); wrap.appendChild(stat); return wrap;
+      sb.storage.from('portal-files').upload(path,file,{upsert:false,contentType:file.type||undefined}).then(function(res){
+        dz.classList.remove('busy'); bar.classList.remove('on');
+        if(res.error){ stat.className='dz-stat err'; stat.textContent=/bucket|not.*found/i.test(res.error.message||'')?'Create a public “portal-files” bucket in Supabase → Storage first (or paste a link below).':(res.error.message||'Upload failed.'); return; }
+        l.url=sb.storage.from('portal-files').getPublicUrl(path).data.publicUrl; markDirty(); renderEditor();
+      }).catch(function(){ dz.classList.remove('busy'); bar.classList.remove('on'); stat.className='dz-stat err'; stat.textContent='Upload failed — try a link below.'; });
+    }
+    dz.addEventListener('click',function(){inp.click();});
+    inp.addEventListener('change',function(){ upload(inp.files[0]); });
+    ['dragenter','dragover'].forEach(function(ev){ dz.addEventListener(ev,function(e){e.preventDefault();dz.classList.add('over');}); });
+    ['dragleave','drop'].forEach(function(ev){ dz.addEventListener(ev,function(e){e.preventDefault();dz.classList.remove('over');}); });
+    dz.addEventListener('drop',function(e){ if(e.dataTransfer&&e.dataTransfer.files&&e.dataTransfer.files[0]) upload(e.dataTransfer.files[0]); });
+    wrap.appendChild(dz); wrap.appendChild(inp); wrap.appendChild(bar); wrap.appendChild(stat);
+    return wrap;
   }
   function field(label,control){var f=el('div','ed-field');f.appendChild(el('label',null,esc(label)));f.appendChild(control);return f;}
   function inputFor(o,k,ph){var i=el('input');i.value=o[k]||'';if(ph)i.placeholder=ph;i.addEventListener('input',function(){o[k]=i.value;markDirty();});return i;}
