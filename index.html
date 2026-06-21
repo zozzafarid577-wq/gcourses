@@ -25,6 +25,7 @@
   <link rel="canonical" href="https://gcourses.site/" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/gcourses-logo.png" />
+  <link rel="stylesheet" href="/gc-experience.css" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Gcourses" />
   <meta property="og:title" content="Gcourses — Study with Gigi" />
@@ -339,7 +340,7 @@
 .nav-links a.login-link:hover{background:var(--blush);border-color:var(--purple);color:var(--purple);}
 </style>
 </head>
-<body>
+<body data-gc-intro>
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WPZZSK8C"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -663,5 +664,6 @@
   else document.addEventListener("DOMContentLoaded",setup);
 })();
 </script>
+<script src="/gc-experience.js" defer></script>
 </body>
 </html>
