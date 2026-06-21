@@ -21,23 +21,23 @@
   <title>Checkout — Gcourses</title>
   <meta name="robots" content="noindex" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     :root{--purple:#a0509f;--lavender:#dab5d5;--blush:#f3e7f3;--deep:#3b1a3a;--mid:#6b3569;--text:#2e1a2e;--muted:#8a6a88;--white:#fdfafd;}
-    body{font-family:'DM Sans',sans-serif;background:var(--blush);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;}
+    body{font-family:'Montserrat',sans-serif;background:var(--blush);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;}
     a{color:var(--purple);}
     .topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 2rem;background:var(--white);border-bottom:1px solid rgba(218,181,213,0.4);}
     .topbar img{height:30px;display:block;}
     .topbar a.back{font-size:0.85rem;color:var(--mid);text-decoration:none;font-weight:500;}
     .wrap{max-width:500px;margin:0 auto;padding:2.4rem 1.2rem 4rem;}
     .eyebrow{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--purple);font-weight:600;margin-bottom:0.5rem;text-align:center;}
-    h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:2.1rem;color:var(--deep);line-height:1.1;margin-bottom:1.5rem;text-align:center;}
+    h1{font-family:'Lato',serif;font-weight:600;font-size:2.1rem;color:var(--deep);line-height:1.1;margin-bottom:1.5rem;text-align:center;}
     .card{background:var(--white);border-radius:20px;padding:1.8rem 1.7rem;box-shadow:0 10px 40px rgba(160,80,159,0.08);}
     .summary{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;padding-bottom:1.2rem;border-bottom:1px solid var(--blush);margin-bottom:1.4rem;}
     .summary .pname{font-size:1.05rem;font-weight:500;color:var(--deep);}
     .summary .pdesc{font-size:0.82rem;color:var(--muted);margin-top:0.2rem;}
-    .summary .pprice{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:600;color:var(--purple);white-space:nowrap;}
+    .summary .pprice{font-family:'Lato',serif;font-size:1.9rem;font-weight:600;color:var(--purple);white-space:nowrap;}
     .step{display:flex;gap:0.8rem;margin-bottom:1.3rem;}
     .step .n{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--purple);color:#fff;font-size:0.85rem;font-weight:600;display:flex;align-items:center;justify-content:center;}
     .step .t{font-size:0.92rem;color:var(--text);}
@@ -49,7 +49,7 @@
     .copy:hover{border-color:var(--purple);}
     .field{margin-bottom:1rem;}
     .field label{display:block;font-size:0.76rem;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem;}
-    .field input[type=text],.field input[type=email]{width:100%;padding:0.75rem 1rem;border:1.5px solid var(--lavender);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.95rem;color:var(--text);outline:none;}
+    .field input[type=text],.field input[type=email]{width:100%;padding:0.75rem 1rem;border:1.5px solid var(--lavender);border-radius:10px;font-family:'Montserrat',sans-serif;font-size:0.95rem;color:var(--text);outline:none;}
     .field input:focus{border-color:var(--purple);}
     .field input[type=file]{width:100%;font-size:0.85rem;color:var(--muted);}
     .hint{font-size:0.78rem;color:var(--muted);margin:-0.4rem 0 1.1rem;}
@@ -64,7 +64,7 @@
     .secure{display:flex;align-items:center;gap:0.4rem;justify-content:center;margin-top:1.2rem;font-size:0.76rem;color:var(--muted);text-align:center;}
     #success{display:none;text-align:center;}
     #success .tick{width:64px;height:64px;border-radius:50%;background:rgba(63,157,107,0.14);color:#3f9d6b;font-size:2rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;}
-    #success h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.7rem;color:var(--deep);margin-bottom:0.5rem;}
+    #success h2{font-family:'Lato',serif;font-weight:600;font-size:1.7rem;color:var(--deep);margin-bottom:0.5rem;}
     #success p{font-size:0.95rem;color:var(--muted);margin-bottom:1.2rem;}
     .legal{text-align:center;font-size:0.74rem;color:var(--muted);margin-top:1.4rem;line-height:1.7;}
     .legal a{color:var(--purple);text-decoration:none;}
@@ -129,7 +129,7 @@
             </div>
             <div class="field">
               <label for="buyer-gov">Governorate</label>
-              <select id="buyer-gov" style="width:100%;padding:0.75rem 1rem;border:1.5px solid var(--lavender);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.95rem;color:var(--text);background:#fff;outline:none;">
+              <select id="buyer-gov" style="width:100%;padding:0.75rem 1rem;border:1.5px solid var(--lavender);border-radius:10px;font-family:'Montserrat',sans-serif;font-size:0.95rem;color:var(--text);background:#fff;outline:none;">
                 <option value="">Select…</option>
               </select>
             </div>
@@ -139,7 +139,7 @@
             </div>
             <div class="field">
               <label for="buyer-address">Full address</label>
-              <textarea id="buyer-address" rows="2" placeholder="Street, building number, apartment, floor" style="width:100%;padding:0.75rem 1rem;border:1.5px solid var(--lavender);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.95rem;color:var(--text);outline:none;resize:vertical;"></textarea>
+              <textarea id="buyer-address" rows="2" placeholder="Street, building number, apartment, floor" style="width:100%;padding:0.75rem 1rem;border:1.5px solid var(--lavender);border-radius:10px;font-family:'Montserrat',sans-serif;font-size:0.95rem;color:var(--text);outline:none;resize:vertical;"></textarea>
             </div>
             <div class="field">
               <label for="buyer-notes">Landmark / notes <span style="text-transform:none;font-weight:300;">(optional)</span></label>
