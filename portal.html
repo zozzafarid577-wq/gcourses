@@ -420,9 +420,25 @@
     return o;
   }
   function renderEmpty(){
-    $('#viewer').innerHTML='<div class="empty"><p>'+
-      (state.isAdmin?'Your portal is empty. Hit <strong>Admin</strong> in the top bar to add your first module, recording, PDF or note.'
-                    :'Your tutor is still setting things up. Check back soon!')+'</p></div>';
+    if(state.isAdmin){
+      $('#viewer').innerHTML='<div class="empty"><p>Your portal is empty.</p>'+
+        '<p style="margin:1rem 0 1.4rem">Load the ready-made <strong>ACT/EST Biology</strong> course (8 chapters, 19 modules — each with revision notes plus empty PDF &amp; video slots for you to fill), or build your own with <strong>Admin</strong>.</p>'+
+        '<button class="btn" id="load-seed">Load starter curriculum</button> '+
+        '<button class="btn ghost" id="start-blank">Start from scratch</button></div>';
+      $('#load-seed').addEventListener('click',loadSeed);
+      $('#start-blank').addEventListener('click',function(){document.body.classList.add('admin-edit');renderEditor();});
+    } else {
+      $('#viewer').innerHTML='<div class="empty"><p>Your tutor is still setting things up. Check back soon!</p></div>';
+    }
+  }
+  function loadSeed(){
+    var btn=$('#load-seed'); if(btn){btn.disabled=true;btn.textContent='Loading…';}
+    fetch('/portal-seed.json',{cache:'no-store'}).then(function(r){return r.json();}).then(function(d){
+      state.curriculum=normalize(d);
+      document.body.classList.add('admin-edit');
+      renderEditor(); markDirty();
+      toast('Course loaded — review it, then hit “Save changes”.');
+    }).catch(function(){ if(btn){btn.disabled=false;btn.textContent='Load starter curriculum';} toast('Could not load the starter file.',true); });
   }
 
   /* ========================= CHROME ========================= */

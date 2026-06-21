@@ -1,0 +1,576 @@
+{
+  "title": "ACT / EST Biology — Full Course",
+  "intro": "Work through each module: read the revision notes, then do the real-test practice (PDF) and watch the walkthrough video.",
+  "modules": [
+    {
+      "id": "ch1-m1",
+      "title": "Chapter 1 · Module 1: Evolution",
+      "lessons": [
+        {
+          "id": "ch1-m1-notes",
+          "type": "text",
+          "title": "Lesson & Revision Notes",
+          "description": "Read through the key concepts before the real-test practice.",
+          "url": "",
+          "text": "**EVOLUTION & ADAPTATION**\n\nEvolution is the change in the **allele (gene) frequencies** of a population over time. *Individuals never evolve — only populations do.*\n• **Microevolution** = small changes within a species.\n• **Macroevolution** = changes that produce new species (speciation).\n\n**Evidence for evolution (6 areas):**\n• Fossil record (incl. transitional fossils like *Archaeopteryx*)\n• Comparative anatomy — *homologous* (same structure, different function → divergent / common ancestry), *analogous* (same function, different structure → convergent), *vestigial* (appendix, coccyx).\n• Comparative biochemistry (common ancestor = common pathways)\n• Comparative embryology (gill pouches in all vertebrate embryos)\n• Molecular biology (cytochrome c, DNA similarity)\n• Biogeography (Pangaea, continental drift)\n\n**Darwin — Natural Selection:** overproduction → variation → struggle for existence → survival of the fittest. *Fittest* = most surviving, fertile offspring. Examples: giraffe neck, antibiotic resistance, peppered moth.\n**Lamarck** (use & disuse, inheritance of acquired traits) was disproved by **Weismann** (mouse-tail experiment).\n\n**Types of selection:** *stabilizing* (favours intermediate), *directional* (favours one extreme), *disruptive* (favours both extremes).\n\n**Sources of variation:** mutation, genetic drift (**bottleneck** & **founder** effects), gene flow.\n\n**Speciation / reproductive isolation:** geographic, polyploidy, temporal, habitat, behavioural.\n**Patterns:** coevolution, parallel evolution, adaptive radiation (Darwin's finches), phylogenetic trees.\n\n**Origin of life:** Heterotroph hypothesis, Endosymbiosis (mitochondria/chloroplasts), Oparin–Haldane, Miller–Urey, Redi & Pasteur (disproved spontaneous generation), gradualism vs punctuated equilibrium.\n\n**Hardy–Weinberg** (p² + 2pq + q² = 1, p + q = 1): no evolution when population is very large, isolated, no mutation, random mating, no genetic drift, no natural selection."
+        },
+        {
+          "id": "ch1-m1-pdf",
+          "type": "pdf",
+          "title": "Real Test — Questions (PDF)",
+          "description": "Add the practice-questions PDF here (Drive/Dropbox link or upload).",
+          "url": "",
+          "text": ""
+        },
+        {
+          "id": "ch1-m1-vid",
+          "type": "video",
+          "title": "Real Test — Walkthrough (Video)",
+          "description": "Add the revision / solving recording here (YouTube, Drive, Loom...).",
+          "url": "",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "id": "ch1-m2",
+      "title": "Chapter 1 · Module 2: Animal Behavior",
+      "lessons": [
+        {
+          "id": "ch1-m2-notes",
+          "type": "text",
+          "title": "Lesson & Revision Notes",
+          "description": "Read through the key concepts before the real-test practice.",
+          "url": "",
+          "text": "**ANIMAL BEHAVIOR**\n\nBehaviour = a change in activity in response to an internal or external stimulus.\n\n**Innate (genetic, inherited):**\n• **Fixed Action Pattern (FAP)** — instinctive, stereotyped sequence that runs to completion once triggered by a **sign stimulus** (e.g., goose egg-rolling — *Niko Tinbergen*; stickleback red belly).\n• **Von Frisch** — honeybee *waggle dance*.\n\n**Learned behaviour:**\n• **Habituation** — stops responding to a repeated harmless stimulus.\n• **Imprinting** — learning in a critical period, irreversible (*Konrad Lorenz*, geese).\n• **Classical conditioning** — pairing a new stimulus with a familiar one (*Ivan Pavlov*, dogs + bell).\n• **Operant conditioning** — trial-and-error, reward/punishment (*B.F. Skinner*, rats + lever).\n• **Insight / reasoning** — using past experience to solve a problem.\n\n**Social behaviour:** cooperation, agonistic (aggression), dominance hierarchy, pheromones, **altruism / kin selection** (help relatives → shared genes; alarm calls, vampire bats).\n\n**Communication:** visual, auditory, chemical (pheromones), tactile. **Camouflage** (blend with environment) vs **mimicry** (resemble a dangerous species).\n\n**Taxis** = directional movement toward/away from a stimulus: phototaxis (light), chemotaxis (chemicals), geotaxis (gravity).\n\n**Thermoregulation:** *Endotherms* (birds, mammals) make heat internally, constant temp. *Ectotherms* (fish, amphibians, reptiles) rely on external heat."
+        },
+        {
+          "id": "ch1-m2-pdf",
+          "type": "pdf",
+          "title": "Real Test — Questions (PDF)",
+          "description": "Add the practice-questions PDF here (Drive/Dropbox link or upload).",
+          "url": "",
+          "text": ""
+        },
+        {
+          "id": "ch1-m2-vid",
+          "type": "video",
+          "title": "Real Test — Walkthrough (Video)",
+          "description": "Add the revision / solving recording here (YouTube, Drive, Loom...).",
+          "url": "",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "id": "ch1-m3",
+      "title": "Chapter 1 · Module 3: Ecology",
+      "lessons": [
+        {
+          "id": "ch1-m3-notes",
+          "type": "text",
+          "title": "Lesson & Revision Notes",
+          "description": "Read through the key concepts before the real-test practice.",
+          "url": "",
+          "text": "**ECOLOGY**\n\n**Levels:** organism → population → community → ecosystem → biome → biosphere.\n• **Abiotic** = non-living (temp, water, light); **Biotic** = living. **Niche** = full ecological role.\n\n**Populations:** size, density, dispersion (clumped = most common, uniform, random). Limited by births, deaths, immigration, emigration.\n**Growth:** *exponential* (J-curve, no limits) vs *logistic* (S-curve, **carrying capacity K**).\n**Limiting factors:** density-dependent (competition, disease, predation) vs density-independent (disasters, weather).\n\n**Survivorship:** Type I (K-selected, survive to old age), Type II (constant), Type III (r-selected, most die young).\n\n**Species interactions:** predation, competition (intraspecific/interspecific), **competitive exclusion** (Gause's *Paramecium*).\n**Symbiosis (long-term):** mutualism (+/+), commensalism (+/0), parasitism (+/−).\n\n**Nutrition:** producers/autotrophs (photoautotrophs, chemoautotrophs at vents); consumers/heterotrophs; decomposers (detritivores digest internally; saprotrophs digest externally).\n\n**Energy:** food chain (≤4–5 levels) → food web. **10% rule** — only 10% of energy passes up each trophic level. **Biological magnification** — toxins (DDT) concentrate up the chain.\n\n**Succession:** primary (bare rock, pioneers = lichens) vs secondary (soil exists, faster) → climax community.\n\n**Biogeochemical cycles:** water, carbon, nitrogen (fixation → nitrification → denitrification), phosphorus (no gas phase).\n\n**Biomes (equator→pole):** rainforest → desert → grassland → temperate forest → taiga → tundra. Marine = largest; rainforest = most diverse; tundra = permafrost.\n\n**Human impact:** eutrophication, acid rain, global warming (greenhouse gases), ozone depletion (CFCs), biomagnification, biological control."
+        },
+        {
+          "id": "ch1-m3-pdf",
+          "type": "pdf",
+          "title": "Real Test — Questions (PDF)",
+          "description": "Add the practice-questions PDF here (Drive/Dropbox link or upload).",
+          "url": "",
+          "text": ""
+        },
+        {
+          "id": "ch1-m3-vid",
+          "type": "video",
+          "title": "Real Test — Walkthrough (Video)",
+          "description": "Add the revision / solving recording here (YouTube, Drive, Loom...).",
+          "url": "",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "id": "ch2-m1",
+      "title": "Chapter 2 · Module 1: Cell Structure",
+      "lessons": [
+        {
+          "id": "ch2-m1-notes",
+          "type": "text",
+          "title": "Lesson & Revision Notes",
+          "description": "Read through the key concepts before the real-test practice.",
+          "url": "",
+          "text": "**CELL STRUCTURE**\n\n**Cell theory:** all living things are made of cells; cells are the basic unit of life; all cells come from pre-existing cells.\n\n**Prokaryotic** (bacteria, archaea): no nucleus, no membrane-bound organelles, circular DNA + plasmids, small (0.2–2 µm).\n**Eukaryotic** (plant, animal, fungi, protist): true nucleus, membrane-bound organelles, larger.\n*Only 4 structures in ALL cells:* ribosome, chromosome (DNA), cytoplasm, cell membrane.\n*Double-membrane organelles:* nucleus, mitochondria, chloroplast.\n\n**Organelles:**\n• **Ribosome** — protein synthesis (free or bound to RER).\n• **Nucleus** — controls cell; holds DNA + nucleolus (makes ribosomes/rRNA).\n• **RER** — protein synthesis/transport; **SER** — lipids, steroids, detox.\n• **Golgi** — modifies, packages, ships proteins; makes lysosomes.\n• **Lysosome** (animal) — digestion, apoptosis (Tay-Sachs = missing enzyme).\n• **Vacuole** — storage; large central vacuole in plants; contractile vacuole in protozoa.\n• **Mitochondria** — cellular respiration (own DNA + ribosomes).\n• **Chloroplast** (plant/algae) — photosynthesis (own DNA + ribosomes).\n• **Cytoskeleton** — microfilaments (actin: cleavage furrow, pseudopods), microtubules (cilia, flagella, spindle, centrioles).\n• **Cell membrane** — fluid mosaic: phospholipid bilayer + proteins + cholesterol + carbs.\n• **Cell wall** — support: bacteria = peptidoglycan, fungi = chitin, plants/algae = cellulose; **plasmodesmata** connect plant cells.\n\n**Studying cells:** ultracentrifuge (separates organelles by mass), light/phase-contrast microscope (living cells), electron microscope (TEM = internal, SEM = surface; not living). Total magnification = ocular × objective."
+        },
+        {
+          "id": "ch2-m1-pdf",
+          "type": "pdf",
+          "title": "Real Test — Questions (PDF)",
+          "description": "Add the practice-questions PDF here (Drive/Dropbox link or upload).",
+          "url": "",
+          "text": ""
+        },
+        {
+          "id": "ch2-m1-vid",
+          "type": "video",
+          "title": "Real Test — Walkthrough (Video)",
+          "description": "Add the revision / solving recording here (YouTube, Drive, Loom...).",
+          "url": "",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "id": "ch2-m2",
+      "title": "Chapter 2 · Module 2: Cell Transport",
+      "lessons": [
+        {
+          "id": "ch2-m2-notes",
+          "type": "text",
+          "title": "Lesson & Revision Notes",
+          "description": "Read through the key concepts before the real-test practice.",
+          "url": "",
+          "text": "**CELL TRANSPORT**\n\nThe membrane is **selectively permeable** — small/non-polar molecules pass; large/polar (starch, protein, sucrose) are blocked.\n\n**Tonicity:** solute concentration outside vs inside.\n• **Hypertonic** (more solute outside) → water leaves → animal cell shrinks, plant cell **plasmolysis**.\n• **Hypotonic** (less solute outside) → water enters → animal cell swells/**lyses**, plant cell **turgid**.\n• **Isotonic** → no net movement (0.9% saline for RBCs).\n\n**Passive transport (NO energy, high → low):**\n• **Simple diffusion** (O₂, CO₂ across membrane).\n• **Facilitated diffusion** (via channel/carrier proteins, e.g. glucose, ions). Aquaporins = water channels.\n• **Osmosis** — diffusion of water toward higher solute.\n\n**Active transport (needs ATP, low → high):** e.g. sodium-potassium pump (Na⁺/K⁺), ion pumps.\n\n**Vesicular transport:**\n• **Endocytosis** (into cell): phagocytosis (solids), pinocytosis (liquids), receptor-mediated.\n• **Exocytosis** (out of cell): vesicle fuses with membrane (e.g. neurotransmitters).\n\nRate of diffusion ↑ with bigger gradient, higher temp, more surface area, thinner membrane."
+        },
+        {
+          "id": "ch2-m2-pdf",
+          "type": "pdf",
+          "title": "Real Test — Questions (PDF)",
+          "description": "Add the practice-questions PDF here (Drive/Dropbox link or upload).",
+          "url": "",
+          "text": ""
+        },
+        {
+          "id": "ch2-m2-vid",
+          "type": "video",
+          "title": "Real Test — Walkthrough (Video)",
+          "description": "Add the revision / solving recording here (YouTube, Drive, Loom...).",
+          "url": "",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "id": "ch2-m3",
+      "title": "Chapter 2 · Module 3: Cell Division",
+      "lessons": [
+        {
+          "id": "ch2-m3-notes",
+          "type": "text",
+          "title": "Lesson & Revision Notes",
+          "description": "Read through the key concepts before the real-test practice.",
+          "url": "",
+          "text": "**CELL DIVISION**\n\n**Chromosomes** = DNA + histone proteins. Humans = 46 (23 pairs): 22 autosome pairs + 1 sex pair (XX female, XY male). **Karyotype** = ordered image of chromosomes (made at metaphase).\n**Homologous chromosomes** = same length, centromere, genes (one from each parent).\n**Diploid (2n)** = two sets; **Haploid (n)** = one set.\n\n**Cell cycle:** Interphase (G₁ → S [DNA replication] → G₂) → M phase (mitosis + cytokinesis).\n*Cancer* = mutations in cell-cycle control proteins → uncontrolled division.\n\n**MITOSIS** (somatic cells → 2 identical diploid cells):\n• **Prophase** — chromosomes condense, nuclear membrane & nucleolus disappear, spindle forms.\n• **Metaphase** — chromosomes line up in the middle.\n• **Anaphase** — sister chromatids separate to poles.\n• **Telophase** — two nuclei reform; then **cytokinesis** (animal = cleavage furrow, plant = cell plate).\n\n**MEIOSIS** (gametes → 4 genetically different haploid cells, 2 divisions):\n• **Crossing over** in *Prophase I* → genetic variation.\n• Meiosis I separates homologues; Meiosis II separates sister chromatids (Anaphase II).\n\nCells after n divisions = 2ⁿ. DNA: doubles in S, halves after mitosis, quartered after meiosis."
+        },
+        {
+          "id": "ch2-m3-pdf",
+          "type": "pdf",
+          "title": "Real Test — Questions (PDF)",
+          "description": "Add the practice-questions PDF here (Drive/Dropbox link or upload).",
+          "url": "",
+          "text": ""
+        },
+        {
+          "id": "ch2-m3-vid",
+          "type": "video",
+          "title": "Real Test — Walkthrough (Video)",
+          "description": "Add the revision / solving recording here (YouTube, Drive, Loom...).",
+          "url": "",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "id": "ch2-m4",
+      "title": "Chapter 2 · Module 4: DNA Replication & Protein Synthesis",
+      "lessons": [
+        {
+          "id": "ch2-m4-notes",
+          "type": "text",
+          "title": "Lesson & Revision Notes",
+          "description": "Read through the key concepts before the real-test practice.",
+          "url": "",
+          "text": "**DNA REPLICATION & PROTEIN SYNTHESIS**\n\n**DNA structure:** double helix, two strands (anti-parallel 5'→3'). Nucleotide = sugar (deoxyribose) + phosphate + base.\n**Base pairing:** A–T (2 H-bonds), G–C (3 H-bonds). Covalent bonds within a strand, hydrogen bonds between bases. **Chargaff:** A=T, G=C.\n\n**Replication** (S phase, *semi-conservative* — each new molecule = 1 old + 1 new strand):\n• **Helicase** unzips (breaks H-bonds).\n• **DNA polymerase** adds nucleotides by base-pairing.\n• **DNA ligase** joins fragments.\n• **Telomeres** = protective non-coding ends.\n\n**RNA:** single strand, ribose sugar, bases A-U-C-G (uracil replaces thymine). Types: **mRNA** (carries code), **tRNA** (carries amino acids, has anticodon), **rRNA** (ribosome structure).\n\n**Protein synthesis (gene expression):**\n• **Transcription** (nucleus) — RNA polymerase builds mRNA from DNA.\n• **RNA processing/splicing** (nucleus) — remove introns, keep exons.\n• **Translation** (ribosome) — mRNA read in **codons** (3 bases). Start = **AUG** (met); stop = **UAA, UAG, UGA**. tRNA anticodons pair with codons to build the polypeptide.\n\n**Genetic code:** 64 codons, 20 amino acids → *degenerate* (protects against mutations). ~97% of human genome is non-coding.\n\n**Key experiments:** Watson & Crick (double helix, from Rosalind Franklin's data); Hershey & Chase (DNA is the genetic material); Griffith (transformation).\nProkaryotes: transcription & translation happen together in cytoplasm."
+        },
+        {
+          "id": "ch2-m4-pdf",
+          "type": "pdf",
+          "title": "Real Test — Questions (PDF)",
+          "description": "Add the practice-questions PDF here (Drive/Dropbox link or upload).",
+          "url": "",
+          "text": ""
+        },
+        {
+          "id": "ch2-m4-vid",
+          "type": "video",
+          "title": "Real Test — Walkthrough (Video)",
+          "description": "Add the revision / solving recording here (YouTube, Drive, Loom...).",
+          "url": "",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "id": "ch3-m1",
+      "title": "Chapter 3 · Module 1: Biochemistry & Enzymes",
+      "lessons": [
+        {
+          "id": "ch3-m1-notes",
+          "type": "text",
+          "title": "Lesson & Revision Notes",
+          "description": "Read through the key concepts before the real-test practice.",
+          "url": "",
+          "text": "**BIOCHEMISTRY & ENZYMES**\n\n**Organic molecules** contain carbon + hydrogen (carbohydrates, lipids, proteins, nucleic acids, vitamins). Carbon forms 4 covalent bonds → huge diversity.\n\n**Carbohydrates** (CH₂O)ₙ — quick energy, 4 cal/g.\n• Monosaccharides (glucose, fructose, galactose — isomers), disaccharides (sucrose, lactose, maltose — glycosidic bond), polysaccharides (starch = plant store, glycogen = animal store, cellulose = plant wall, chitin).\n• Built by **dehydration**, broken by **hydrolysis**.\n\n**Lipids** — C, H, O (little O); 9 cal/g. Triglyceride = glycerol + 3 fatty acids. Saturated (no double bonds, solid, animal) vs unsaturated (double bonds, liquid, plant). Functions: energy store, membranes (phospholipids), insulation, hormones (steroids), cushioning.\n\n**Proteins** — C, H, O, N; 4 cal/g; amino acids + peptide bonds. Structure: primary (sequence) → secondary (helix, H-bonds) → tertiary (3D, *determines function*) → quaternary (multiple chains, e.g. haemoglobin). **Denaturation** by heat/pH. Functions: enzymes, hormones, antibodies, transport, structure.\n\n**Nucleic acids** — DNA, RNA, ATP (adenine + ribose + 3 phosphates; energy released between 2nd & 3rd phosphate).\n**Vitamins** — coenzymes; water-soluble (B, C) vs fat-soluble (A, D, E, K).\n\n**Water:** polar; high specific heat, cohesion/adhesion (capillary action, surface tension), ice less dense than water, high heat of vaporization, universal solvent.\n**pH:** 0–14 (7 neutral). Each unit = 10× change. Buffers resist pH change.\n\n**Enzymes** = protein catalysts that **lower activation energy**; specific (**induced-fit model**), reusable, need cofactors (minerals)/coenzymes (vitamins). Affected by temperature, pH (pepsin pH 2, trypsin pH 8.5), substrate/enzyme concentration. Inhibitors: competitive (active site) vs non-competitive (allosteric)."
+        },
+        {
+          "id": "ch3-m1-pdf",
+          "type": "pdf",
+          "title": "Real Test — Questions (PDF)",
+          "description": "Add the practice-questions PDF here (Drive/Dropbox link or upload).",
+          "url": "",
+          "text": ""
+        },
+        {
+          "id": "ch3-m1-vid",
+          "type": "video",
+          "title": "Real Test — Walkthrough (Video)",
+          "description": "Add the revision / solving recording here (YouTube, Drive, Loom...).",
+          "url": "",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "id": "ch3-m2",
+      "title": "Chapter 3 · Module 2: Photosynthesis & Cellular Respiration",
+      "lessons": [
+        {
+          "id": "ch3-m2-notes",
+          "type": "text",
+          "title": "Lesson & Revision Notes",
+          "description": "Read through the key concepts before the real-test practice.",
+          "url": "",
+          "text": "**PHOTOSYNTHESIS & CELLULAR RESPIRATION**\n\n**Cellular respiration** releases energy from glucose into ATP. Aerobic (with O₂) vs anaerobic (without).\n\n**AEROBIC RESPIRATION** (≈36–38 ATP total):\n• **Glycolysis** (cytoplasm, anaerobic start) — glucose → 2 pyruvate + 2 ATP + 2 NADH.\n• **Krebs / Citric acid cycle** (mitochondrial matrix, runs twice) — pyruvate → Acetyl-CoA; releases CO₂; makes ATP, NADH, FADH₂.\n• **Oxidative phosphorylation / ETC** (inner membrane, cristae) — NADH & FADH₂ drop electrons down the chain; proton gradient drives **ATP synthase** (chemiosmosis) → ~32 ATP. **O₂ is the final electron/hydrogen acceptor.**\n(NADH → 3 ATP, FADH₂ → 2 ATP.)\n\n**ANAEROBIC RESPIRATION / FERMENTATION** (cytoplasm, no O₂, only 2 ATP — regenerates NAD⁺ for glycolysis):\n• **Lactic acid fermentation** — muscles, yogurt bacteria → lactic acid + 2 ATP.\n• **Alcohol fermentation** — yeast → ethanol + CO₂ + 2 ATP.\n\n**Photosynthesis** (reverse idea): 6CO₂ + 6H₂O + light → C₆H₁₂O₆ + 6O₂, in chloroplasts (light reactions in thylakoids, Calvin cycle in stroma)."
+        },
+        {
+          "id": "ch3-m2-pdf",
+          "type": "pdf",
+          "title": "Real Test — Questions (PDF)",
+          "description": "Add the practice-questions PDF here (Drive/Dropbox link or upload).",
+          "url": "",
+          "text": ""
+        },
+        {
+          "id": "ch3-m2-vid",
+          "type": "video",
+          "title": "Real Test — Walkthrough (Video)",
+          "description": "Add the revision / solving recording here (YouTube, Drive, Loom...).",
+          "url": "",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "id": "ch4-m1",
+      "title": "Chapter 4 · Module 1: Classical Genetics",
+      "lessons": [
+        {
+          "id": "ch4-m1-notes",
+          "type": "text",
+          "title": "Lesson & Revision Notes",
+          "description": "Read through the key concepts before the real-test practice.",
+          "url": "",
+          "text": "**CLASSICAL GENETICS**\n\n**Mendel's laws:** segregation (alleles separate into gametes) and independent assortment.\n• **Genotype** (alleles) vs **phenotype** (trait); homozygous vs heterozygous; dominant vs recessive.\n• **Punnett squares:** monohybrid 3:1, dihybrid 9:3:3:1; test cross to find unknown genotype.\n\n**Extensions:** incomplete dominance (blend), codominance (both shown, e.g. AB blood), multiple alleles (ABO), polygenic traits, pleiotropy, epistasis.\n**Sex linkage:** X-linked recessive (colour-blindness, haemophilia) more common in males.\n**Linkage & recombination:** genes close on a chromosome are inherited together; crossing over separates them."
+        },
+        {
+          "id": "ch4-m1-pdf",
+          "type": "pdf",
+          "title": "Real Test — Questions (PDF)",
+          "description": "Add the practice-questions PDF here (Drive/Dropbox link or upload).",
+          "url": "",
+          "text": ""
+        },
+        {
+          "id": "ch4-m1-vid",
+          "type": "video",
+          "title": "Real Test — Walkthrough (Video)",
+          "description": "Add the revision / solving recording here (YouTube, Drive, Loom...).",
+          "url": "",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "id": "ch4-m2",
+      "title": "Chapter 4 · Module 2: Molecular Genetics Review",
+      "lessons": [
+        {
+          "id": "ch4-m2-notes",
+          "type": "text",
+          "title": "Lesson & Revision Notes",
+          "description": "Read through the key concepts before the real-test practice.",
+          "url": "",
+          "text": "**MOLECULAR GENETICS REVIEW**\n\n**Gene expression** = transcription → (splicing) → translation (see DNA module).\n**Mutations:** point (substitution — silent, missense, nonsense), frameshift (insertion/deletion); chromosomal (deletion, duplication, inversion, translocation); non-disjunction (e.g. Down syndrome, trisomy 21).\n**Regulation:** operons in prokaryotes (lac operon); promoters, transcription factors in eukaryotes.\n**Biotechnology:** restriction enzymes, gel electrophoresis, PCR, recombinant DNA / plasmids, CRISPR, GMOs."
+        },
+        {
+          "id": "ch4-m2-pdf",
+          "type": "pdf",
+          "title": "Real Test — Questions (PDF)",
+          "description": "Add the practice-questions PDF here (Drive/Dropbox link or upload).",
+          "url": "",
+          "text": ""
+        },
+        {
+          "id": "ch4-m2-vid",
+          "type": "video",
+          "title": "Real Test — Walkthrough (Video)",
+          "description": "Add the revision / solving recording here (YouTube, Drive, Loom...).",
+          "url": "",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "id": "ch4-m3",
+      "title": "Chapter 4 · Module 3: Practice Problems + Pedigrees",
+      "lessons": [
+        {
+          "id": "ch4-m3-notes",
+          "type": "text",
+          "title": "Lesson & Revision Notes",
+          "description": "Read through the key concepts before the real-test practice.",
+          "url": "",
+          "text": "**PRACTICE PROBLEMS + PEDIGREES**\n\n**Pedigree analysis:** squares = males, circles = females, shaded = affected.\n• **Autosomal recessive:** skips generations; unaffected parents → affected child.\n• **Autosomal dominant:** appears every generation.\n• **X-linked recessive:** mostly males; affected sons from carrier mothers.\n**Probability:** product rule (AND ×) and sum rule (OR +); apply Punnett-square ratios to predict offspring."
+        },
+        {
+          "id": "ch4-m3-pdf",
+          "type": "pdf",
+          "title": "Real Test — Questions (PDF)",
+          "description": "Add the practice-questions PDF here (Drive/Dropbox link or upload).",
+          "url": "",
+          "text": ""
+        },
+        {
+          "id": "ch4-m3-vid",
+          "type": "video",
+          "title": "Real Test — Walkthrough (Video)",
+          "description": "Add the revision / solving recording here (YouTube, Drive, Loom...).",
+          "url": "",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "id": "ch5-m1",
+      "title": "Chapter 5 · Module 1: Plant Structure, Growth & Reproduction",
+      "lessons": [
+        {
+          "id": "ch5-m1-notes",
+          "type": "text",
+          "title": "Lesson & Revision Notes",
+          "description": "Read through the key concepts before the real-test practice.",
+          "url": "",
+          "text": "**PLANT STRUCTURE, GROWTH & REPRODUCTION**\n\n**Tissues:** dermal (epidermis, cuticle), vascular (**xylem** = water up, **phloem** = sugars), ground.\n**Organs:** roots (absorb water/minerals), stems (support, transport), leaves (photosynthesis; stomata + guard cells control gas exchange & transpiration).\n**Transport:** transpiration pull (cohesion-tension) in xylem; translocation in phloem.\n**Growth:** meristems; tropisms (phototropism, gravitropism, thigmotropism); hormones (auxin, gibberellin, cytokinin, ethylene, ABA).\n**Reproduction:** alternation of generations; flower parts (stamen = anther + filament; carpel = stigma, style, ovary); pollination → double fertilization → seed & fruit."
+        },
+        {
+          "id": "ch5-m1-pdf",
+          "type": "pdf",
+          "title": "Real Test — Questions (PDF)",
+          "description": "Add the practice-questions PDF here (Drive/Dropbox link or upload).",
+          "url": "",
+          "text": ""
+        },
+        {
+          "id": "ch5-m1-vid",
+          "type": "video",
+          "title": "Real Test — Walkthrough (Video)",
+          "description": "Add the revision / solving recording here (YouTube, Drive, Loom...).",
+          "url": "",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "id": "ch6-m1",
+      "title": "Chapter 6 · Module 1: Taxonomy & Classification Systems",
+      "lessons": [
+        {
+          "id": "ch6-m1-notes",
+          "type": "text",
+          "title": "Lesson & Revision Notes",
+          "description": "Read through the key concepts before the real-test practice.",
+          "url": "",
+          "text": "**TAXONOMY & CLASSIFICATION SYSTEMS**\n\n**Hierarchy:** Domain → Kingdom → Phylum → Class → Order → Family → Genus → Species (*\"Dear King Philip Came Over For Good Soup\"*).\n**Binomial nomenclature:** *Genus species* (Linnaeus).\n**3 Domains:** Bacteria, Archaea, Eukarya. **Kingdoms:** Protista, Fungi, Plantae, Animalia (+ bacteria).\n**Phylogenetics:** cladograms/phylogenetic trees show common ancestry; shared derived traits; more recent common ancestor = more related.\n**Viruses:** non-living, need a host (lytic vs lysogenic cycles)."
+        },
+        {
+          "id": "ch6-m1-pdf",
+          "type": "pdf",
+          "title": "Real Test — Questions (PDF)",
+          "description": "Add the practice-questions PDF here (Drive/Dropbox link or upload).",
+          "url": "",
+          "text": ""
+        },
+        {
+          "id": "ch6-m1-vid",
+          "type": "video",
+          "title": "Real Test — Walkthrough (Video)",
+          "description": "Add the revision / solving recording here (YouTube, Drive, Loom...).",
+          "url": "",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "id": "ch7-m1",
+      "title": "Chapter 7 · Module 1: Circulatory / Respiratory Systems",
+      "lessons": [
+        {
+          "id": "ch7-m1-notes",
+          "type": "text",
+          "title": "Lesson & Revision Notes",
+          "description": "Read through the key concepts before the real-test practice.",
+          "url": "",
+          "text": "**CIRCULATORY / RESPIRATORY SYSTEMS**\n\n**Circulatory:** heart (4 chambers: 2 atria, 2 ventricles), double circulation (pulmonary + systemic). Arteries (away, high pressure) → capillaries (exchange) → veins (back, valves). Blood = RBCs (haemoglobin/O₂), WBCs (immunity), platelets (clotting), plasma.\n**Respiratory:** nose → trachea → bronchi → bronchioles → **alveoli** (gas exchange by diffusion). Diaphragm drives breathing. O₂ in, CO₂ out; CO₂ transported as bicarbonate; controlled by CO₂/pH levels."
+        },
+        {
+          "id": "ch7-m1-pdf",
+          "type": "pdf",
+          "title": "Real Test — Questions (PDF)",
+          "description": "Add the practice-questions PDF here (Drive/Dropbox link or upload).",
+          "url": "",
+          "text": ""
+        },
+        {
+          "id": "ch7-m1-vid",
+          "type": "video",
+          "title": "Real Test — Walkthrough (Video)",
+          "description": "Add the revision / solving recording here (YouTube, Drive, Loom...).",
+          "url": "",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "id": "ch7-m2",
+      "title": "Chapter 7 · Module 2: Digestive / Immune / Excretory Systems",
+      "lessons": [
+        {
+          "id": "ch7-m2-notes",
+          "type": "text",
+          "title": "Lesson & Revision Notes",
+          "description": "Read through the key concepts before the real-test practice.",
+          "url": "",
+          "text": "**DIGESTIVE / IMMUNE / EXCRETORY SYSTEMS**\n\n**Digestive:** mouth (amylase) → stomach (pepsin, HCl, pH 2) → small intestine (most digestion & absorption; villi; bile from liver, enzymes from pancreas) → large intestine (water absorption).\n**Immune:** non-specific (skin, inflammation, phagocytes) vs specific (B-cells → antibodies/humoral; T-cells → cell-mediated); antigens, memory cells, vaccines.\n**Excretory:** kidney → **nephron** (filtration, reabsorption, secretion) → urine; maintains water/salt balance (osmoregulation) and removes nitrogenous waste (urea)."
+        },
+        {
+          "id": "ch7-m2-pdf",
+          "type": "pdf",
+          "title": "Real Test — Questions (PDF)",
+          "description": "Add the practice-questions PDF here (Drive/Dropbox link or upload).",
+          "url": "",
+          "text": ""
+        },
+        {
+          "id": "ch7-m2-vid",
+          "type": "video",
+          "title": "Real Test — Walkthrough (Video)",
+          "description": "Add the revision / solving recording here (YouTube, Drive, Loom...).",
+          "url": "",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "id": "ch7-m3",
+      "title": "Chapter 7 · Module 3: Reproductive / Endocrine / Nervous Systems",
+      "lessons": [
+        {
+          "id": "ch7-m3-notes",
+          "type": "text",
+          "title": "Lesson & Revision Notes",
+          "description": "Read through the key concepts before the real-test practice.",
+          "url": "",
+          "text": "**REPRODUCTIVE / ENDOCRINE / NERVOUS SYSTEMS**\n\n**Nervous:** neuron (dendrite → cell body → axon); resting/action potential; synapse + neurotransmitters; CNS (brain, spinal cord) vs PNS; reflex arc.\n**Endocrine:** glands release **hormones** (slow, long-lasting) — pituitary, thyroid, adrenal, pancreas (insulin/glucagon — glucose homeostasis); negative feedback.\n**Reproductive:** male (testes → sperm, testosterone) & female (ovaries → eggs, estrogen/progesterone); menstrual cycle; fertilization → zygote → development."
+        },
+        {
+          "id": "ch7-m3-pdf",
+          "type": "pdf",
+          "title": "Real Test — Questions (PDF)",
+          "description": "Add the practice-questions PDF here (Drive/Dropbox link or upload).",
+          "url": "",
+          "text": ""
+        },
+        {
+          "id": "ch7-m3-vid",
+          "type": "video",
+          "title": "Real Test — Walkthrough (Video)",
+          "description": "Add the revision / solving recording here (YouTube, Drive, Loom...).",
+          "url": "",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "id": "ch8-m1",
+      "title": "Chapter 8 · Module 1: Full Review of All Chapters",
+      "lessons": [
+        {
+          "id": "ch8-m1-notes",
+          "type": "text",
+          "title": "Lesson & Revision Notes",
+          "description": "Read through the key concepts before the real-test practice.",
+          "url": "",
+          "text": "**FULL REVIEW OF ALL CHAPTERS**\n\nUse this module to revise across every chapter before the mock exams. Work through the summary notes from Chapters 1–7, then attempt the mixed real-test set and watch the walkthrough.\n\n**Quick checklist:** Evolution • Animal Behavior • Ecology • Cell Structure • Transport • Division • DNA/Protein Synthesis • Biochemistry/Enzymes • Photosynthesis/Respiration • Genetics • Plants • Taxonomy • Human Systems."
+        },
+        {
+          "id": "ch8-m1-pdf",
+          "type": "pdf",
+          "title": "Real Test — Questions (PDF)",
+          "description": "Add the practice-questions PDF here (Drive/Dropbox link or upload).",
+          "url": "",
+          "text": ""
+        },
+        {
+          "id": "ch8-m1-vid",
+          "type": "video",
+          "title": "Real Test — Walkthrough (Video)",
+          "description": "Add the revision / solving recording here (YouTube, Drive, Loom...).",
+          "url": "",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "id": "ch8-m2",
+      "title": "Chapter 8 · Module 2: Targeted ACT Practice Questions",
+      "lessons": [
+        {
+          "id": "ch8-m2-notes",
+          "type": "text",
+          "title": "Lesson & Revision Notes",
+          "description": "Read through the key concepts before the real-test practice.",
+          "url": "",
+          "text": "**TARGETED ACT / EST PRACTICE QUESTIONS**\n\nFocused, exam-style question sets to drill your weak areas under timed conditions. Add the practice PDFs and the solving recordings below. Aim for real test timing and review every mistake."
+        },
+        {
+          "id": "ch8-m2-pdf",
+          "type": "pdf",
+          "title": "Real Test — Questions (PDF)",
+          "description": "Add the practice-questions PDF here (Drive/Dropbox link or upload).",
+          "url": "",
+          "text": ""
+        },
+        {
+          "id": "ch8-m2-vid",
+          "type": "video",
+          "title": "Real Test — Walkthrough (Video)",
+          "description": "Add the revision / solving recording here (YouTube, Drive, Loom...).",
+          "url": "",
+          "text": ""
+        }
+      ]
+    }
+  ]
+}
