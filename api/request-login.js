@@ -3,7 +3,7 @@
 const crypto = require('crypto');
 const { isAdminEmail } = require('./_portal');
 
-const SITE = 'https://gcourses.vercel.app';
+const SITE = 'https://gcourses.site';
 const LOGO_URL = SITE + '/gcourses-logo.png';
 
 function signToken(email, secret) {
@@ -35,7 +35,7 @@ function buildMagicLinkEmail(name, link) {
           <p style="margin:0;font-size:12px;color:#8a6a88;">If you didn't request this, you can safely ignore this email.</p>
         </td></tr>
         <tr><td style="background:#3b1a3a;padding:16px 32px;text-align:center;">
-          <a href="${SITE}" style="color:#dab5d5;font-size:12px;text-decoration:none;">gcourses.vercel.app</a>
+          <a href="${SITE}" style="color:#dab5d5;font-size:12px;text-decoration:none;">gcourses.site</a>
         </td></tr>
       </table>
     </td></tr>

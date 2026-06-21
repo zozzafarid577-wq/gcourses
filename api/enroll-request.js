@@ -1,5 +1,5 @@
 // Sends an enrollment request notification to Gigi via Brevo.
-const LOGO_URL = 'https://gcourses.vercel.app/gcourses-logo.png';
+const LOGO_URL = 'https://gcourses.site/gcourses-logo.png';
 
 function esc(s) {
   return String(s == null ? '' : s)
@@ -27,7 +27,7 @@ function buildHtml(name, email, message) {
           </div>
         </td></tr>
         <tr><td style="background:#3b1a3a;padding:16px 32px;text-align:center;">
-          <a href="https://gcourses.vercel.app" style="color:#dab5d5;font-size:12px;text-decoration:none;">gcourses.vercel.app</a>
+          <a href="https://gcourses.site" style="color:#dab5d5;font-size:12px;text-decoration:none;">gcourses.site</a>
         </td></tr>
       </table>
     </td></tr>
