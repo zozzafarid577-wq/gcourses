@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Revision Portal — Gcourses</title>
+  <title>Portal — Gcourses</title>
   <meta name="robots" content="noindex" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/gcourses-logo.png" />
@@ -140,11 +140,11 @@
   <div class="topbar">
     <div class="brand">
       <span id="brand-logo"></span>
-      <span class="sub">Revision&nbsp;Portal</span>
+      <span class="sub">Portal</span>
     </div>
     <div class="tools">
       <span class="who" id="who"></span>
-      <button class="btn ghost sm" id="admin-toggle" style="display:none">✎ Admin</button>
+      <button class="btn ghost sm" id="admin-toggle" style="display:none"> Admin</button>
       <button class="btn ghost sm" id="logout">Log out</button>
     </div>
   </div>
@@ -160,7 +160,7 @@
   <!-- student layout -->
   <div class="layout">
     <aside class="side">
-      <h1 id="course-title">Revision Portal</h1>
+      <h1 id="course-title">Portal</h1>
       <p class="intro" id="course-intro"></p>
       <div class="progress-wrap">
         <div class="progress-bar"><span id="progress-fill"></span></div>
@@ -281,7 +281,7 @@
   // ---------- sidebar ----------
   function renderSidebar(){
     var c=state.curriculum;
-    $('#course-title').textContent = c.title || 'Revision Portal';
+    $('#course-title').textContent = c.title || 'Portal';
     $('#course-intro').textContent = c.intro || '';
     var list=$('#module-list'); list.innerHTML='';
     var lessons=allLessons(), done=lessons.filter(function(l){return isDone(l.id);}).length;
@@ -289,7 +289,7 @@
     $('#progress-fill').style.width=pct+'%';
     $('#progress-label').textContent = pct+'% complete · '+done+'/'+lessons.length+' lessons';
 
-    if(!c.modules.length){ list.innerHTML='<p class="hint">No modules yet.'+(state.isAdmin?' Click <strong>✎ Admin</strong> to add the first one.':' Check back soon!')+'</p>'; return; }
+    if(!c.modules.length){ list.innerHTML='<p class="hint">No modules yet.'+(state.isAdmin?' Click <strong> Admin</strong> to add the first one.':' Check back soon!')+'</p>'; return; }
 
     c.modules.forEach(function(m){
       var mod=el('div','module');
@@ -357,8 +357,8 @@
     return out;
   }
   function renderEmpty(){
-    $('#viewer').innerHTML='<div class="empty"><div class="em">📚</div><p>'+
-      (state.isAdmin?'Your portal is empty. Hit <strong>✎ Admin</strong> in the top bar to add your first module, recording, PDF or note.'
+    $('#viewer').innerHTML='<div class="empty"><div class="em"></div><p>'+
+      (state.isAdmin?'Your portal is empty. Hit <strong> Admin</strong> in the top bar to add your first module, recording, PDF or note.'
                     :'Your tutor is still setting things up. Check back soon — Gigi will let you know when it’s ready!')+'</p></div>';
   }
 
@@ -376,7 +376,7 @@
   function saveAll(){
     var btn=$('#save-btn'); btn.disabled=true; btn.textContent='Saving…';
     // sync title/intro fields
-    state.curriculum.title = $('#ed-title').value.trim()||'Revision Portal';
+    state.curriculum.title = $('#ed-title').value.trim()||'Portal';
     state.curriculum.intro = $('#ed-intro').value.trim();
     api('portal-save',{curriculum:state.curriculum}).then(function(res){
       btn.disabled=false; btn.textContent='Save changes';
@@ -409,7 +409,7 @@
     var acts=el('div','ed-actions');
     acts.appendChild(iconBtn('↑','Move up',function(){move(state.curriculum.modules,mi,-1);renderEditor();}));
     acts.appendChild(iconBtn('↓','Move down',function(){move(state.curriculum.modules,mi,1);renderEditor();}));
-    acts.appendChild(iconBtn('🗑','Delete module',function(){if(confirm('Delete this module and all its lessons?')){state.curriculum.modules.splice(mi,1);markDirty();renderEditor();}},'del'));
+    acts.appendChild(iconBtn('✕','Delete module',function(){if(confirm('Delete this module and all its lessons?')){state.curriculum.modules.splice(mi,1);markDirty();renderEditor();}},'del'));
     head.appendChild(acts);
     box.appendChild(head);
 
@@ -433,7 +433,7 @@
     var acts=el('div','ed-actions');
     acts.appendChild(iconBtn('↑','Move up',function(){move(m.lessons,li,-1);renderEditor();}));
     acts.appendChild(iconBtn('↓','Move down',function(){move(m.lessons,li,1);renderEditor();}));
-    acts.appendChild(iconBtn('🗑','Delete lesson',function(){if(confirm('Delete this lesson?')){m.lessons.splice(li,1);markDirty();renderEditor();}},'del'));
+    acts.appendChild(iconBtn('✕','Delete lesson',function(){if(confirm('Delete this lesson?')){m.lessons.splice(li,1);markDirty();renderEditor();}},'del'));
     top.appendChild(acts);
     box.appendChild(top);
 
@@ -460,7 +460,7 @@
     var wrap=el('div','uploadrow');
     if(state.storage!=='kv'){ /* upload still allowed; needs blob token server-side */ }
     var inp=el('input'); inp.type='file'; inp.accept=accept; inp.style.display='none';
-    var btn=el('button','btn ghost sm','⬆ Upload file'); btn.type='button';
+    var btn=el('button','btn ghost sm','Upload file'); btn.type='button';
     var stat=el('span','hint'); stat.style.marginTop='0';
     btn.addEventListener('click',function(){inp.click();});
     inp.addEventListener('change',function(){

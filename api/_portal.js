@@ -23,12 +23,15 @@ function verifyToken(token, secret) {
 }
 
 // Admins are listed in ADMIN_EMAILS (comma separated). Falls back to the
-// SENDER_EMAIL so a fresh deployment still has one working admin.
+// the built-in admins below, PLUS anything set in ADMIN_EMAILS / SENDER_EMAIL.
+// The env list is additive, so a fresh deployment always has a working admin.
+const BUILTIN_ADMINS = ['gigiimofarid@gmail.com', 'gcourrrses@gmail.com'];
 function isAdminEmail(email) {
-  const list = (process.env.ADMIN_EMAILS || process.env.SENDER_EMAIL || '')
+  const env = (process.env.ADMIN_EMAILS || process.env.SENDER_EMAIL || '')
     .split(',')
     .map((e) => e.trim().toLowerCase())
     .filter(Boolean);
+  const list = BUILTIN_ADMINS.concat(env);
   return list.includes(String(email || '').trim().toLowerCase());
 }
 
@@ -66,7 +69,7 @@ async function kvCommand(cmd) {
 }
 
 const EMPTY_CURRICULUM = {
-  title: 'ACT Biology Revision Portal',
+  title: 'ACT Biology Portal',
   intro: 'Welcome! Work through the modules below — recordings, notes and PDFs are added here as we go.',
   modules: [],
   updatedAt: 0

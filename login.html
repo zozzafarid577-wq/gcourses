@@ -101,7 +101,7 @@
 
 <!-- token verification screen (shown while processing magic link) -->
 <div id="verify-screen" style="display:none;">
-  <div class="verify-icon">⏳</div>
+  <div class="verify-icon"></div>
   <h2>Verifying your link…</h2>
   <p>Just a moment.</p>
 </div>
@@ -247,7 +247,7 @@ async function submitEnroll(e) {
       setTimeout(() => { location.href = params.get('next') || 'courses.html'; }, 1000);
     } else {
       const vs = document.getElementById('verify-screen');
-      vs.querySelector('.verify-icon').textContent = '⚠️';
+      vs.querySelector('.verify-icon').textContent = '';
       vs.querySelector('h2').textContent = 'Link expired or invalid';
       vs.querySelector('p').innerHTML = 'This login link has expired or already been used. <a href="login.html" style="color:var(--purple)">Request a new one →</a>';
     }

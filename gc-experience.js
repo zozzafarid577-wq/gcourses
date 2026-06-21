@@ -90,7 +90,7 @@
 
   /* ---- 3. The "G" buddy helper ------------------------------------------ */
   var DEFAULT_TIPS = [
-    'Hi, I’m Gigi! 💜 Tap me any time you want a study nudge.',
+    'Hi, I’m Gigi! Tap me any time you want a study nudge.',
     'Short, focused revision beats long cramming. Try 25-minute sprints.',
     'Stuck on a topic? Re-watch the recording, then redo the questions.',
     'Sleep before a mock test does more than one extra hour of studying.'

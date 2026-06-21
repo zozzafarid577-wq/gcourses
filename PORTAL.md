@@ -1,4 +1,4 @@
-# Gcourses Revision Portal
+# Gcourses Portal
 
 An internal learning portal (à la a clean AI-learning portal) with **two
 sides — admin and student** — for the July 17 revision launch and beyond.
@@ -6,7 +6,7 @@ sides — admin and student** — for the July 17 revision launch and beyond.
 - **Page:** [`portal.html`](portal.html) — gated by the existing magic-link login.
 - **Students** browse modules → lessons (recordings, PDFs, notes, links) with
   per-lesson "mark complete" progress tracking.
-- **Admins** get an inline editor (the **✎ Admin** button) to add / edit /
+- **Admins** get an inline editor (the **Admin** button) to add / edit /
   reorder / delete modules and lessons and **Save** them for everyone.
 
 ## How content works
@@ -44,9 +44,9 @@ Already used by the site (required):
 New / relevant to the portal:
 
 - `ADMIN_EMAILS` — **comma-separated** list of admin emails. Anyone here sees
-  the editor. If unset, it falls back to `SENDER_EMAIL` so there's always one
-  admin. _Add the owner's email here_, e.g.
-  `ADMIN_EMAILS=gigiimofarid@gmail.com,hmaki@amalandcompany.com`.
+  the editor. If unset, it falls back to `SENDER_EMAIL`, and finally to the
+  built-in default admin `gigiimofarid@gmail.com` — so there's always one
+  admin. To add more: `ADMIN_EMAILS=gigiimofarid@gmail.com,someone@else.com`.
 - `BLOB_READ_WRITE_TOKEN` — **optional.** Enables the "⬆ Upload file" button
   (Vercel → Storage → Blob). Without it, uploads are disabled and admins simply
   paste links instead — everything else still works.

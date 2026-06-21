@@ -112,7 +112,7 @@
   .quiz-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; gap:1rem; flex-wrap:wrap; }
   .section-badge { font-size:0.7rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--purple); background:var(--blush); padding:0.4rem 0.9rem; border-radius:100px; }
   .timer { font-family:'Lato',serif; font-size:1.5rem; font-weight:600; color:var(--deep); display:flex; align-items:center; gap:0.45rem; }
-  .timer::before { content:'⏱'; font-size:1.1rem; }
+  .timer::before { content:''; font-size:1.1rem; }
   .timer.warn { color:var(--bad); animation:pulse 1s ease-in-out infinite; }
   @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.45;} }
   /* SECTION BREAK */
@@ -131,7 +131,7 @@
   .flag-btn:hover { border-color:var(--warn); color:var(--warn); }
   .flag-btn.flagged { background:var(--warn); border-color:var(--warn); color:#fff; }
   .nav-cell { position:relative; }
-  .nav-cell.flag::after { content:'⚑'; position:absolute; top:-6px; right:-4px; font-size:0.7rem; color:var(--warn); background:#fff; border-radius:50%; line-height:1; padding:1px; }
+  .nav-cell.flag::after { content:''; position:absolute; top:-6px; right:-4px; font-size:0.7rem; color:var(--warn); background:#fff; border-radius:50%; line-height:1; padding:1px; }
   .dot.flag { background:var(--warn); }
   .q-text { font-family:'Lato',serif; font-size:1.7rem; font-weight:400; line-height:1.3; color:var(--deep); margin-bottom:1.8rem; }
   .options { display:flex; flex-direction:column; gap:0.7rem; }
@@ -228,7 +228,7 @@
     <li><a href="about.html" class="">About</a></li><li><a href="login.html" class="login-link" id="gc-login-link">Login</a></li>
     <li><a href="mock-test.html" class="active mock-link">Mock Test</a></li>
   </ul>
-  <a href="pricing.html" class="nav-cta">Enroll Now</a>
+  
   <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
@@ -288,7 +288,7 @@
     <div class="progress-text"><span id="prog-label">Question 1</span><span id="prog-count"></span></div>
     <div class="q-topbar">
       <div class="q-chapter" id="q-chapter"></div>
-      <button class="flag-btn" id="flag-btn" type="button">⚑ Flag</button>
+      <button class="flag-btn" id="flag-btn" type="button"> Flag</button>
     </div>
     <div class="q-text" id="q-text"></div>
     <div class="options" id="options"></div>
@@ -329,8 +329,8 @@
     <h2 style="font-size:1.6rem;margin-bottom:1.3rem;">Performance by chapter</h2>
     <div id="breakdown"></div>
     <div class="lists">
-      <div class="list-card"><h3 class="col-good">✨ You’re strong in</h3><ul id="strong-list"></ul></div>
-      <div class="list-card"><h3 class="col-bad">📚 Needs improvement</h3><ul id="weak-list"></ul></div>
+      <div class="list-card"><h3 class="col-good"> You’re strong in</h3><ul id="strong-list"></ul></div>
+      <div class="list-card"><h3 class="col-bad"> Needs improvement</h3><ul id="weak-list"></ul></div>
     </div>
     <h2 style="font-size:1.6rem;margin:2.5rem 0 1.3rem;">Answer review &amp; explanations</h2>
     <p style="font-size:0.9rem;color:var(--muted);margin-bottom:1.5rem;">Every question with your answer, the correct answer, and why.</p>
@@ -617,7 +617,7 @@ function sendReport(overall, correct, rows){
   const el = $('email-status');
   el.style.display = 'flex';
   el.className = 'email-status sending';
-  el.textContent = '⏳ Sending your report to ' + student.email + '…';
+  el.textContent = ' Sending your report to ' + student.email + '…';
 
   const weak = rows.filter(r=>r.p<50).sort((a,b)=>a.p-b.p);
   const okay = rows.filter(r=>r.p>=50 && r.p<70).sort((a,b)=>a.p-b.p);
@@ -644,12 +644,12 @@ function sendReport(overall, correct, rows){
     } else {
       el.className = 'email-status err';
       var msg = (d && d.error) ? (typeof d.error==='string'? d.error : JSON.stringify(d.error)) : 'unknown error';
-      el.textContent = '⚠ Email failed: ' + msg;
+      el.textContent = ' Email failed: ' + msg;
     }
   })
   .catch(function(e){
     el.className = 'email-status err';
-    el.textContent = '⚠ Email request failed: ' + (e && e.message || e);
+    el.textContent = ' Email request failed: ' + (e && e.message || e);
   });
 }
 
