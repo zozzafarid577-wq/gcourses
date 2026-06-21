@@ -957,18 +957,27 @@
   function start(){
     $('#boot').style.display='flex'; $('#auth').style.display='none';
     sb.auth.getUser().then(function(u){
-      state.user = u.data.user;
-      Promise.all([
+      state.user = (u && u.data && u.data.user) || null;
+      if(!state.user){ // session missing or expired — back to login
+        $('#boot').style.display='none'; $('#auth').style.display='flex'; setMode('in');
+        authMsg('err','Your session expired — please log in again.'); return;
+      }
+      return Promise.all([
         sb.from('profiles').select('is_admin').eq('id', state.user.id).maybeSingle(),
         sb.from('portal_content').select('data').eq('id',1).maybeSingle()
       ]).then(function(r){
-        state.isAdmin = !!(r[0].data && r[0].data.is_admin);
-        state.curriculum = normalize(r[1].data && r[1].data.data);
+        state.isAdmin = !!(r[0] && r[0].data && r[0].data.is_admin);
+        state.curriculum = normalize(r[1] && r[1].data && r[1].data.data);
         if(!state.curriculum.modules.length && window.GC_SEED){
           state.curriculum = normalize(window.GC_SEED); state.seeded = true;
         }
         showApp();
       });
+    }).catch(function(){
+      // never leave the user on a blank screen — fall back to the bundled course
+      if(!state.user) state.user = { email:'' };
+      if(!state.curriculum.modules.length && window.GC_SEED){ state.curriculum = normalize(window.GC_SEED); state.seeded = true; }
+      showApp();
     });
   }
   function normalize(d){
@@ -982,7 +991,7 @@
   function showApp(){
     $('#boot').style.display='none';
     $('#app').style.display='block';
-    $('#who').textContent = state.user.email;
+    $('#who').textContent = (state.user && state.user.email) || '';
     if(state.isAdmin){ var b=el('span','badge','Admin'); $('#who').after(b); $('#admin-toggle').style.display='inline-block'; }
     renderSidebar();
     var first=allLessons()[0];
