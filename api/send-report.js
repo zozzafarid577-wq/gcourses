@@ -2,7 +2,7 @@
 // Free tier: 300 emails/day. Set BREVO_API_KEY in Vercel → Project → Settings → Environment Variables.
 // Optional: SENDER_EMAIL (a verified Brevo sender), SENDER_NAME, OWNER_EMAIL.
 
-const LOGO_URL = 'https://gcourses.vercel.app/gcourses-logo.png';
+const LOGO_URL = 'https://gcourses.site/gcourses-logo.png';
 
 function esc(s) {
   return String(s == null ? '' : s)
@@ -46,11 +46,11 @@ function buildHtml(d) {
           ${focus}
         </td></tr>
         <tr><td style="padding:24px 32px 30px;">
-          <a href="https://gcourses.vercel.app/mock-test.html" style="display:inline-block;background:#a0509f;color:#fff;text-decoration:none;font-size:14px;font-weight:600;padding:12px 26px;border-radius:100px;">Retake the test →</a>
+          <a href="https://gcourses.site/mock-test.html" style="display:inline-block;background:#a0509f;color:#fff;text-decoration:none;font-size:14px;font-weight:600;padding:12px 26px;border-radius:100px;">Retake the test →</a>
         </td></tr>
         <tr><td style="background:#3b1a3a;padding:18px 32px;text-align:center;">
           <div style="color:#dab5d5;font-size:12px;">Study with Gigi · Gcourses</div>
-          <a href="https://gcourses.vercel.app" style="color:#dab5d5;font-size:12px;text-decoration:none;">gcourses.vercel.app</a>
+          <a href="https://gcourses.site" style="color:#dab5d5;font-size:12px;text-decoration:none;">gcourses.site</a>
         </td></tr>
       </table>
     </td></tr>
