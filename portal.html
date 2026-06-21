@@ -1230,7 +1230,19 @@
 
   window.addEventListener('beforeunload',function(e){ if(state.dirty){e.preventDefault();e.returnValue='';} });
 
-  boot();
+  // Surface any boot/runtime error on screen so it can't fail silently.
+  function showBootError(err){
+    var g=document.getElementById('boot'); if(!g) return;
+    g.style.display='flex';
+    g.innerHTML='<div style="max-width:440px;text-align:center;padding:1.4rem;color:#7d2c40;font-size:.9rem;line-height:1.5">'+
+      '<strong>The portal hit an error while loading.</strong><br><br>'+
+      '<span style="font-family:monospace;font-size:.8rem;word-break:break-word">'+esc(String((err&&err.message)||err||'unknown'))+'</span>'+
+      '<br><br>Please screenshot this and send it.</div>';
+  }
+  window.addEventListener('error',function(e){ showBootError(e.error||e.message); });
+  window.addEventListener('unhandledrejection',function(e){ showBootError(e.reason); });
+
+  try { boot(); } catch(err){ showBootError(err); }
 })();
 </script>
 </body>
