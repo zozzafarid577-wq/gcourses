@@ -44,9 +44,9 @@ Already used by the site (required):
 New / relevant to the portal:
 
 - `ADMIN_EMAILS` — **comma-separated** list of admin emails. Anyone here sees
-  the editor. If unset, it falls back to `SENDER_EMAIL` so there's always one
-  admin. _Add the owner's email here_, e.g.
-  `ADMIN_EMAILS=gigiimofarid@gmail.com,hmaki@amalandcompany.com`.
+  the editor. If unset, it falls back to `SENDER_EMAIL`, and finally to the
+  built-in default admin `gigiimofarid@gmail.com` — so there's always one
+  admin. To add more: `ADMIN_EMAILS=gigiimofarid@gmail.com,someone@else.com`.
 - `BLOB_READ_WRITE_TOKEN` — **optional.** Enables the "⬆ Upload file" button
   (Vercel → Storage → Blob). Without it, uploads are disabled and admins simply
   paste links instead — everything else still works.
