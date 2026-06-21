@@ -1002,6 +1002,11 @@
 
   /* ========================= SIDEBAR ========================= */
   function renderSidebar(){
+    // Safety net: if we somehow have no modules but the bundled course exists,
+    // use it. Guarantees the portal is never empty when GC_SEED is present.
+    if((!state.curriculum.modules || !state.curriculum.modules.length) && window.GC_SEED){
+      state.curriculum = normalize(window.GC_SEED); state.seeded = true;
+    }
     var c=state.curriculum;
     $('#course-title').textContent=c.title||'Portal';
     $('#course-intro').textContent=c.intro||'';
@@ -1010,7 +1015,8 @@
     var pct=lessons.length?Math.round(done/lessons.length*100):0;
     $('#progress-fill').style.width=pct+'%';
     $('#progress-label').textContent=pct+'% complete · '+done+'/'+lessons.length+' lessons';
-    if(!c.modules.length){ list.innerHTML='<p class="hint">No modules yet.'+(state.isAdmin?' Click <strong>Admin</strong> to add the first one.':' Check back soon!')+'</p>'; return; }
+    if(!c.modules.length){ list.innerHTML='<p class="hint">No modules yet.'+(state.isAdmin?' Click <strong>Admin</strong> to add the first one.':' Check back soon!')+'</p>'+
+        '<p class="hint" style="opacity:.6;font-size:.66rem">debug: course='+(window.GC_SEED&&window.GC_SEED.modules?window.GC_SEED.modules.length+' modules loaded':'NOT LOADED')+'</p>'; return; }
     c.modules.forEach(function(m){
       var mod=el('div','module'), head=el('div','module-head');
       head.innerHTML='<span class="chev">▾</span><span class="mtitle">'+esc(m.title||'Untitled module')+'</span><span class="mcount">'+(m.lessons||[]).length+'</span>';
@@ -1230,7 +1236,19 @@
 
   window.addEventListener('beforeunload',function(e){ if(state.dirty){e.preventDefault();e.returnValue='';} });
 
-  boot();
+  // Surface any boot/runtime error on screen so it can't fail silently.
+  function showBootError(err){
+    var g=document.getElementById('boot'); if(!g) return;
+    g.style.display='flex';
+    g.innerHTML='<div style="max-width:440px;text-align:center;padding:1.4rem;color:#7d2c40;font-size:.9rem;line-height:1.5">'+
+      '<strong>The portal hit an error while loading.</strong><br><br>'+
+      '<span style="font-family:monospace;font-size:.8rem;word-break:break-word">'+esc(String((err&&err.message)||err||'unknown'))+'</span>'+
+      '<br><br>Please screenshot this and send it.</div>';
+  }
+  window.addEventListener('error',function(e){ showBootError(e.error||e.message); });
+  window.addEventListener('unhandledrejection',function(e){ showBootError(e.reason); });
+
+  try { boot(); } catch(err){ showBootError(err); }
 })();
 </script>
 </body>
