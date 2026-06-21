@@ -1,6 +1,7 @@
 // Sends a magic login link to an enrolled student via Brevo.
 // Checks APPROVED_EMAILS env var (comma-separated) for authorization.
 const crypto = require('crypto');
+const { isAdminEmail } = require('./_portal');
 
 const SITE = 'https://gcourses.vercel.app';
 const LOGO_URL = SITE + '/gcourses-logo.png';
@@ -77,8 +78,9 @@ module.exports = async (req, res) => {
 
   const emailLower = email.trim().toLowerCase();
 
-  // Approved if manually whitelisted OR auto-enrolled via a paid purchase (KV).
+  // Approved if manually whitelisted, a portal admin, OR auto-enrolled (KV).
   let allowed = approved.includes(emailLower);
+  if (!allowed) allowed = isAdminEmail(emailLower);
   if (!allowed) allowed = await kvIsEnrolled(emailLower);
 
   // Always return success to prevent email enumeration
