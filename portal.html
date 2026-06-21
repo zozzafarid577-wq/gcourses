@@ -173,6 +173,19 @@
     .chip button:hover{background:var(--err);color:#fff}
     .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--deep);color:#fff;padding:.7rem 1.3rem;border-radius:100px;font-size:.85rem;opacity:0;transition:.3s;z-index:700;box-shadow:0 10px 30px rgba(0,0,0,.25)}
     .toast.show{opacity:1;transform:translateX(-50%) translateY(0)} .toast.err{background:var(--err)}
+    .mgr-head{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1.2rem}
+    .mgr-head h2{font-family:'Lato',serif;font-size:1.4rem;color:var(--deep)}
+    .mgr-head p{font-size:.84rem;color:var(--muted);margin-top:.25rem;max-width:520px;line-height:1.5}
+    .acard{display:flex;align-items:center;gap:.9rem;background:var(--white);border:1px solid var(--line);border-radius:16px;padding:1rem 1.1rem;margin-bottom:.8rem;box-shadow:0 4px 18px rgba(160,80,159,.05)}
+    .acard-num{width:34px;height:34px;border-radius:10px;background:var(--blush);color:var(--purple);font-weight:700;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+    .acard-main{flex:1;min-width:0}
+    .acard-main strong{display:block;color:var(--deep);font-size:1.02rem;line-height:1.2}
+    .acard-main span{font-size:.78rem;color:var(--muted)}
+    .acard-actions{display:flex;gap:.45rem;flex-wrap:wrap}
+    .enroll-card{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;background:var(--white);border:1px solid var(--line);border-radius:16px;padding:1.1rem;margin-bottom:1.3rem;box-shadow:0 4px 18px rgba(160,80,159,.05)}
+    .enroll-card input,.enroll-card select{padding:.65rem .85rem;border:1.5px solid var(--lavender);border-radius:10px;font-family:inherit;font-size:.9rem;outline:none;background:#fff}
+    .enroll-card input{flex:1;min-width:200px} .enroll-card input:focus,.enroll-card select:focus{border-color:var(--purple)}
+    .scard{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:.95rem 1.1rem;margin-bottom:.7rem;box-shadow:0 4px 18px rgba(160,80,159,.05)}
     @media(max-width:820px){.layout{grid-template-columns:1fr}.side{border-right:none;border-bottom:1px solid var(--line)}.ed-head-row{grid-template-columns:1fr}}
   </style>
 </head>
@@ -886,6 +899,7 @@
       if(state.isAdmin){ jobs.push(sb.from('profiles').select('email,is_admin')); jobs.push(sb.from('enrollments').select('*')); }
       else { jobs.push(sb.from('enrollments').select('*')); }
       return Promise.all(jobs).then(function(r){
+        state.coursesError=r[0].error||null;
         state.courses=(r[0].data)||[];
         if(state.isAdmin){ state.students=(r[1].data)||[]; state.enrollments=(r[2].data)||[]; }
         else { state.enrollments=(r[1].data)||[]; }
@@ -897,9 +911,19 @@
     $('#who').textContent=myEmail();
     if(state.isAdmin){ if(!$('#who .badge')){var b=el('span','badge','Admin');$('#who').after(b);} $('#manage-btn').style.display='inline-block'; }
     wireTop();
+    if(state.coursesError && /relation|exist|schema|table/i.test(state.coursesError.message||'')){ showSetup(); return; }
     if(state.isAdmin && state.courses.length===0 && window.GC_SEED){
       preloadStarter().then(showHome).catch(showHome);
     } else showHome();
+  }
+  function showSetup(){
+    only('home');
+    $('#home-h').textContent='One quick setup step';
+    $('#home-sub').textContent='';
+    $('#course-grid').innerHTML='<div class="empty" style="text-align:left;max-width:640px;margin:0 auto">'+
+      '<p style="margin-bottom:1rem">The portal needs its <strong>courses</strong> tables in Supabase before it can show anything. Nothing is lost — your modules are safe in the code.</p>'+
+      '<p style="margin-bottom:1rem"><strong>To fix:</strong> open Supabase &rarr; <strong>SQL Editor</strong>, paste the block from <code>SUPABASE_COURSES.md</code>, and click <strong>Run</strong>. Then reload this page.</p>'+
+      '<p class="hint">Error: '+esc((state.coursesError&&state.coursesError.message)||'tables missing')+'</p></div>';
   }
   function preloadStarter(){
     var s=window.GC_SEED;
@@ -988,7 +1012,14 @@
     renderSidebar(); $('.main').scrollTop=0;
   }
   function navBtns(lid){var a=allLessons(),i=a.findIndex(function(l){return l.id===lid;}),o='';if(i>0)o+='<button class="btn ghost sm" id="prev-l" data-id="'+a[i-1].id+'">← Previous</button>';if(i<a.length-1)o+='<button class="btn ghost sm" id="next-l" data-id="'+a[i+1].id+'">Next →</button>';return o;}
-  function renderCourseEmpty(){$('#viewer').innerHTML='<div class="empty"><p>'+(state.isAdmin?'This course has no lessons yet. Click <strong>Edit content</strong> to add modules.':'Your tutor is still setting this course up.')+'</p></div>';}
+  function renderCourseEmpty(){
+    var v=$('#viewer');
+    if(state.isAdmin){
+      v.innerHTML='<div class="empty"><p>This course has no lessons yet.</p><div style="margin-top:1.1rem;display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap"><button class="btn" id="ce-edit">Edit content</button>'+(window.GC_SEED?'<button class="btn ghost" id="ce-load">Load the ACT/EST starter (19 modules)</button>':'')+'</div></div>';
+      $('#ce-edit').addEventListener('click',enterEdit);
+      var lb=$('#ce-load'); if(lb)lb.addEventListener('click',function(){state.curriculum.modules=JSON.parse(JSON.stringify(window.GC_SEED.modules||[]));if(!state.curriculum.title||/^new course$/i.test(state.curriculum.title))state.curriculum.title=window.GC_SEED.title;markDirty();enterEdit();toast('Loaded — hit “Save changes” to keep it.');});
+    } else { v.innerHTML='<div class="empty"><p>Your tutor is still setting this course up.</p></div>'; }
+  }
 
   /* ---------- COURSE EDITING ---------- */
   function enterEdit(){ document.body.classList.add('editing'); renderEditor(); }
@@ -1070,37 +1101,38 @@
   }
   function renderManageCourses(){
     var w=$('#tab-courses');w.innerHTML='';
-    var add=el('div','addbar');var ni=el('input');ni.placeholder='New course name';ni.style.flex='1';var nb=el('button','btn sm','+ New course');
-    nb.addEventListener('click',function(){var t=ni.value.trim()||'New course';nb.disabled=true;sb.from('courses').insert({title:t,intro:'',data:{modules:[]},sort:state.courses.length}).select().then(function(r){nb.disabled=false;if(r.error){toast(r.error.message,true);return;}if(r.data&&r.data[0]){state.courses.push(r.data[0]);ni.value='';toast('Course created');renderManageCourses();}});});
-    add.appendChild(ni);add.appendChild(nb);w.appendChild(add);
-    if(!state.courses.length){w.appendChild(el('p','hint','No courses yet — add one above.'));return;}
-    state.courses.forEach(function(c){
-      var mods=((c.data&&c.data.modules)||[]).length;
-      var row=el('div','mrow');
-      row.innerHTML='<div class="mt"><strong>'+esc(c.title||'Untitled')+'</strong><span>'+mods+' modules · '+enrolledCount(c.id)+' students</span></div>';
-      var a=el('div','ma');
-      var edit=el('button','btn ghost sm','Edit content');edit.addEventListener('click',function(){openCourse(c);enterEdit();});
+    var head=el('div','mgr-head');head.innerHTML='<div><h2>Courses</h2><p>Create courses, edit their content, and manage who is enrolled.</p></div>';
+    var nb=el('button','btn','+ New course');
+    nb.addEventListener('click',function(){var t=prompt('Name your new course:','New course');if(t==null)return;nb.disabled=true;sb.from('courses').insert({title:t.trim()||'New course',intro:'',data:{modules:[]},sort:state.courses.length}).select().then(function(r){nb.disabled=false;if(r.error){toast(r.error.message,true);return;}if(r.data&&r.data[0]){state.courses.push(r.data[0]);toast('Course created — add some content');openCourse(r.data[0]);}});});
+    head.appendChild(nb);w.appendChild(head);
+    if(!state.courses.length){w.appendChild(el('p','hint','No courses yet — click “+ New course”.'));return;}
+    state.courses.forEach(function(c,i){
+      var mods=((c.data&&c.data.modules)||[]).length, st=enrolledCount(c.id);
+      var card=el('div','acard');
+      card.innerHTML='<div class="acard-num">'+(i+1)+'</div><div class="acard-main"><strong>'+esc(c.title||'Untitled')+'</strong><span>'+mods+' module'+(mods===1?'':'s')+' · '+st+' student'+(st===1?'':'s')+'</span></div>';
+      var a=el('div','acard-actions');
+      var edit=el('button','btn sm','Edit content');edit.addEventListener('click',function(){openCourse(c);enterEdit();});
       var ren=el('button','btn ghost sm','Rename');ren.addEventListener('click',function(){var t=prompt('Course name:',c.title||'');if(t==null)return;sb.from('courses').update({title:t.trim()||c.title}).eq('id',c.id).then(function(res){if(res.error){toast(res.error.message,true);return;}c.title=t.trim()||c.title;toast('Renamed');renderManageCourses();});});
       var del=el('button','btn danger sm','Delete');del.addEventListener('click',function(){if(!confirm('Delete “'+(c.title||'course')+'” and all its content + enrollments?'))return;sb.from('courses').delete().eq('id',c.id).then(function(res){if(res.error){toast(res.error.message,true);return;}state.courses=state.courses.filter(function(x){return x.id!==c.id;});state.enrollments=state.enrollments.filter(function(e){return e.course_id!==c.id;});toast('Deleted');renderManageCourses();});});
-      a.appendChild(edit);a.appendChild(ren);a.appendChild(del);row.appendChild(a);w.appendChild(row);
+      a.appendChild(edit);a.appendChild(ren);a.appendChild(del);card.appendChild(a);w.appendChild(card);
     });
   }
   function renderManageStudents(){
     var w=$('#tab-students');w.innerHTML='';
+    w.appendChild(el('div','mgr-head','<div><h2>Students</h2><p>Enroll students by email into a course. They only see the courses you enroll them in.</p></div>'));
     if(!state.courses.length){w.appendChild(el('p','hint','Create a course first (Courses tab), then enroll students here.'));return;}
-    var bar=el('div','addbar');
-    var em=el('input');em.type='email';em.placeholder='student@email.com';em.style.flex='1';em.style.minWidth='180px';
+    var bar=el('div','enroll-card');
+    var em=el('input');em.type='email';em.placeholder='student@email.com';
     var sel=el('select');state.courses.forEach(function(c){var o=el('option',null,esc(c.title||'Course'));o.value=c.id;sel.appendChild(o);});
-    var btn=el('button','btn sm','Enroll');
+    var btn=el('button','btn','Enroll');
     btn.addEventListener('click',function(){var email=em.value.trim().toLowerCase();if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){toast('Enter a valid email',true);return;}var cid=parseInt(sel.value,10);btn.disabled=true;sb.from('enrollments').insert({course_id:cid,student_email:email}).select().then(function(r){btn.disabled=false;if(r.error){toast(/duplicate|unique/i.test(r.error.message)?'Already enrolled in that course.':r.error.message,true);return;}if(r.data&&r.data[0])state.enrollments.push(r.data[0]);em.value='';toast('Enrolled '+email);renderManageStudents();});});
     bar.appendChild(em);bar.appendChild(sel);bar.appendChild(btn);w.appendChild(bar);
-    // build student list: profiles + any enrolled emails without an account
     var emails={};state.students.forEach(function(p){if(p.email)emails[p.email.toLowerCase()]={account:true,admin:!!p.is_admin};});
     state.enrollments.forEach(function(e){var k=(e.student_email||'').toLowerCase();if(!emails[k])emails[k]={account:false};});
     var keys=Object.keys(emails).sort();
     if(!keys.length){w.appendChild(el('p','hint','No students yet. Enroll someone by email above (they can sign up afterwards).'));return;}
     keys.forEach(function(k){
-      var info=emails[k];var card=el('div','stu');
+      var info=emails[k];var card=el('div','scard');
       var top=el('div','stu-top');top.innerHTML='<span class="stu-email">'+esc(k)+'</span>'+(info.admin?'<span class="stu-tag">admin</span>':'')+(info.account?'':'<span class="stu-tag">no account yet</span>');
       card.appendChild(top);
       var chips=el('div','chips');
