@@ -43,7 +43,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
       height: 100%; background: var(--blush);
-      font-family: 'DM Sans', system-ui, sans-serif;
+      font-family: 'Montserrat', system-ui, sans-serif;
       user-select: none; -webkit-user-select: none;
       overflow: hidden;
     }
@@ -357,7 +357,7 @@
     const x = (parseFloat(textInput.style.left) - (ar.left - pw.left)) * sx;
     const y = (parseFloat(textInput.style.top)  - (ar.top  - pw.top )) * sy;
     aCtx.globalCompositeOperation = 'source-over';
-    aCtx.font = `${size}px 'DM Sans', sans-serif`;
+    aCtx.font = `${size}px 'Montserrat', sans-serif`;
     aCtx.fillStyle = color;
     aCtx.fillText(textInput.value, x, y + size);
     annotations[currentPage] = annotCanvas.toDataURL();
