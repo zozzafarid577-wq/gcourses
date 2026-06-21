@@ -88,54 +88,97 @@
       '</span>';
   }
 
-  /* ---- 3. The "G" buddy helper ------------------------------------------ */
-  var DEFAULT_TIPS = [
-    'Hi, I’m Gigi! Tap me any time you want a study nudge.',
-    'Short, focused revision beats long cramming. Try 25-minute sprints.',
-    'Stuck on a topic? Re-watch the recording, then redo the questions.',
-    'Sleep before a mock test does more than one extra hour of studying.'
-  ];
+  /* ---- 3. The "G" buddy — chat with Gigi -------------------------------- */
+  var GREETING = window.GC_BUDDY_GREETING ||
+    "Hi, I’m Gigi! Ask me anything about the course, the eBook, or booking a session — your message comes straight to me.";
 
   function gcBuddy() {
     if (document.querySelector('.gc-buddy')) return;
     var img = window.GC_BUDDY_IMG || '/gigi-buddy.png';
     var name = window.GC_BUDDY_NAME || 'Gigi';
-    var tips = (window.GC_BUDDY_TIPS && window.GC_BUDDY_TIPS.length)
-      ? window.GC_BUDDY_TIPS : DEFAULT_TIPS;
-    var i = 0;
 
     var wrap = document.createElement('div');
     wrap.className = 'gc-buddy';
     wrap.innerHTML =
-      '<div class="gc-buddy__bubble" role="status">' +
-        '<button class="gc-buddy__bubble-close" aria-label="Close">&times;</button>' +
-        '<span class="gc-buddy__bubble-name">' + esc(name) + '</span>' +
-        '<span class="gc-buddy__bubble-text"></span>' +
-        '<button class="gc-buddy__next" type="button">Another tip &rarr;</button>' +
+      '<div class="gc-buddy__panel" role="dialog" aria-label="Chat with ' + esc(name) + '">' +
+        '<div class="gc-buddy__head">' +
+          '<img class="gc-buddy__avatar" src="' + img + '" alt="" />' +
+          '<div class="gc-buddy__head-txt"><strong>Chat with ' + esc(name) + '</strong>' +
+            '<span>Usually replies within a day</span></div>' +
+          '<button class="gc-buddy__close" type="button" aria-label="Close">&times;</button>' +
+        '</div>' +
+        '<div class="gc-buddy__msgs">' +
+          '<div class="gc-buddy__msg gc-buddy__msg--in">' + esc(GREETING) + '</div>' +
+        '</div>' +
+        '<form class="gc-buddy__form">' +
+          '<input class="gc-buddy__field" type="text" name="name" placeholder="Your name (optional)" autocomplete="name" />' +
+          '<input class="gc-buddy__field" type="email" name="email" placeholder="Your email (so I can reply)" autocomplete="email" required />' +
+          '<textarea class="gc-buddy__field gc-buddy__ta" name="message" placeholder="Type your message…" required></textarea>' +
+          '<button class="gc-buddy__send" type="submit">Send message</button>' +
+          '<div class="gc-buddy__status" role="status"></div>' +
+        '</form>' +
       '</div>' +
-      '<button class="gc-buddy__char" aria-label="' + esc(name) + ', your study buddy">' +
+      '<button class="gc-buddy__char" aria-label="Chat with ' + esc(name) + '">' +
         '<span class="gc-buddy__poke">!</span>' +
         '<img src="' + img + '" alt="' + esc(name) + '" />' +
       '</button>';
     document.body.appendChild(wrap);
 
-    var bubbleText = wrap.querySelector('.gc-buddy__bubble-text');
-    function render() { bubbleText.textContent = tips[i % tips.length]; }
-    function open() { render(); wrap.classList.add('is-open'); }
+    var msgs = wrap.querySelector('.gc-buddy__msgs');
+    var form = wrap.querySelector('.gc-buddy__form');
+    var statusEl = wrap.querySelector('.gc-buddy__status');
+
+    function open() {
+      wrap.classList.add('is-open');
+      setTimeout(function () { var e = form.querySelector('[name=email]'); if (e) e.focus(); }, 250);
+    }
     function close() { wrap.classList.remove('is-open'); }
 
     wrap.querySelector('.gc-buddy__char').addEventListener('click', function () {
-      if (wrap.classList.contains('is-open')) { close(); }
-      else { open(); }
+      if (wrap.classList.contains('is-open')) close(); else open();
     });
-    wrap.querySelector('.gc-buddy__next').addEventListener('click', function () {
-      i++; render();
-    });
-    wrap.querySelector('.gc-buddy__bubble-close').addEventListener('click', close);
+    wrap.querySelector('.gc-buddy__close').addEventListener('click', close);
 
-    render();
-    // gentle first hello after the curtain clears
-    if (!REDUCED) setTimeout(open, body && body.hasAttribute('data-gc-intro') ? 2600 : 1200);
+    function bubble(text, dir) {
+      var b = document.createElement('div');
+      b.className = 'gc-buddy__msg gc-buddy__msg--' + dir;
+      b.textContent = text;
+      msgs.appendChild(b);
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var fd = new FormData(form);
+      var payload = {
+        name: (fd.get('name') || '').trim(),
+        email: (fd.get('email') || '').trim(),
+        message: (fd.get('message') || '').trim(),
+        page: location.pathname
+      };
+      if (!payload.message) return;
+      var btn = form.querySelector('.gc-buddy__send');
+      btn.disabled = true; btn.textContent = 'Sending…'; statusEl.textContent = '';
+      bubble(payload.message, 'out');
+      fetch('/api/buddy-message', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
+      })
+        .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+        .then(function (res) {
+          btn.disabled = false; btn.textContent = 'Send message';
+          if (res.ok && res.d.success) {
+            bubble('Thanks ' + (payload.name ? payload.name + ' ' : '') + '— your message reached ' +
+                   name + '. You’ll get a reply by email soon.', 'in');
+            form.querySelector('[name=message]').value = '';
+          } else {
+            statusEl.textContent = (res.d && res.d.error) || 'Could not send. Please try again.';
+          }
+        })
+        .catch(function () {
+          btn.disabled = false; btn.textContent = 'Send message';
+          statusEl.textContent = 'Network error. Please try again.';
+        });
+    });
   }
 
   var body = document.body;

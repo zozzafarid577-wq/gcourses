@@ -246,7 +246,7 @@
   // ---------- boot ----------
   function boot(){
     if(!TOKEN){ showGateLogin('Please log in to open your revision portal.'); return; }
-    api('portal-data',{}).then(function(res){
+    api('portal',{action:'data'}).then(function(res){
       if(!res.ok){
         if(res.d && /authoris/i.test(res.d.error||'')) showGateLogin('Your session expired. Please log in again.');
         else showGateError(res.d&&res.d.error||'Could not load the portal.');
@@ -378,7 +378,7 @@
     // sync title/intro fields
     state.curriculum.title = $('#ed-title').value.trim()||'Portal';
     state.curriculum.intro = $('#ed-intro').value.trim();
-    api('portal-save',{curriculum:state.curriculum}).then(function(res){
+    api('portal',{action:'save',curriculum:state.curriculum}).then(function(res){
       btn.disabled=false; btn.textContent='Save changes';
       if(res.ok&&res.d.success){ markClean(); toast('Saved ✓'); }
       else toast(res.d&&res.d.error||'Could not save',true);
@@ -470,7 +470,7 @@
       var rd=new FileReader();
       rd.onload=function(){
         var b64=String(rd.result).split(',')[1];
-        api('portal-upload',{filename:file.name,contentType:file.type,dataBase64:b64}).then(function(res){
+        api('portal',{action:'upload',filename:file.name,contentType:file.type,dataBase64:b64}).then(function(res){
           if(res.ok&&res.d.url){ l.url=res.d.url; markDirty(); renderEditor(); }
           else stat.textContent=(res.d&&res.d.error)||'Upload failed.';
         }).catch(function(){stat.textContent='Upload failed.';});
