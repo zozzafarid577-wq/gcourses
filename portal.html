@@ -388,7 +388,12 @@
       ]).then(function(r){
         state.isAdmin = !!(r[0].data && r[0].data.is_admin);
         state.curriculum = normalize(r[1].data && r[1].data.data);
-        showApp();
+        if(!state.curriculum.modules.length){
+          fetch('/portal-seed.json',{cache:'no-store'})
+            .then(function(x){return x.json();})
+            .then(function(seed){ state.curriculum=normalize(seed); state.seeded=true; showApp(); })
+            .catch(function(){ showApp(); });
+        } else { showApp(); }
       });
     });
   }
@@ -409,6 +414,7 @@
     var first=allLessons()[0];
     if(first) openLesson(first.id); else renderEmpty();
     wireChrome();
+    if(state.seeded && state.isAdmin){ setTimeout(function(){ toast('Showing the starter course — open Admin and hit Save to make it yours.'); },800); }
   }
 
   /* ========================= SIDEBAR ========================= */
