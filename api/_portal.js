@@ -66,7 +66,7 @@ async function kvCommand(cmd) {
 }
 
 const EMPTY_CURRICULUM = {
-  title: 'ACT Biology Revision Portal',
+  title: 'ACT Biology Portal',
   intro: 'Welcome! Work through the modules below — recordings, notes and PDFs are added here as we go.',
   modules: [],
   updatedAt: 0

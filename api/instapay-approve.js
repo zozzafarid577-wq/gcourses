@@ -19,7 +19,7 @@ function verify(token, secret) {
 }
 
 function page(title, body, ok) {
-  const icon = ok ? '✓' : '⚠️';
+  const icon = ok ? '✓' : '';
   const color = ok ? '#3f9d6b' : '#c0506a';
   return `<!DOCTYPE html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>${title} — Gcourses</title>

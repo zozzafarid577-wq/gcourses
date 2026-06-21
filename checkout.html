@@ -154,7 +154,7 @@
           <button class="btn" type="submit" id="ip-submit">I've paid — send for confirmation</button>
         </form>
         <div class="status" id="status"></div>
-        <div class="secure">🔒 Your details go straight to Gigi to confirm your InstaPay transfer.</div>
+        <div class="secure"> Your details go straight to Gigi to confirm your InstaPay transfer.</div>
       </div>
 
       <!-- PAYPAL FLOW (only if configured) -->
@@ -170,7 +170,7 @@
         <p class="hint">We'll send your login link to this email right after payment.</p>
         <div id="paypal-buttons"></div>
         <div class="status" id="pp-status"></div>
-        <div class="secure">🔒 Payments processed securely by PayPal.</div>
+        <div class="secure"> Payments processed securely by PayPal.</div>
       </div>
 
       <!-- FALLBACK -->
@@ -182,7 +182,7 @@
       <!-- SUCCESS -->
       <div id="success">
         <div class="tick">✓</div>
-        <h2 id="success-title">Request received! 🎉</h2>
+        <h2 id="success-title">Request received! </h2>
         <p id="success-msg"></p>
         <a class="btn" id="success-link" href="#" style="display:none;">Open my course →</a>
       </div>
@@ -271,7 +271,7 @@
           .then(function(res){
             if(res.ok && res.d.success){
               if(window.dataLayer){ dataLayer.push({ event:'begin_checkout', method:'instapay', product:product }); }
-              showSuccess('Request received! 🎉', physical
+              showSuccess('Request received! ', physical
                 ? "Thanks! We've sent your order to Gigi. Once your InstaPay transfer is confirmed, your <strong>printed copy will be shipped to your address</strong> and we'll email your digital access to <strong>"+email+"</strong>."
                 : "Thanks! We've sent your payment details to Gigi. Once your InstaPay transfer is confirmed (usually within a few hours), you'll get an email at <strong>"+email+"</strong> with your one-click login link.");
             } else {
@@ -313,7 +313,7 @@
             return fetch('/api/paypal-capture',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({orderID:data.orderID})})
               .then(function(r){ return r.json().then(function(d){ return {ok:r.ok,d:d}; }); })
               .then(function(res){
-                if(res.ok && res.d.success){ showSuccess("You're enrolled! 🎉","Payment received. We've emailed your login link to <strong>"+(res.d.email||'')+"</strong>.", res.d.loginUrl); }
+                if(res.ok && res.d.success){ showSuccess("You're enrolled! ","Payment received. We've emailed your login link to <strong>"+(res.d.email||'')+"</strong>.", res.d.loginUrl); }
                 else { showStatus('pp-status','err',(res.d&&res.d.error)||'Could not confirm payment. If charged, contact us.'); }
               });
           },

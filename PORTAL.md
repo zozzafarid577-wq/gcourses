@@ -1,4 +1,4 @@
-# Gcourses Revision Portal
+# Gcourses Portal
 
 An internal learning portal (à la a clean AI-learning portal) with **two
 sides — admin and student** — for the July 17 revision launch and beyond.
@@ -6,7 +6,7 @@ sides — admin and student** — for the July 17 revision launch and beyond.
 - **Page:** [`portal.html`](portal.html) — gated by the existing magic-link login.
 - **Students** browse modules → lessons (recordings, PDFs, notes, links) with
   per-lesson "mark complete" progress tracking.
-- **Admins** get an inline editor (the **✎ Admin** button) to add / edit /
+- **Admins** get an inline editor (the **Admin** button) to add / edit /
   reorder / delete modules and lessons and **Save** them for everyone.
 
 ## How content works

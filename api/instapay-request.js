@@ -23,7 +23,7 @@ function ownerEmailHtml({ name, email, productName, amount, approveUrl, hasShot,
   const d = delivery || {};
   const deliveryBlock = physical ? `
           <div style="margin-top:16px;padding:14px 16px;background:#f3e7f3;border-radius:10px;">
-            <div style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#a0509f;font-weight:600;margin-bottom:8px;">📦 Deliver printed copy to</div>
+            <div style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#a0509f;font-weight:600;margin-bottom:8px;"> Deliver printed copy to</div>
             <table style="width:100%;border-collapse:collapse;">
               <tr><td style="padding:4px 0;font-size:13px;color:#8a6a88;width:100px;">Phone</td><td style="padding:4px 0;font-size:13px;color:#2e1a2e;">${esc(d.phone)}</td></tr>
               <tr><td style="padding:4px 0;font-size:13px;color:#8a6a88;">Governorate</td><td style="padding:4px 0;font-size:13px;color:#2e1a2e;">${esc(d.governorate)}</td></tr>
