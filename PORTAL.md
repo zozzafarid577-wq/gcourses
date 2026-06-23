@@ -51,6 +51,25 @@ New / relevant to the portal:
   (Vercel → Storage → Blob). Without it, uploads are disabled and admins simply
   paste links instead — everything else still works.
 
+## Gamification
+
+The student course view is gamified to make working through modules more
+motivating. Everything is **client-side** and stored per-device in
+`localStorage` (key `gc_portal_game`) — no backend or PII involved.
+
+- **XP & Levels** — every completed lesson is worth 100 XP. Levels (Seedling →
+  Sprout → … → Legend) come from a rising XP curve, shown with a level badge
+  and an XP progress bar in the course sidebar.
+- **Daily streak** — a 🔥 counter that grows when you complete a lesson on
+  consecutive days and resets if you skip a day.
+- **Achievement badges** — eight unlockable badges (first lesson, 5 lessons,
+  finish a module, finish a course, 3- and 7-day streaks, 5 lessons in a day,
+  reach Level 5). Earned badges light up in the sidebar.
+- **Per-module progress rings** — each module shows a ring with how many of its
+  lessons are done, turning into a green ✓ when the module is fully complete.
+- **Celebrations** — leveling up, finishing a module or course, and unlocking a
+  badge each trigger a confetti burst and a celebratory pop-up.
+
 ## Notes
 
 - Student progress is stored per-device in `localStorage` (no PII server-side).
